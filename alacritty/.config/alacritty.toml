@@ -10,7 +10,7 @@ startup_mode = "Maximized"
 padding = { x = 10, y = 0 }
 
 [font]
-normal = { family = "FiraCode Nerd Font Mono", style = "Regular" }
+normal = { family = "Mononoki Nerd Font Mono", style = "Regular" }
 bold = { style = "Bold" }
 italic = { style = "Italic" }
 bold_italic = { style = "Bold Italic" }

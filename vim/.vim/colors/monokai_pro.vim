@@ -12,6 +12,15 @@ endif
 
 let g:colors_name = "monokai_pro"
 
+" Palette
+" pink:     #ff6188
+" orange:   #fc9867
+" yellow:   #ffd866
+" green:    #a9dc76
+" cyan:     #78dce8
+" purple:   #ab9df2
+" normal:   #fcfcfa
+
 " Default group
 hi Cursor ctermfg=236 ctermbg=231 cterm=NONE guifg=#2d2a2e guibg=#fcfcfa gui=NONE
 hi SignColumn ctermfg=NONE ctermbg=237 cterm=NONE guibg=#3a3a3a guifg=NONE guisp=NONE gui=NONE
@@ -169,3 +178,34 @@ hi graphqlBraces ctermfg=246 ctermbg=NONE cterm=NONE guifg=#939293 guibg=NONE gu
 
 " Typescript
 hi typescriptImport ctermfg=204 ctermbg=NONE cterm=NONE guifg=#ff6188 guibg=NONE gui=NONE
+
+
+" Palette
+" pink:     #ff6188
+" orange:   #fc9867
+" yellow:   #ffd866
+" green:    #a9dc76
+" cyan:     #78dce8
+" purple:   #ab9df2
+" normal:   #fcfcfa
+" vim-lsp-semantic
+
+hi LspSemanticType guifg=#78dce8
+hi LspSemanticClass guifg=#78dce8
+hi LspSemanticEnum guifg=#78dce8
+hi LspSemanticInterface guifg=#78dce8
+hi LspSemanticTypeParameter guifg=#78dce8
+hi LspSemanticParameter guifg=#fcfcfa cterm=bold gui=bold
+hi LspSemanticVariable guifg=#fcfcfa
+hi LspSemanticProperty guifg=#fcfcfa cterm=italic gui=italic
+hi LspSemanticEnumMember guifg=#ab9df2
+hi LspSemanticEvents guifg=#78dce8
+hi LspSemanticFunction guifg=#a9dc76
+hi LspSemanticMethod guifg=#a9dc76
+hi LspSemanticKeyword guifg=#ff6188
+hi LspSemanticModifier guifg=#ff6188
+hi LspSemanticString guifg=#ffd866
+hi LspSemanticNumber guifg=#ab9df2
+hi LspSemanticRegexp guifg=#ffd866 gui=bold cterm=bold
+hi LspSemanticOperator guifg=#ff6188
+hi LspSemanticNamespace guifg=#78dce8
