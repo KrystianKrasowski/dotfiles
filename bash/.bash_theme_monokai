@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+pink() {
+    echo "\[\e[38;2;255;97;136m\]$1\[\e[0m\]"
+}
+
+yellow() {
+    echo "\[\e[38;2;255;216;102m\]$1\[\e[0m\]"
+}
+
+cyan() {
+    echo "\[\e[38;2;120;220;232m\]$1\[\e[0m\]"
+}
+
+green() {
+    echo "\[\e[38;2;169;220;118m\]$1\[\e[0m\]"
+}
+
+short_pwd() {
+    [[ "$PWD" == "$HOME" ]] && echo "~" || basename "$PWD"
+}
+
+parse_git_branch() {
+    git rev-parse --is-inside-work-tree &>/dev/null || return
+
+    local branch
+    branch=$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --exact-match 2>/dev/null)
+
+    local status
+    if [[ -n $(git status --porcelain 2>/dev/null) ]]; then
+        status="✘"
+    else
+        status="✔"
+    fi
+
+    echo " (${branch} ${status})"
+}
+
+build_prompt() {
+    local user="$(green " \u ")"
+    local path="$(cyan " \w ")"
+    local gitinfo="$(pink "$(parse_git_branch) ")"
+    local prompt="$(green "$")"
+    
+    PS1="\n${user}${path}${gitinfo}\n${prompt} "
+}
+
+PROMPT_COMMAND=build_prompt

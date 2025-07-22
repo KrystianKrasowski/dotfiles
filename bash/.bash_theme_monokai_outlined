@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+pink_outline() {
+    echo "\[\e[30;48;2;255;97;136m\]$1\[\e[0m\]"
+}
+
+pink() {
+    echo "\[\e[38;2;255;97;136m\]$1\[\e[0m\]"
+}
+
+yellow_outline() {
+    echo "\[\e[30;48;2;255;216;102m\]$1\[\e[0m\]"
+}
+
+cyan_outline() {
+    echo "\[\e[30;48;2;120;220;232m\]$1\[\e[0m\]"
+}
+
+green_outline() {
+    echo "\[\e[30;48;2;169;220;118m\]$1\[\e[0m\]"
+}
+
+green() {
+    echo "\[\e[38;2;169;220;118m\]$1\[\e[0m\]"
+}
+
+short_pwd() {
+    [[ "$PWD" == "$HOME" ]] && echo "~" || basename "$PWD"
+}
+
+parse_git_branch() {
+    git rev-parse --is-inside-work-tree &>/dev/null || return
+
+    local branch
+    branch=$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --exact-match 2>/dev/null)
+
+    local status
+    if [[ -n $(git status --porcelain 2>/dev/null) ]]; then
+        status="✘"
+    else
+        status="✔"
+    fi
+
+    echo " (${branch} ${status})"
+}
+
+build_prompt() {
+    local logo="$(green_outline "  ")"
+    local user="$(green_outline " \u ")"
+    local path="$(cyan_outline "  \w ")"
+    local gitinfo="$(pink_outline " $(parse_git_branch) ")"
+    local ending="$(pink "")"
+    local prompt="$(green "$")"
+    
+    PS1="\n${logo}${user}${path}${gitinfo}${ending}\n${prompt} "
+}
+
+PROMPT_COMMAND=build_prompt
