@@ -27,8 +27,17 @@ nnoremap <leader>]z ]]zz
 " move and center to the previous method
 nnoremap <leader>[z [[zz
 
-" toggle netrw
-nnoremap <leader>t :Le<CR>
+" toggle NERDTree and find the current node
+nnoremap <leader>tf :NERDTreeFind<CR>
+
+" toggle NERDTree
+nnoremap <leader>tt :NERDTreeToggle<CR>
+
+" edit in parent directory of the current file
+nnoremap <leader>ee :e %:p:h
+
+" edit in root directory
+nnoremap <leader>er :e 
 
 " ==== LSP mappings ====
 
