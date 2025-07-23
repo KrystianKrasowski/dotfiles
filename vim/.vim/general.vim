@@ -11,6 +11,7 @@ set cursorline
 " Fix timeout for <Esc>
 set timeoutlen=1000 ttimeoutlen=0
 set backspace=indent,eol,start
+set hlsearch
 
 " file navigation
 set path+=**

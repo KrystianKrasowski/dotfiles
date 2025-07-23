@@ -209,3 +209,5 @@ hi LspSemanticNumber guifg=#ab9df2
 hi LspSemanticRegexp guifg=#ffd866 gui=bold cterm=bold
 hi LspSemanticOperator guifg=#ff6188
 hi LspSemanticNamespace guifg=#78dce8
+hi LspSemanticMacro guifg=#ab9df2
+
