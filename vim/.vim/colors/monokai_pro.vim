@@ -198,6 +198,8 @@ hi LspSemanticTypeParameter guifg=#78dce8
 hi LspSemanticParameter guifg=#fcfcfa cterm=bold gui=bold
 hi LspSemanticVariable guifg=#fcfcfa
 hi LspSemanticProperty guifg=#fcfcfa cterm=italic gui=italic
+hi! LspSemanticUsedAsMutableReferenceProperty guifg=#ffd866 cterm=underline gui=underline
+hi! LspSemanticUsedAsMutablePointerProperty guifg=#ffd866 cterm=underline gui=underline
 hi LspSemanticEnumMember guifg=#ab9df2
 hi LspSemanticEvents guifg=#78dce8
 hi LspSemanticFunction guifg=#a9dc76

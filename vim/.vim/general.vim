@@ -18,6 +18,7 @@ set path+=**
 set wildignore+=**/build/**
 set wildmenu
 set wildoptions=pum,fuzzy
+set wildcharm=<Tab>
 
 " color theme
 set termguicolors

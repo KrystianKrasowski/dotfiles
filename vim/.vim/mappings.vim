@@ -12,8 +12,8 @@ nnoremap <C-k> <C-w>k
 " move to right pane
 nnoremap <C-l> <C-w>l
 
-" delete all buffers
-nnoremap <leader>bd :%bd<CR>
+" kill all buffers
+nnoremap <leader>bd :%bd!<CR>
 
 " yank all document
 nnoremap <leader>ya ggvG$"+y
@@ -34,10 +34,13 @@ nnoremap <leader>tf :NERDTreeFind<CR>
 nnoremap <leader>tt :NERDTreeToggle<CR>
 
 " edit in parent directory of the current file
-nnoremap <leader>ee :e %:p:h
+nnoremap <leader>ee :e %:p:h<Tab>
 
 " edit in root directory
 nnoremap <leader>er :e 
+
+" trigger omnicompletion
+inoremap <C-i><C-o> <C-x><C-o>
 
 " ==== LSP mappings ====
 
