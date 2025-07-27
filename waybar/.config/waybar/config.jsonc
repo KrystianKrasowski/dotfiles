@@ -1,0 +1,30 @@
+{
+	"height": 40,
+	"spacing": 4,
+	"modules-left": ["hyprland/workspaces"],
+	"modules-center": ["clock"],
+	"modules-right": ["network", "battery", "custom/logout"],
+	"clock": {
+		"format": "{:%A, %d %B %H:%M}"
+	},
+	"hyprland/workspaces": {
+		"format": "{id}",
+		"on-click": "activate",
+		"sort-by-number": true
+	},
+	"network": {
+		"format-wifi": "   {signalStrength}%",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "", 
+		"interval": 30
+	},
+	"battery": {
+		"format": "{icon} {capacity}%",
+		"format-icons": ["󰁻", "󰁽", "󰁿", "󰂁", "󰁹"],
+		"interval": 60
+	},
+	"custom/logout": {
+		"format": "  ",
+		"on-click": "wlogout"
+	}
+}
