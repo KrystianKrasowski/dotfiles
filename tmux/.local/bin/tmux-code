@@ -1,0 +1,22 @@
+#!/bin/bash
+
+print_help()
+{
+    echo "Usage: tmux-code <session-name>"
+}
+
+if [ -z "$1" ]; then
+    echo "Invalid input"
+    print_help
+    exit 1
+fi
+
+NAME=$1
+
+tmux new-session -d -s "$NAME"
+tmux rename-window -t "$NAME":0 'code'
+tmux new-window -t "$NAME" -n 'build'
+tmux select-window -t 0
+tmux attach-session -t "$NAME"
+
+exit 0

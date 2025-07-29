@@ -8,6 +8,7 @@ Install following packages:
 
 ```
 # bootstrap
+mkdir ~/.config
 mkdir ~/.vim
 mkdir -p ~/.local/bin 
 
