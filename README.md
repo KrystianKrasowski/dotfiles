@@ -9,6 +9,7 @@ Install following packages:
 ```
 # bootstrap
 mkdir ~/.config
+mkdir ~/.config/nvim
 mkdir ~/.vim
 mkdir -p ~/.local/bin 
 
