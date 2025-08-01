@@ -34,7 +34,16 @@ hl("LineNr", { fg = "#5B595C" })
 hl("CursorLineNr", { fg = colors.yellow, bold = true })
 hl("VertSplit", { fg = "#403E41" })
 hl("StatusLine", { fg = colors.fg, bg = "#403E41" })
+hl("StatusLineNC", { bg = colors.bg })
 hl("Operator", { fg = colors.pink })
+
+-- Status line
+hl("StatuslineModeNormal", { fg = colors.fg })
+hl("StatuslineModeInsert", { bg = colors.blue, fg = colors.bg })
+hl("StatuslineModeVisual", { bg = colors.orange, fg = colors.bg })
+hl("StatuslineModeReplace", { bg = colors.blue, fg = colors.bg })
+hl("StatuslineModeCommand", { bg = colors.green, fg = colors.bg })
+hl("StatuslineModeTerminal", { bg = colors.green, fg = colors.bg })
 
 -- Syntax
 hl("Keyword", { fg = colors.pink, bold = true })
