@@ -113,16 +113,36 @@ end
 
 local file_path_relative = "%<%{expand('%:.')}"
 
+local filetype_icons = {
+    ["default"] = "",
+    ["cpp"] = "",
+    ["lua"] = "󰢱",
+    ["java"] = "",
+    ["kotlin"] = ""
+}
+
+local function filetype_icon(type)
+    local icon = filetype_icons[type:lower()]
+
+    if icon ~= nil then
+        return icon
+    else
+        return filetype_icons['default']
+    end
+end
+
 Statusline = {}
 
 Statusline.active = function()
     local mode = vim.api.nvim_get_mode().mode
+    local file_type = vim.bo.filetype
 
     return table.concat({
         vim_mode_color_group(mode),
         mode_label(mode),
         '%*',
         file_path_relative,
+        filetype_icon(file_type),
         '%h%w%m%r%=%l,%c%V%',
     }, ' ')
 end
