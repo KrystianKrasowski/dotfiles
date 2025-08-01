@@ -39,6 +39,7 @@ hl("Operator", { fg = colors.pink })
 
 -- Status line
 hl("StatuslineModeNormal", { fg = colors.fg })
+hl("StatuslineModeNormalTemp", { fg = colors.yellow })
 hl("StatuslineModeInsert", { bg = colors.blue, fg = colors.bg })
 hl("StatuslineModeVisual", { bg = colors.orange, fg = colors.bg })
 hl("StatuslineModeReplace", { bg = colors.blue, fg = colors.bg })
