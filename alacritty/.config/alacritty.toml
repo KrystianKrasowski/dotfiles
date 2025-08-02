@@ -10,9 +10,8 @@ startup_mode = "SimpleFullscreen"
 padding = {x = 5, y = 0}
 
 [font]
-normal = { family = "Mononoki Nerd Font Mono", style = "Regular" }
+normal = { family = "Mononoki Nerd Font", style = "Regular" }
 bold = { style = "Bold" }
 italic = { style = "Italic" }
 bold_italic = { style = "Bold Italic" }
 size = 12
-offset = { x = 0, y = 1 }
