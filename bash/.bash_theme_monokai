@@ -33,12 +33,12 @@ parse_git_branch() {
         status=""
     fi
 
-    echo " ${branch} ${status}"
+    echo " ${branch}"
 }
 
 build_prompt() {
     local user="$(green " \u")"
-    local path="$(cyan " \w")"
+    local path="$(cyan "  \w")"
     local gitinfo="$(pink "$(parse_git_branch)")"
     local prompt="$(green "$")"
     
