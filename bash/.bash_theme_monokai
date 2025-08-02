@@ -28,21 +28,21 @@ parse_git_branch() {
 
     local status
     if [[ -n $(git status --porcelain 2>/dev/null) ]]; then
-        status="✘"
+        status="󰐗"
     else
-        status="✔"
+        status=""
     fi
 
-    echo " (${branch} ${status})"
+    echo " ${branch} ${status}"
 }
 
 build_prompt() {
-    local user="$(green " \u ")"
-    local path="$(cyan " \w ")"
-    local gitinfo="$(pink "$(parse_git_branch) ")"
+    local user="$(green " \u")"
+    local path="$(cyan " \w")"
+    local gitinfo="$(pink "$(parse_git_branch)")"
     local prompt="$(green "$")"
     
-    PS1="\n${user}${path}${gitinfo}\n${prompt} "
+    PS1="\n${user}  ${path}  ${gitinfo}\n${prompt} "
 }
 
 PROMPT_COMMAND=build_prompt
