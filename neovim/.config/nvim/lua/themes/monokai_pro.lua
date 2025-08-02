@@ -45,6 +45,8 @@ hl("StatuslineModeVisual", { bg = colors.orange, fg = colors.bg })
 hl("StatuslineModeReplace", { bg = colors.blue, fg = colors.bg })
 hl("StatuslineModeCommand", { bg = colors.green, fg = colors.bg })
 hl("StatuslineModeTerminal", { bg = colors.green, fg = colors.bg })
+hl("StatuslineErrorsCount", { fg = colors.pink })
+hl("StatuslineErrorsNone", { fg = colors.green })
 
 -- Syntax
 hl("Keyword", { fg = colors.pink, bold = true })

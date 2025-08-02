@@ -131,6 +131,15 @@ local function filetype_icon(type)
     end
 end
 
+local function get_errors_count()
+    local msg = "%#StatuslineErrorsNone# %*"
+    local errors = vim.tbl_count(vim.diagnostic.get(0, { severity = "Error" }))
+    if (errors ~= 0 ) then
+        msg = '%#StatuslineErrorsCount#' .. ' ' .. errors .. '%*'
+    end
+    return msg
+end
+
 local function git_branch()
     local branch = vim.fn.system("git branch --show-current 2> /dev/null | tr -d '\n'")
     if branch ~= "" then
@@ -140,7 +149,8 @@ local function git_branch()
     end
 end
 
-local line_no_and_column = '󰍎 ' .. '%l,%c%V%'
+local file_marks = '%h%w%m%r%'
+local line_no_and_column = '󰍎 ' .. '%l,%c'
 
 Statusline = {}
 
@@ -149,15 +159,9 @@ Statusline.active = function()
     local file_type = vim.bo.filetype
 
     return table.concat({
-        vim_mode_color_group(mode),
-        mode_label(mode),
-        '%*%=',
-        file_path_relative,
-        filetype_icon(file_type),
-        '%h%w%m%r%',
-        '%=',
-        git_branch(),
-        line_no_and_column
+        vim_mode_color_group(mode) .. ' ' .. mode_label(mode) .. ' %*  ' .. git_branch(),
+        '%=' .. file_path_relative .. ' ' .. filetype_icon(file_type) .. ' ' .. file_marks,
+        '%=%-12(' ..  line_no_and_column .. '%)' .. get_errors_count(),
     }, ' ')
 end
 
