@@ -131,6 +131,17 @@ local function filetype_icon(type)
     end
 end
 
+local function git_branch()
+    local branch = vim.fn.system("git branch --show-current 2> /dev/null | tr -d '\n'")
+    if branch ~= "" then
+        return ' ' .. branch
+    else
+        return ""
+    end
+end
+
+local line_no_and_column = '󰍎 ' .. '%l,%c%V%'
+
 Statusline = {}
 
 Statusline.active = function()
@@ -140,10 +151,13 @@ Statusline.active = function()
     return table.concat({
         vim_mode_color_group(mode),
         mode_label(mode),
-        '%*',
+        '%*%=',
         file_path_relative,
         filetype_icon(file_type),
-        '%h%w%m%r%=%l,%c%V%',
+        '%h%w%m%r%',
+        '%=',
+        git_branch(),
+        line_no_and_column
     }, ' ')
 end
 
