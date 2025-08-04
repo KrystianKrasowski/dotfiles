@@ -118,7 +118,8 @@ local filetype_icons = {
     ["cpp"] = "",
     ["lua"] = "󰢱",
     ["java"] = "",
-    ["kotlin"] = ""
+    ["kotlin"] = "",
+    ["markdown"] = ""
 }
 
 local function filetype_icon(type)
