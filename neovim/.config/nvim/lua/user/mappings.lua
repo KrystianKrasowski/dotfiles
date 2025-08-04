@@ -31,6 +31,9 @@ vim.keymap.set('i', '<C-i><C-o>', '<C-x><C-o>')
 -- update all
 vim.keymap.set('n', '<leader>wa', ':wa<CR>')
 
+-- close quickfix window
+vim.keymap.set('n', '<leader>qq', ':ccl')
+
 -- lsp mappings
 vim.keymap.set({ 'n', 'i' }, '<leader>fd', vim.lsp.buf.format)
 vim.keymap.set('n', 'gD', vim.lsp.buf.definition)
