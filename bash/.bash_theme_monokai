@@ -37,12 +37,12 @@ parse_git_branch() {
 }
 
 build_prompt() {
-    local user="$(green " \u")"
-    local path="$(cyan "  \w")"
+    local user="$(green "\u")"
+    local path="$(green "  \w")"
     local gitinfo="$(pink "$(parse_git_branch)")"
-    local prompt="$(green "$")"
+    local prompt="$(green "")"
     
-    PS1="\n${user}  ${path}  ${gitinfo}\n${prompt} "
+    PS1="\n${path}  ${gitinfo}\n${prompt} "
 }
 
 PROMPT_COMMAND=build_prompt

@@ -46,7 +46,7 @@ parse_git_branch() {
 
 build_prompt() {
     local logo="$(green_outline "  ")"
-    local user="$(green_outline " \u")$(green '\xE0\xBC')"
+    local user="$(green_outline " \u")$(green '')"
     local path="$(cyan "")$(cyan_outline "  \w ")$(cyan "")"
     local gitinfo="$(pink "")$(pink_outline " $(parse_git_branch) ")"
     local ending="$(pink "")"
