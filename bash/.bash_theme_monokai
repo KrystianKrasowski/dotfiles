@@ -28,12 +28,12 @@ parse_git_branch() {
 
     local status
     if [[ -n $(git status --porcelain 2>/dev/null) ]]; then
-        status="󰐗"
+        status="[+]"
     else
-        status=""
+        status=""
     fi
 
-    echo " ${branch}"
+    echo " ${branch} ${status}"
 }
 
 build_prompt() {
