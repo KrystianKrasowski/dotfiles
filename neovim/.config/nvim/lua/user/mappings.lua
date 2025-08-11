@@ -34,6 +34,12 @@ vim.keymap.set('n', '<leader>wa', ':wa<CR>')
 -- close quickfix window
 vim.keymap.set('n', '<leader>qq', ':ccl<CR>')
 
+-- toggle Netrw
+vim.keymap.set('n', '<leader>tr', ':20Lex<CR>')
+
+-- toggle Netrw in the parent directory of the file
+vim.keymap.set('n', '<leader>tt', ':20Lex %:p:h<CR>')
+
 -- lsp mappings
 vim.keymap.set({ 'n', 'i' }, '<leader>fd', vim.lsp.buf.format)
 vim.keymap.set('n', 'gD', vim.lsp.buf.definition)
@@ -42,6 +48,5 @@ vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
 vim.keymap.set('n', 'gr', vim.lsp.buf.references)
 vim.keymap.set('n', 'gs', vim.lsp.buf.document_symbol)
 vim.keymap.set('n', 'K', vim.lsp.buf.hover)
-vim.keymap.set('n', '<C-K>', vim.lsp.buf.signature_help)
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
