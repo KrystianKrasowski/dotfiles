@@ -14,7 +14,7 @@ function M.print_status()
     local errors = vim.tbl_count(vim.diagnostic.get(0, { severity = "Error" }))
 
     if (errors ~= 0) then
-        msg = '%#' .. M.status_err_highlight_group .. '#' .. M.status_err_icon .. ' ' .. errors .. '%*'
+        msg = '%#' .. cfg.status_err_highlight_group .. '#' .. cfg.status_err_icon .. ' ' .. errors .. '%*'
     end
 
     return msg
