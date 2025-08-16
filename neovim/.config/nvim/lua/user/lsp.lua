@@ -3,12 +3,16 @@ vim.lsp.enable('clangd')
 
 -- Diagnostics
 vim.diagnostic.config({
-  -- Use the default configuration
-  -- virtual_lines = true
+    virtual_lines = {
+        current_line = true,
+    },
+})
 
-  -- Alternatively, customize specific options
-  virtual_lines = {
-    -- Only show virtual line diagnostics for the current cursor line
-    current_line = true,
-  },
+-- enable symbol under the coursor highlight
+vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+    callback = vim.lsp.buf.document_highlight
+})
+
+vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+    callback = vim.lsp.buf.clear_references
 })
