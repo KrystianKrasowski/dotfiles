@@ -48,6 +48,9 @@ hl("StatuslineModeTerminal", { bg = colors.green, fg = colors.bg })
 hl("StatuslineErrorsCount", { fg = colors.pink })
 hl("StatuslineErrorsNone", { fg = colors.green })
 
+-- tabline
+hl("TabLineSel", { bg = colors.comment })
+
 -- Syntax
 hl("Keyword", { fg = colors.pink, bold = true })
 hl("Identifier", { fg = colors.blue })
