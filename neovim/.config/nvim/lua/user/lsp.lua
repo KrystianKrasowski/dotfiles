@@ -1,5 +1,6 @@
 vim.lsp.enable('luals')
 vim.lsp.enable('clangd')
+vim.lsp.enable('jdtls')
 
 -- Diagnostics
 vim.diagnostic.config({
