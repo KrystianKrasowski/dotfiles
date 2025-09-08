@@ -18,7 +18,7 @@ if not root_dir then
 end
 
 -- put workspace inside project as ".jdtls/"
-local workspace_dir = root_dir .. "/.jdtls"
+local workspace_dir = home .. "/.jdtls"
 
 vim.lsp.config['jdtls'] = {
     cmd = {
