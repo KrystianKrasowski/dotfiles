@@ -20,7 +20,7 @@ vim.keymap.set('n', '<leader>va', 'ggvG$')
 vim.keymap.set('n', '<leader>ya', 'ggvG$"+y')
 
 -- edit in parent dir of the current file
-vim.keymap.set('n', '<leader>ee', ':e %:p:h')
+vim.keymap.set('n', '<leader>ee', ':e %:.:h')
 
 -- edit in root dir
 vim.keymap.set('n', '<leader>er', ':e')
@@ -50,7 +50,7 @@ vim.keymap.set('n', 'gs', vim.lsp.buf.document_symbol)
 vim.keymap.set('n', 'K', vim.lsp.buf.hover)
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
-vim.keymap.set({'n', 'i'}, '<leader>sh', vim.lsp.buf.signature_help)
+vim.keymap.set({ 'n', 'i' }, '<leader>sh', vim.lsp.buf.signature_help)
 
 -- diagnostics mappings
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float)
