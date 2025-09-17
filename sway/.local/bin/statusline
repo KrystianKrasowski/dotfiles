@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+echo '{ "version": 1 }'
+echo '['
+echo '[],'
+
+while :; do
+    datetime=$(date '+%d %b %H:%M')
+    echo "[{\"full_text\":\""$datetime"\"}],"
+    sleep 1
+done
