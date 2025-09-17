@@ -1,0 +1,32 @@
+window {
+    font-size: 24px;
+    font-family: "Cantarell";
+    background-color: #2d2a2e;
+    border: 1px solid #727072;
+    color: #fcfcfa;
+}
+
+#input {
+    background-color: #2d2a2e;
+    color: #fcfcfa;
+    font-size: 16px;
+    font-weight: normal;
+    padding: .5em;
+    border: 1px solid #727072;
+}
+
+#entry {
+    padding: .25em;
+}
+
+#entry:selected {
+    background-color: #78dce8;
+}
+
+#text:selected {
+    color: #2d2a2e;
+}
+
+image {
+    margin: 0 .25em;
+}

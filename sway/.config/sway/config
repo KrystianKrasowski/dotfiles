@@ -14,14 +14,16 @@ set $left h
 set $down j
 set $up k
 set $right l
+
 # Your preferred terminal emulator
 set $term alacritty
+
 # Your preferred application launcher
-set $menu wmenu-run
+set $menu wofi --show drun
 
 include /etc/sway/config-vars.d/*
 
-font pango:Mononoki Nerd Font 12
+font pango:Cantarell Medium 12
 
 default_border pixel 3
 
@@ -243,15 +245,18 @@ bindsym $mod+r mode "resize"
 bar {
     position top
     status_padding 7
+    status_edge_padding 15
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
     status_command /home/krystian/.local/bin/statusline
 
     colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
+        statusline #fcfcfa
+        background #2d2a2e
+        inactive_workspace #2d2a2e #2d2a2e #fcfcfa
+        active_workspace #2d2a2e #2d2a2e #fcfcfa
+        focused_workspace #2d2a2e #78dce8 #2d2a2e
     }
 }
 
