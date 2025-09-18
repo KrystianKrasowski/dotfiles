@@ -1,11 +1,80 @@
 #!/usr/bin/env bash
-
-echo '{ "version": 1 }'
+echo '{"version":1, "click_events":true}'
 echo '['
 echo '[],'
 
+exec 3<&0
+
+handle_clicks() {
+    while read -r line <&3; do
+        if echo "$line" | grep -q '"name": "lock"'; then
+            gtklock &
+        fi
+    done
+}
+
+handle_clicks &
+
+battery() {
+    local battery="/sys/class/power_supply/BAT0"
+    local capacity=$(cat $battery/capacity)
+    local state=$(cat $battery/status)
+
+    if [ "$state" = "Discharging" ]; then
+        if [ "$capacity" -lt 10 ]; then
+            echo -n '{"full_text":"󰁺", "urgent":true}'
+        elif [ "$capacity" -lt 20 ]; then
+            echo -n '{"full_text":"󰁻", "urgent":true}'
+        elif [ "$capacity" -lt 30 ]; then
+            echo -n '{"full_text":"󰁼", "urgent":true}'
+        elif [ "$capacity" -lt 40 ]; then
+            echo -n '{"full_text":"󰁽"}'
+        elif [ "$capacity" -lt 50 ]; then
+            echo -n '{"full_text":"󰁾"}'
+        elif [ "$capacity" -lt 60 ]; then
+            echo -n '{"full_text":"󰁿"}'
+        elif [ "$capacity" -lt 70 ]; then
+            echo -n '{"full_text":"󰂀"}'
+        elif [ "$capacity" -lt 80 ]; then
+            echo -n '{"full_text":"󰂁"}'
+        elif [ "$capacity" -lt 90 ]; then
+            echo -n '{"full_text":"󰂂"}'
+        else
+            echo -n '{"full_text":"󰁹"}'
+        fi
+    else
+        if [ "$capacity" -lt 10 ]; then
+            echo -n '{"full_text":"󰢜", "urgent":true}'
+        elif [ "$capacity" -lt 20 ]; then
+            echo -n '{"full_text":"󰂆", "urgent":true}'
+        elif [ "$capacity" -lt 30 ]; then
+            echo -n '{"full_text":"󰂇", "urgent":true}'
+        elif [ "$capacity" -lt 40 ]; then
+            echo -n '{"full_text":"󰂈"}'
+        elif [ "$capacity" -lt 50 ]; then
+            echo -n '{"full_text":"󰢝"}'
+        elif [ "$capacity" -lt 60 ]; then
+            echo -n '{"full_text":"󰂉"}'
+        elif [ "$capacity" -lt 70 ]; then
+            echo -n '{"full_text":"󰢞"}'
+        elif [ "$capacity" -lt 80 ]; then
+            echo -n '{"full_text":"󰂊"}'
+        elif [ "$capacity" -lt 90 ]; then
+            echo -n '{"full_text":"󰂋"}'
+        else
+            echo -n '{"full_text":"󰂅"}'
+        fi
+    fi
+}
+
 while :; do
     datetime=$(date '+%d %b %H:%M')
-    echo "[{\"full_text\":\""$datetime"\"}],"
+    bat=$(battery)
+
+    echo -n '['
+    echo -n "$bat"
+    echo -n ",{\"full_text\":\"$datetime\"}"
+    echo -n ',{"full_text":"", "name":"lock"}'
+    echo '],'
     sleep 1
 done
