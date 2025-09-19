@@ -1,0 +1,9 @@
+configuration {
+    display-drun: "Application";
+    drun-display-format: "{icon} {name}";
+    modi: "run,drun";
+    show-icons: true;
+    icon-theme: "Adwaita";
+}
+
+@theme "/home/krystian/.local/share/rofi/themes/theme.rasi"

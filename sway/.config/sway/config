@@ -19,7 +19,7 @@ set $right l
 set $term alacritty
 
 # Your preferred application launcher
-set $menu wofi --show drun
+set $menu rofi -show drun
 
 include /etc/sway/config-vars.d/*
 
@@ -49,6 +49,7 @@ gaps outer 10
 output * bg /home/krystian/Obrazy/wallpapers/debian-monokai.jpg fill
 output HDMI-A-1 pos 0 0 
 output eDP-1 pos 760 1440 
+#output eDP-1 pos 0 0 
 
 ### Idle configuration
 #
