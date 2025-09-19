@@ -1,0 +1,56 @@
+* {
+    font-family: "Cantarell Medium";
+    font-size: 16px;
+}
+
+window#waybar {
+    background-color: rgba(43, 48, 59, 0.8);
+    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    color: #fcfcfc;
+}
+
+button {
+    border: none;
+}
+
+button:hover {
+    background: inherit;
+}
+
+#workspaces button {
+    padding: 5px;
+    margin: 5px;
+    background-color: transparent;
+    color: #fcfcfc;
+}
+
+#workspaces button:hover,
+#workspaces button.focused,
+#workspaces button.active {
+    background: #78dce8;
+    color: #000;
+    font-weight: normal;
+}
+
+.modules-left {
+    margin-left: 15px;
+}
+
+.modules-right {
+    margin-right: 15px;
+}
+
+#network,
+#battery {
+    padding: 5px;
+    margin: 5px;
+}
+
+#battery.warning {
+    color: #ffd866
+}
+
+#battery.critical {
+    color: #ff6188;
+}
+
