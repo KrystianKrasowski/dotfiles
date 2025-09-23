@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+selection=$(nmcli -t -f IN-USE,SSID,RATE,SIGNAL,SECURITY device wifi list \
+    | awk -F: '{printf "%s  |  (%s)  |  %s%%  |  %s %s%s%s\n",$2,$3,$4,$5,$1,$1,$1}' \
+    | rofi -dmenu -p "Select WiFi")
+
+ssid=$(echo "$selection" | awk -F'|' '{print $1}' | xargs)
+
+pass=$(rofi -dmenu -p "Enter passowrd" -password)
+
+echo "$pass"

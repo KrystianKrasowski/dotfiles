@@ -44,23 +44,15 @@ inputbar {
     font:       "Cantarell 20";
     padding:    12px;
     spacing:    12px;
-    children:   [ icon-search, entry ];
+    children:   [ entry ];
 }
 
-icon-search {
-    expand:     false;
-    filename:   "search";
-    size: 28px;
-}
-
-icon-search, entry, element-icon, element-text {
+entry, element-icon, element-text {
     vertical-align: 0.5;
 }
 
 entry {
     font:   inherit;
-
-    placeholder         : "Search";
     placeholder-color   : @comment;
 }
 
