@@ -30,13 +30,13 @@ battery() {
         elif [ "$battery_capacity" -gt 60 ]; then
             echo -n '"full_text":"󰂀", "color": "a9dc76"'
         elif [ "$battery_capacity" -gt 50 ]; then
-            echo -n '"full_text":"󰁽", "color": "ffd866"'
+            echo -n '"full_text":"󰁿", "color": "ffd866"'
         elif [ "$battery_capacity" -gt 40 ]; then
             echo -n '"full_text":"󰁽", "color": "ffd866"'
         elif [ "$battery_capacity" -gt 30 ]; then
             echo -n '"full_text":"󰁽", "color": "ffd866"'
         elif [ "$battery_capacity" -gt 20 ]; then
-            echo -n '"full_text":"󰁻", "color": "ff6188"'
+            echo -n '"full_text":"󰁼", "color": "ff6188"'
         elif [ "$battery_capacity" -gt 10 ]; then
             echo -n '"full_text":"󰁻", "color": "ff6188"'
         else
