@@ -55,9 +55,14 @@ output eDP-1 pos 0 0
 #
 # Example configuration:
 #
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+#          before-sleep 'swaylock -f -c 000000'
 exec swayidle -w \
-         timeout 300 'gtklock' \
-         before-sleep 'gtklock'
+         timeout 300 'swaylock' \
+         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         before-sleep 'swaylock'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -112,7 +117,7 @@ input type:touchpad {
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
     # Lock the screen
-    bindsym $mod+Shift+x exec gtklock
+    bindsym $mod+Shift+x exec swaylock
 #
 # Moving around:
 #
@@ -241,7 +246,7 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     # Special key to take a screenshot with grim
-    bindsym Print exec grim
+    bindsym Print exec grim -t png -g "$(slurp)" ~/screenshots/$(date +%Y-%m-%d_%H-%m-%s).png
 
 #
 # Status Bar:
@@ -251,12 +256,13 @@ bar {
     position top
     status_padding 7
     status_edge_padding 15
+    workspace_min_width 30
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    #status_command /home/krystian/.local/bin/statusline
+    status_command /home/krystian/.local/bin/statusline
     #status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-    swaybar_command waybar
+    #swaybar_command waybar
 
     colors {
         statusline #fcfcfa

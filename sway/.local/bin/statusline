@@ -8,7 +8,7 @@ exec 3<&0
 handle_clicks() {
     while read -r line <&3; do
         if echo "$line" | grep -q '"name": "lock"'; then
-            gtklock &
+            swaylock &
         fi
     done
 }
@@ -21,15 +21,82 @@ battery() {
     local battery_state=$(cat $battery/status)
 
     if [ "$battery_state" = "Discharging" ]; then
-        echo -n "{\"full_text\":\"\"}"
+        if [ "$battery_capacity" -gt 90 ]; then
+            echo -n '"full_text":"󰁹", "color": "a9dc76"'
+        elif [ "$battery_capacity" -gt 80 ]; then
+            echo -n '"full_text":"󰂂", "color": "a9dc76"'
+        elif [ "$battery_capacity" -gt 70 ]; then
+            echo -n '"full_text":"󰂁", "color": "a9dc76"'
+        elif [ "$battery_capacity" -gt 60 ]; then
+            echo -n '"full_text":"󰂀", "color": "a9dc76"'
+        elif [ "$battery_capacity" -gt 50 ]; then
+            echo -n '"full_text":"󰁽", "color": "ffd866"'
+        elif [ "$battery_capacity" -gt 40 ]; then
+            echo -n '"full_text":"󰁽", "color": "ffd866"'
+        elif [ "$battery_capacity" -gt 30 ]; then
+            echo -n '"full_text":"󰁽", "color": "ffd866"'
+        elif [ "$battery_capacity" -gt 20 ]; then
+            echo -n '"full_text":"󰁻", "color": "ff6188"'
+        elif [ "$battery_capacity" -gt 10 ]; then
+            echo -n '"full_text":"󰁻", "color": "ff6188"'
+        else
+            echo -n '"full_text":"󰁺", "color": "ff6188"'
+        fi
+    else
+        if [ "$battery_capacity" -gt 90 ]; then
+            echo -n '"full_text":"󰂅", "color": "78dce8"'
+        elif [ "$battery_capacity" -gt 80 ]; then
+            echo -n '"full_text":"󰂋", "color": "78dce8"'
+        elif [ "$battery_capacity" -gt 70 ]; then
+            echo -n '"full_text":"󰂊", "color": "78dce8"'
+        elif [ "$battery_capacity" -gt 60 ]; then
+            echo -n '"full_text":"󰢞", "color": "78dce8"'
+        elif [ "$battery_capacity" -gt 50 ]; then
+            echo -n '"full_text":"󰂉", "color": "78dce8"'
+        elif [ "$battery_capacity" -gt 40 ]; then
+            echo -n '"full_text":"󰢝", "color": "78dce8"'
+        elif [ "$battery_capacity" -gt 30 ]; then
+            echo -n '"full_text":"󰂈", "color": "78dce8"'
+        elif [ "$battery_capacity" -gt 20 ]; then
+            echo -n '"full_text":"󰂇", "color": "78dce8"'
+        elif [ "$battery_capacity" -gt 10 ]; then
+            echo -n '"full_text":"󰂆", "color": "78dce8"'
+        else
+            echo -n '"full_text":"󰢜", "color": "78dce8"'
+        fi
+    fi
+}
+
+wifi() {
+    local INTERFACE=wlp0s20f3
+    local SSID=$(iwgetid -r)
+    local STRENGTH=$(grep "$INTERFACE" /proc/net/wireless | awk '{print int($3 * 100 / 70)}')
+
+    if [[ -z "$SSID" ]]; then
+        echo -n '"full_text":"󰤭", "color": "ff6188"'
+    else
+        if [ "$STRENGTH" -gt 75 ]; then
+            echo -n '"full_text":"󰤨", "color": "78dce8"'
+        elif [ "$STRENGTH" -gt 50 ]; then
+            echo -n '"full_text":"󰤥", "color": "78dce8"'
+        elif [ "$STRENGTH" -gt 25 ]; then
+            echo -n '"full_text":"󰤢", "color": "78dce8"'
+        else
+            echo -n '"full_text":"󰤟", "color": "78dce8"'
+        fi
+    fi
 }
 
 while :; do
     datetime=$(date '+%d %b %H:%M')
+    battery=$(battery)
+    wifi=$(wifi)
 
     echo -n '['
-    echo -n "{\"full_text\":\"$datetime\"}"
-    echo -n ',{"full_text":"", "name":"lock"}'
+    echo -n "{\"full_text\":\"$datetime\", \"separator\": false}"
+    echo -n ",{"$wifi", \"separator\": false, \"min_width\":15}"
+    echo -n ",{"$battery", \"separator\": false}"
+    #echo -n ',{"full_text":"", "name":"lock", "separator": false}'
     echo '],'
     sleep 1
 done

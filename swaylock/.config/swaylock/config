@@ -1,0 +1,12 @@
+color=2d2a2e
+
+indicator-radiu=200
+inside-color=78dce895
+inside-wrong-color=ff618895
+inside-ver-color=78dce895
+inside-clear-color=a9dc7695
+
+ring-color=78dce8
+ring-wrong-color=ff6188
+ring-ver-color=78dce8
+ring-clear-color=a9dc76
