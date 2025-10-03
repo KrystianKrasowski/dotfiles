@@ -255,7 +255,7 @@ bindsym $mod+r mode "resize"
 bar {
     position top
     status_padding 7
-    status_edge_padding 15
+    status_edge_padding 18
     workspace_min_width 30
 
     # When the status_command prints a new line to stdout, swaybar updates.

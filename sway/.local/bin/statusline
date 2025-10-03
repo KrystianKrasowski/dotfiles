@@ -22,15 +22,15 @@ battery() {
 
     if [ "$battery_state" = "Discharging" ]; then
         if [ "$battery_capacity" -gt 90 ]; then
-            echo -n '"full_text":"󰁹", "color": "a9dc76"'
+            echo -n '"full_text":"󰁹"'
         elif [ "$battery_capacity" -gt 80 ]; then
-            echo -n '"full_text":"󰂂", "color": "a9dc76"'
+            echo -n '"full_text":"󰂂"'
         elif [ "$battery_capacity" -gt 70 ]; then
-            echo -n '"full_text":"󰂁", "color": "a9dc76"'
+            echo -n '"full_text":"󰂁"'
         elif [ "$battery_capacity" -gt 60 ]; then
-            echo -n '"full_text":"󰂀", "color": "a9dc76"'
+            echo -n '"full_text":"󰂀"'
         elif [ "$battery_capacity" -gt 50 ]; then
-            echo -n '"full_text":"󰁿", "color": "ffd866"'
+            echo -n '"full_text":"󰁿"'
         elif [ "$battery_capacity" -gt 40 ]; then
             echo -n '"full_text":"󰁽", "color": "ffd866"'
         elif [ "$battery_capacity" -gt 30 ]; then
@@ -44,25 +44,25 @@ battery() {
         fi
     else
         if [ "$battery_capacity" -gt 90 ]; then
-            echo -n '"full_text":"󰂅", "color": "78dce8"'
+            echo -n '"full_text":"󰂅"'
         elif [ "$battery_capacity" -gt 80 ]; then
-            echo -n '"full_text":"󰂋", "color": "78dce8"'
+            echo -n '"full_text":"󰂋"'
         elif [ "$battery_capacity" -gt 70 ]; then
-            echo -n '"full_text":"󰂊", "color": "78dce8"'
+            echo -n '"full_text":"󰂊"'
         elif [ "$battery_capacity" -gt 60 ]; then
-            echo -n '"full_text":"󰢞", "color": "78dce8"'
+            echo -n '"full_text":"󰢞"'
         elif [ "$battery_capacity" -gt 50 ]; then
-            echo -n '"full_text":"󰂉", "color": "78dce8"'
+            echo -n '"full_text":"󰂉"'
         elif [ "$battery_capacity" -gt 40 ]; then
-            echo -n '"full_text":"󰢝", "color": "78dce8"'
+            echo -n '"full_text":"󰢝"'
         elif [ "$battery_capacity" -gt 30 ]; then
-            echo -n '"full_text":"󰂈", "color": "78dce8"'
+            echo -n '"full_text":"󰂈"'
         elif [ "$battery_capacity" -gt 20 ]; then
-            echo -n '"full_text":"󰂇", "color": "78dce8"'
+            echo -n '"full_text":"󰂇"'
         elif [ "$battery_capacity" -gt 10 ]; then
-            echo -n '"full_text":"󰂆", "color": "78dce8"'
+            echo -n '"full_text":"󰂆"'
         else
-            echo -n '"full_text":"󰢜", "color": "78dce8"'
+            echo -n '"full_text":"󰢜"'
         fi
     fi
 }
@@ -76,14 +76,24 @@ wifi() {
         echo -n '"full_text":"󰤭", "color": "ff6188"'
     else
         if [ "$STRENGTH" -gt 75 ]; then
-            echo -n '"full_text":"󰤨", "color": "78dce8"'
+            echo -n '"full_text":"󰤨"'
         elif [ "$STRENGTH" -gt 50 ]; then
-            echo -n '"full_text":"󰤥", "color": "78dce8"'
+            echo -n '"full_text":"󰤥"'
         elif [ "$STRENGTH" -gt 25 ]; then
-            echo -n '"full_text":"󰤢", "color": "78dce8"'
+            echo -n '"full_text":"󰤢"'
         else
-            echo -n '"full_text":"󰤟", "color": "78dce8"'
+            echo -n '"full_text":"󰤟"'
         fi
+    fi
+}
+
+bluetooth() {
+    local any_connected=$(bluetoothctl devices Connected)
+
+    if [[ -z "$any_connected" ]]; then
+        echo -n '"full_text":"󰂯"'
+    else
+        echo -n '"full_text":"󰂱"'
     fi
 }
 
@@ -91,10 +101,12 @@ while :; do
     datetime=$(date '+%d %b %H:%M')
     battery=$(battery)
     wifi=$(wifi)
+    bluetooth=$(bluetooth)
 
     echo -n '['
-    echo -n "{\"full_text\":\"$datetime\", \"separator\": false}"
-    echo -n ",{"$wifi", \"separator\": false, \"min_width\":15}"
+    echo -n "{\"full_text\":\"$datetime\", \"separator\": false, \"separator_block_width\":20}"
+    echo -n ",{"$bluetooth", \"separator\": false, \"separator_block_width\":20}"
+    echo -n ",{"$wifi", \"separator\": false, \"separator_block_width\":25}"
     echo -n ",{"$battery", \"separator\": false}"
     #echo -n ',{"full_text":"", "name":"lock", "separator": false}'
     echo '],'
