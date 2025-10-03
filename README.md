@@ -3,6 +3,8 @@
 Install following packages:
 
 * stow
+* nmcli
+* bluetoothcli
 
 ### Usage
 
