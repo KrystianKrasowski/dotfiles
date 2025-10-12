@@ -45,4 +45,8 @@ build_prompt() {
     PS1="\n${path}  ${gitinfo}\n${prompt} "
 }
 
-PROMPT_COMMAND=build_prompt
+IS_TTY=$(tty | grep tty)
+
+if [ -z "$IS_TTY" ]; then
+    PROMPT_COMMAND=build_prompt
+fi
