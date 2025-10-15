@@ -1,0 +1,17 @@
+{
+  "modules": [
+    { "type": "os" },
+    { "type": "host" },
+    { "type": "kernel" },
+    { "type": "uptime" },
+    { "type": "display" },
+    { "type": "wm" },
+    { "type": "cpu" },
+    { "type": "memory" },
+    {
+      "type": "disk",
+      "folders": ["/", "/boot", "/home"]
+    },
+    { "type": "battery" }
+  ]
+}
