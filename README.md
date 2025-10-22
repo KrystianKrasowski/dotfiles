@@ -11,6 +11,7 @@ Install following packages:
 * alacritty
 * neovim
 * bash-completion
+* jq
 
 ### Usage
 

@@ -96,14 +96,26 @@ bluetooth() {
     fi
 }
 
+notifications() {
+    local unread_count=$(dunstctl history | jq '[.data[][] | select(.timeout.data > 0)] | length')
+
+    if [ "$unread_count" -gt 0 ]; then
+        echo -n "\"full_text\":\"󱅫 "$unread_count"\",\"color\":\"ff6188\""
+    else
+        echo -n "\"full_text\":\"󰂚\""
+    fi
+}
+
 while :; do
     datetime=$(date '+%d %b %H:%M')
     battery=$(battery)
     wifi=$(wifi)
     bluetooth=$(bluetooth)
+    notifications=$(notifications)
 
     echo -n '['
     echo -n "{\"full_text\":\"$datetime\", \"separator\": false, \"separator_block_width\":20}"
+    echo -n ",{"$notifications", \"separator\": false, \"separator_block_width\":23}"
     echo -n ",{"$bluetooth", \"separator\": false, \"separator_block_width\":20}"
     echo -n ",{"$wifi", \"separator\": false, \"separator_block_width\":25}"
     echo -n ",{"$battery", \"separator\": false}"
