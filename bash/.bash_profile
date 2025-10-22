@@ -20,6 +20,6 @@ fi
 DESKTOP_WALLPAPER="$HOME/wallpapers/main.jpg"
 
 # source custom desktop environment variables
-if [ -f "$HOME/.bash_profile_local" ]
+if [ -f "$HOME/.bash_profile_local" ]; then
     . "$HOME/.bash_profile_local"
 fi
