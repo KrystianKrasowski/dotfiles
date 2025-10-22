@@ -5,6 +5,11 @@ Install following packages:
 * stow
 * nmcli
 * bluetoothcli
+* dunst
+* fastfetch
+* rofi
+* alacritty
+* neovim
 
 ### Usage
 
@@ -14,6 +19,9 @@ mkdir ~/.config
 mkdir ~/.config/nvim
 mkdir ~/.vim
 mkdir -p ~/.local/bin 
+mkdir ~/screenshots
+mkdir ~/wallpapers
+mkdir ~/downloads
 
 cd ~/dotfiles
 

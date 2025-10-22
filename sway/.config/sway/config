@@ -21,6 +21,9 @@ set $term alacritty
 # Your preferred application launcher
 set $menu rofi -show drun
 
+# Set custom desktop variables
+set $wallpaper $DESKTOP_WALLPAPER
+
 include /etc/sway/config-vars.d/*
 
 font pango:Cantarell Medium 12
