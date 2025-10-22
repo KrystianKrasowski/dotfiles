@@ -10,6 +10,7 @@ Install following packages:
 * rofi
 * alacritty
 * neovim
+* bash-completion
 
 ### Usage
 

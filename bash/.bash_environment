@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# set default theme
+DESKTOP_BASH_THEME=~/.bash_theme_monokai
+
+# overwrite machine local DESKTOP_* settings
+if [ -f "$HOME/.bash_environment.local" ]; then
+    . "$HOME/.bash_environment.local"
+fi

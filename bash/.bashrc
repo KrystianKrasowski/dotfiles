@@ -39,6 +39,14 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Custom environment setup
+if [ -f ~/.bash_environment ]; then
+    . ~/.bash_environment
+fi
+
+# Set bash thene
+. "$DESKTOP_BASH_THEME"
+
 # Display fastfetch
 if command -v fastfetch > /dev/null 2>&1; then
     fastfetch

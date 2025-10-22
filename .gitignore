@@ -1,2 +1,2 @@
 backups
-./bash/.bash_profile_local
+*.local
