@@ -9,6 +9,12 @@ handle_clicks() {
     while read -r line <&3; do
         if echo "$line" | grep -q '"name": "lock"'; then
             swaylock &
+        elif echo "$line" | grep -q '"name": "notifications"'; then
+            local notification_id=$(dunstctl history | jq '[.data[][] | select(.timeout.data > 0 and .urgency.data != "LOW") | .id.data] | first')
+            
+            if [ -n "$notification_id" ]; then
+                dunstctl history-pop "$notification_id"
+            fi
         fi
     done
 }
@@ -75,29 +81,29 @@ wifi() {
         echo -n '"full_text":"󰤭", "color": "ff6188"'
     else
         if [ "$STRENGTH" -gt 75 ]; then
-            echo -n '"full_text":"󰤨"'
+            echo -n "\"full_text\":\"󰤨 <small>"$SSID"</small>\""
         elif [ "$STRENGTH" -gt 50 ]; then
-            echo -n '"full_text":"󰤥"'
+            echo -n "\"full_text\":\"󰤥 <small>"$SSID"</small>\""
         elif [ "$STRENGTH" -gt 25 ]; then
-            echo -n '"full_text":"󰤢"'
+            echo -n "\"full_text\":\"󰤢 <small>"$SSID"</small>\""
         else
-            echo -n '"full_text":"󰤟"'
+            echo -n "\"full_text\":\"󰤟 <small>"$SSID"</small>\""
         fi
     fi
 }
 
 bluetooth() {
-    local any_connected=$(bluetoothctl devices Connected)
+    local connections=$(bluetoothctl devices Connected | wc -l)
 
-    if [[ -z "$any_connected" ]]; then
-        echo -n '"full_text":"󰂯"'
+    if [ "$connections" -gt 0 ]; then
+        echo -n "\"full_text\":\"󰂱 <small>"$connections"</small>\""
     else
-        echo -n '"full_text":"󰂱"'
+        echo -n '"full_text":"󰂯"'
     fi
 }
 
 notifications() {
-    local unread_count=$(dunstctl history | jq '[.data[][] | select(.timeout.data > 0)] | length')
+    local unread_count=$(dunstctl history | jq '[.data[][] | select(.timeout.data > 0 and .urgency.data != "LOW")] | length')
     local is_paused=$(dunstctl is-paused)
 
     if [ "$is_paused" = "true" ]; then
@@ -117,10 +123,10 @@ while :; do
     notifications=$(notifications)
 
     echo -n '['
-    echo -n "{\"full_text\":\"$datetime\", \"separator\": false, \"separator_block_width\":20}"
-    echo -n ",{"$notifications", \"separator\": false, \"separator_block_width\":23, \"markup\":\"pango\"}"
-    echo -n ",{"$bluetooth", \"separator\": false, \"separator_block_width\":20}"
-    echo -n ",{"$wifi", \"separator\": false, \"separator_block_width\":25}"
+    echo -n "{\"full_text\":\"$datetime\", \"min_width\":30, \"separator\": true, \"separator_block_width\":20}"
+    echo -n ",{"$notifications", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":23, \"markup\":\"pango\", \"name\":\"notifications\"}"
+    echo -n ",{"$bluetooth", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":20, \"markup\":\"pango\"}"
+    echo -n ",{"$wifi", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\"}"
     echo -n ",{"$battery", \"separator\": false}"
     #echo -n ',{"full_text":"", "name":"lock", "separator": false}'
     echo '],'

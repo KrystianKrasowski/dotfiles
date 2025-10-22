@@ -262,6 +262,7 @@ bar {
     status_padding 7
     status_edge_padding 18
     workspace_min_width 30
+    separator_symbol |
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
