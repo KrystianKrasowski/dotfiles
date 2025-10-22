@@ -98,9 +98,12 @@ bluetooth() {
 
 notifications() {
     local unread_count=$(dunstctl history | jq '[.data[][] | select(.timeout.data > 0)] | length')
+    local is_paused=$(dunstctl is-paused)
 
-    if [ "$unread_count" -gt 0 ]; then
-        echo -n "\"full_text\":\"󱅫 "$unread_count"\",\"color\":\"ff6188\""
+    if [ "$is_paused" = "true" ]; then
+        echo -n "\"full_text\":\"󰂛\",\"color\":\"78dce8\""
+    elif [ "$unread_count" -gt 0 ]; then
+        echo -n "\"full_text\":\"󱅫 <small>"$unread_count"</small>\",\"color\":\"ff6188\""
     else
         echo -n "\"full_text\":\"󰂚\""
     fi
@@ -115,7 +118,7 @@ while :; do
 
     echo -n '['
     echo -n "{\"full_text\":\"$datetime\", \"separator\": false, \"separator_block_width\":20}"
-    echo -n ",{"$notifications", \"separator\": false, \"separator_block_width\":23}"
+    echo -n ",{"$notifications", \"separator\": false, \"separator_block_width\":23, \"markup\":\"pango\"}"
     echo -n ",{"$bluetooth", \"separator\": false, \"separator_block_width\":20}"
     echo -n ",{"$wifi", \"separator\": false, \"separator_block_width\":25}"
     echo -n ",{"$battery", \"separator\": false}"
