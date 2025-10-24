@@ -47,7 +47,3 @@ fi
 # Set bash thene
 . "$DESKTOP_BASH_THEME"
 
-# Display fastfetch
-if command -v fastfetch > /dev/null 2>&1; then
-    fastfetch
-fi
