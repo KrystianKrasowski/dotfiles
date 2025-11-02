@@ -21,6 +21,7 @@ mkdir ~/.config
 mkdir ~/.config/nvim
 mkdir ~/.vim
 mkdir -p ~/.local/bin 
+mkdir -p ~/.local/share
 mkdir ~/screenshots
 mkdir ~/wallpapers
 mkdir ~/downloads
