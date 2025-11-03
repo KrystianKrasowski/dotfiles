@@ -75,3 +75,10 @@ exec sh -c "/usr/libexec/xdg-desktop-portal-wlr; sleep 1"
 exec sh -c "/usr/libexec/xdg-desktop-portal"
 ```
 
+### Useful packages
+---
+
+* guvcview - camera capture
+* imv - image preview
+* vmfm - file manager
+* mpv - video player
