@@ -83,3 +83,5 @@ exec sh -c "/usr/libexec/xdg-desktop-portal"
 * vmfm - file manager
 * mpv - video player
 * zathura - PDF viewer with VIM motions (zathura-pdf-poppler)
+* wf-recorder - screen recorder
+* pandoc - markdown converter
