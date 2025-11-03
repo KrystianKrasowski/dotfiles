@@ -1,55 +1,69 @@
-### Prerequesites
+### Basic setup
+---
 
 Install following packages:
 
 * stow
-* nmcli
-* bluetoothcli
-* dunst
 * fastfetch
-* rofi
-* alacritty
 * neovim
 * bash-completion
 * jq
 
-### Usage
+### Create required directories
 
 ```
-# bootstrap
-mkdir ~/.config
-mkdir ~/.config/nvim
+mkdir -p ~/.config/nvim
 mkdir ~/.vim
 mkdir -p ~/.local/bin 
 mkdir -p ~/.local/share
 mkdir ~/screenshots
 mkdir ~/wallpapers
 mkdir ~/downloads
-
-cd ~/dotfiles
-
-# create symlinks
-stow bash
-stow vim
 ```
 
 ### Sway
+---
 
-Make sure the `~/.local/bin` directory is created.
-You can put your local configuration extensions under `dotfiles/sway/.config/sway/config.d/*.local`.
+#### Prerequesites
 
+Install required packages:
+
+* nmcli
+* bluetoothctl
+* pipewire
+* pipewire-pulse
+* pipewire-alsa
+* xdg-desktop-portal
+* xdg-desktop-portal-wlr
+* dunst
+* rofi
+* alacritty
+
+#### Setup dotfiles symlinks
 
 ```
-cd dotfiles
+cd ~/dotfiles
+stow dunst
+stow rofi
+stow alacritty
 stow sway
-start-sway
 ```
 
-### Screen sharing on Sway
+#### Setup local configuration
 
-1. Make sure the following packages are installed:
-    * xdg-desktop-portal-wlr
-    * xdg-desktop-portal
+The default sway configuration can be overwritten or extended by \*.local files,
+placed under `~/.config/sway/config.d` directory.
+They can be used for set custom wallpaper, different output configuration, etc.
+
+#### Starting sway without login manager (from TTY)
+
+In order to run sway with audio/video capabilities it has to be run with dbus-run-session manually
+There is a script under `~/.local/bin/start-sway` that provides this requirement.
+Additionaly, the script exports some environemnt variables for xdg desktop portal.
+Remember to add the user to audio, video and bluetooth groups.
+
+#### Screen sharing on Sway
+
 1. Add xdg-desktop-portal-* to sway's autostart (ex. ~/.config/sway/config.d/autostart.local):
 
 ```
