@@ -82,3 +82,4 @@ exec sh -c "/usr/libexec/xdg-desktop-portal"
 * imv - image preview
 * vmfm - file manager
 * mpv - video player
+* zathura - PDF viewer with VIM motions (zathura-pdf-poppler)
