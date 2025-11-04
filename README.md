@@ -28,6 +28,12 @@ mkdir ~/downloads
 
 Install required packages:
 
+* sway
+* swaylock
+* swayidle
+* brightnessctl
+* grim
+* slurp
 * nmcli
 * bluetoothctl
 * pipewire
@@ -75,13 +81,29 @@ exec sh -c "/usr/libexec/xdg-desktop-portal-wlr; sleep 1"
 exec sh -c "/usr/libexec/xdg-desktop-portal"
 ```
 
+### File management
+---
+
+#### Prerequesites
+
+Install useful packages
+
+* vifm - file manager with VIM motions
+* imv - image preview
+* mpv - video player
+* zathura - PDF viewer with VIM motions (zathura-pdf-poppler)
+
+#### Setup dotfiles symlinks
+
+```
+cd ~/dotfiles
+stow vifm
+```
+
 ### Useful packages
 ---
 
 * guvcview - camera capture
-* imv - image preview
 * vmfm - file manager
-* mpv - video player
-* zathura - PDF viewer with VIM motions (zathura-pdf-poppler)
 * wf-recorder - screen recorder
 * pandoc - markdown converter

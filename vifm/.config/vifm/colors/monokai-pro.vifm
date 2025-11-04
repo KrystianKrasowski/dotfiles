@@ -1,0 +1,77 @@
+" monokai_pro.vifm - Monokai Pro inspired color scheme for vifm
+" Place in ~/.config/vifm/colors/ or ~/.vifm/colors/ and load with:
+"   :colorscheme monokai_pro
+" or add to vifmrc: colorscheme monokai_pro
+
+let g:colors_name = "monokai_pro"
+
+" ---- Palette (guicolors)
+" bg      = #272822  (dark)
+" fg      = #F8F8F2  (foreground)
+" pink    = #FF6188
+" orange  = #FF9767
+" yellow  = #FFD866
+" green   = #A9DC76
+" cyan    = #78DCE8
+" purple  = #AA9EEF
+" gray    = #75715E
+
+" cterm approximations (256-color index)
+" bg=235, fg=188, pink=204, orange=208, yellow=220, green=112, cyan=37, purple=141, gray=242
+
+" Basic UI
+highlight Normal      cterm=NONE ctermfg=188 ctermbg=235 guifg=#F8F8F2 guibg=#272822
+highlight NonText     ctermfg=242 guifg=#75715E
+highlight Directory   ctermfg=112 cterm=bold guifg=#A9DC76
+highlight Link        ctermfg=37  cterm=underline guifg=#78DCE8
+highlight SpecialKey  ctermfg=141 guifg=#AA9EEF
+highlight Comment     ctermfg=242 guifg=#75715E
+
+" File types / items
+highlight Identifier  ctermfg=204 guifg=#FF6188
+highlight Statement   ctermfg=208 guifg=#FF9767
+highlight Constant    ctermfg=220 guifg=#FFD866
+highlight Type        ctermfg=141 guifg=#AA9EEF
+highlight String      ctermfg=112 guifg=#A9DC76
+highlight Number      ctermfg=220 guifg=#FFD866
+highlight Boolean     ctermfg=204 guifg=#FF6188
+highlight Error       ctermfg=196 cterm=bold guifg=#F92672
+highlight WarningMsg  ctermfg=208 cterm=bold guifg=#FF9767
+
+" Selection / cursor / visual
+highlight Visual      cterm=reverse ctermfg=NONE ctermbg=NONE guifg=NONE guibg=#3a3a3a
+highlight CursorLine  cterm=NONE ctermbg=236 guibg=#2f2f2f
+highlight Cursor      cterm=reverse guifg=NONE guibg=NONE
+
+" Line numbers / sign column
+highlight LineNr      ctermfg=242 guifg=#75715E
+highlight SignColumn  ctermfg=188 guifg=#F8F8F2
+
+" Status / prompts
+highlight StatusLine  ctermfg=188 ctermbg=236 guifg=#F8F8F2 guibg=#2f2f2f
+highlight StatusLineNC ctermfg=242 ctermbg=235 guifg=#75715E guibg=#272822
+highlight Pmenu       ctermfg=188 ctermbg=236 guifg=#F8F8F2 guibg=#2f2f2f
+highlight PmenuSel    ctermfg=235 ctermbg=112 guifg=#272822 guibg=#A9DC76
+
+" Search / matches
+highlight Search      ctermfg=235 ctermbg=220 guifg=#272822 guibg=#FFD866
+highlight IncSearch   ctermfg=235 ctermbg=204 guifg=#272822 guibg=#FF6188
+highlight MatchParen  cterm=bold ctermfg=37 guifg=#78DCE8
+
+" Popup / float
+highlight NormalFloat ctermfg=188 ctermbg=236 guifg=#F8F8F2 guibg=#2f2f2f
+highlight FloatBorder  ctermfg=242 guifg=#75715E
+
+" Diffs (if used)
+highlight DiffAdd     ctermfg=112 ctermbg=235 guifg=#A9DC76 guibg=#272822
+highlight DiffChange  ctermfg=208 ctermbg=235 guifg=#FF9767 guibg=#272822
+highlight DiffDelete  ctermfg=196 ctermbg=235 guifg=#F92672 guibg=#272822
+highlight DiffText    ctermfg=37  ctermbg=235 guifg=#78DCE8 guibg=#272822
+
+" Folds / folded text
+highlight Folded      ctermfg=242 ctermbg=235 guifg=#75715E guibg=#272822
+
+" Misc / fallback
+highlight Title       ctermfg=141 cterm=bold guifg=#AA9EEF
+highlight Todo        ctermfg=220 cterm=bold guifg=#FFD866
+highlight ErrorMsg    ctermfg=196 cterm=bold guifg=#F92672
