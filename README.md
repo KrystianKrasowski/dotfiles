@@ -28,6 +28,7 @@ mkdir ~/downloads
 
 Install required packages:
 
+* dbus
 * sway
 * swaylock
 * swayidle
@@ -44,6 +45,12 @@ Install required packages:
 * dunst
 * rofi
 * alacritty
+
+#### Setup d-bus
+
+On systemd or DE based distributions there is probably nothing to do here.
+Otherwise you need to make sure that dbus runs as a init system service.
+Sway should be started by `dbus-run-session sway` in order to work with pipewire.
 
 #### Setup dotfiles symlinks
 
