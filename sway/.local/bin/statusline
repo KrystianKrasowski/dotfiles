@@ -115,18 +115,34 @@ notifications() {
     fi
 }
 
+volume() {
+    local volume=$(wpctl get-volume @DEFAULT_SINK@ | awk -F'.' '{print $2}')
+
+    if echo "$volume" | grep -qi "muted"; then
+        echo -n "\"full_text\":\"󰖁\""
+    elif [ "$volume" -gt 66 ]; then
+        echo -n "\"full_text\":\"󰕾 <small>"$volume"%</small>\""
+    elif [ "$volume" -gt 33 ]; then
+        echo -n "\"full_text\":\"󰖀 <small>"$volume"%</small>\""
+    else
+        echo -n "\"full_text\":\"󰕿 <small>"$volume"%</small>\""
+    fi
+}
+
 while :; do
     datetime=$(date '+%d %b %H:%M')
     battery=$(battery)
     wifi=$(wifi)
     bluetooth=$(bluetooth)
     notifications=$(notifications)
+    volume=$(volume)
 
     echo -n '['
     echo -n "{\"full_text\":\"$datetime\", \"min_width\":30, \"separator\": true, \"separator_block_width\":20}"
     echo -n ",{"$notifications", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":23, \"markup\":\"pango\", \"name\":\"notifications\"}"
     echo -n ",{"$bluetooth", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":20, \"markup\":\"pango\"}"
     echo -n ",{"$wifi", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\"}"
+    echo -n ",{"$volume", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\"}"
     echo -n ",{"$battery", \"separator\": false}"
     #echo -n ',{"full_text":"", "name":"lock", "separator": false}'
     echo '],'
