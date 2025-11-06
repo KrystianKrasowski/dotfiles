@@ -61,6 +61,7 @@ stow dunst
 stow rofi
 stow alacritty
 stow sway
+stow swaynag
 ```
 
 #### Setup local configuration

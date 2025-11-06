@@ -1,0 +1,14 @@
+background=2d2a2e
+border-bottom=2d2a2e
+message-padding=5
+button-padding=5
+font=Cantarell 12
+
+[confirm]
+text=78dce8
+background=78dce833
+button-background=78dce833
+button-border-size=0
+button-text=78dce8
+border-bottom=78dce833
+border-bottom-size=1

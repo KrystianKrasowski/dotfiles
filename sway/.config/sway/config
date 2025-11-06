@@ -109,17 +109,17 @@ input type:touchpad {
     # Reload the configuration file
     bindsym $mod+Shift+c reload
 
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-
     # Lock the screen
     bindsym $mod+Shift+x exec swaylock
 
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t confirm -m 'You pressed the exit shortcut. Do you really want to exit sway?' -B 'Yes, exit sway' 'swaymsg exit'
+
     # Power off
-    bindsym $mod+Shift+p exec swaynag -t warning -m 'You pressed the power off shortcut. Do you really want to shutdown?' -B 'Yes, shutdown' 'loginctl poweroff'
+    bindsym $mod+Shift+p exec swaynag -t confirm -m 'You pressed the power off shortcut. Do you really want to shutdown?' -B 'Yes, shutdown' 'loginctl poweroff'
 
     # Reboot
-    bindsym $mod+Shift+r exec swaynag -t warning -m 'You pressed the reboot shortcut. Do you really want to restart the machine?' -B 'Yes, restart' 'loginctl reboot'
+    bindsym $mod+Shift+r exec swaynag -t confirm -m 'You pressed the reboot shortcut. Do you really want to restart the machine?' -B 'Yes, restart' 'loginctl reboot'
 #
 # Moving around:
 #
