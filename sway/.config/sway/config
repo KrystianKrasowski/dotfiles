@@ -114,6 +114,12 @@ input type:touchpad {
 
     # Lock the screen
     bindsym $mod+Shift+x exec swaylock
+
+    # Power off
+    bindsym $mod+Shift+p exec swaynag -t warning -m 'You pressed the power off shortcut. Do you really want to shutdown?' -B 'Yes, shutdown' 'loginctl poweroff'
+
+    # Reboot
+    bindsym $mod+Shift+r exec swaynag -t warning -m 'You pressed the reboot shortcut. Do you really want to restart the machine?' -B 'Yes, restart' 'loginctl reboot'
 #
 # Moving around:
 #

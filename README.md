@@ -45,6 +45,7 @@ Install required packages:
 * dunst
 * rofi
 * alacritty
+* elogind (in case of a distro without systemd)
 
 #### Setup d-bus
 
