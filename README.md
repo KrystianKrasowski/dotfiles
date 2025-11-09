@@ -46,6 +46,8 @@ Install required packages:
 * rofi
 * alacritty
 * elogind (in case of a distro without systemd)
+* fonts: Mononoki, Cantarell
+* wl-clipboard
 
 #### Setup d-bus
 
@@ -90,6 +92,8 @@ exec sh -c "/usr/libexec/xdg-desktop-portal-wlr; sleep 1"
 exec sh -c "/usr/libexec/xdg-desktop-portal"
 ```
 
+2. Install wlroots
+
 ### File management
 ---
 
@@ -116,3 +120,4 @@ stow vifm
 * vmfm - file manager
 * wf-recorder - screen recorder
 * pandoc - markdown converter
+* udisks2 - mounting flash drives as user
