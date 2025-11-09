@@ -117,15 +117,16 @@ notifications() {
 
 volume() {
     local volume=$(wpctl get-volume @DEFAULT_SINK@ | awk -F'.' '{print $2}')
+    local name=$(wpctl inspect @DEFAULT_SINK@ | grep -i node.description | awk -F\" '{ print $2}')
 
     if echo "$volume" | grep -qi "muted"; then
         echo -n "\"full_text\":\"󰖁\""
     elif [ "$volume" -gt 66 ]; then
-        echo -n "\"full_text\":\"󰕾 <small>"$volume"%</small>\""
+        echo -n "\"full_text\":\"󰕾 <small>"$name" ("$volume"%)</small>\""
     elif [ "$volume" -gt 33 ]; then
-        echo -n "\"full_text\":\"󰖀 <small>"$volume"%</small>\""
+        echo -n "\"full_text\":\"󰖀 <small>"$name" ("$volume"%)</small>\""
     else
-        echo -n "\"full_text\":\"󰕿 <small>"$volume"%</small>\""
+        echo -n "\"full_text\":\"󰕿 <small>"$name" ("$volume"%)</small>\""
     fi
 }
 
