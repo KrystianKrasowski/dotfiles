@@ -92,6 +92,7 @@ wifi() {
     fi
 }
 
+
 bluetooth() {
     local connections=$(bluetoothctl devices Connected | wc -l)
     local icons=$(bluetoothctl devices Connected | cut -c 8-24 | xargs -I{} bluetoothctl info {} | grep -i icon | awk -F': ' '{print $2}')
@@ -100,15 +101,7 @@ bluetooth() {
         echo -n "\"full_text\":\"󰂱 <small>"
 
         for i in $icons; do
-
-            if [ "$i" = "input-keyboard" ]; then
-                echo -n " 󰌌 "
-            elif [ "$i" = "input-mouse" ]; then
-                echo -n " 󰍽 "
-            else
-                echo -n "  "
-            fi
-
+            echo -n " $(_bluetooth_type_to_icon $i) "
         done
 
         echo -n '</small>"'
@@ -145,6 +138,15 @@ volume() {
     fi
 }
 
+_bluetooth_type_to_icon() {
+    case $1 in
+        "input-keyboard") echo -n "󰌌" ;;
+        "input-mouse") echo -n "󰍽" ;;
+        "audio-card") echo -n "󰓃" ;;
+        *) echo -n "" ;;
+    esac
+}
+
 while :; do
     datetime=$(date '+%d %b %H:%M')
     battery=$(battery)
@@ -160,7 +162,6 @@ while :; do
     echo -n ",{"$wifi", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\"}"
     echo -n ",{"$volume", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\"}"
     echo -n ",{"$battery", \"separator\": false}"
-    #echo -n ',{"full_text":"", "name":"lock", "separator": false}'
     echo '],'
     sleep 1
 done
