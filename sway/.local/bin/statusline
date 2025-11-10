@@ -98,13 +98,13 @@ bluetooth() {
     local icons=$(bluetoothctl devices Connected | cut -c 8-24 | xargs -I{} bluetoothctl info {} | grep -i icon | awk -F': ' '{print $2}')
 
     if [ "$connections" -gt 0 ]; then
-        echo -n "\"full_text\":\"󰂱 <small>"
+        echo -n "\"full_text\":\"󰂱 <small>["
 
         for i in $icons; do
             echo -n " $(_bluetooth_type_to_icon $i) "
         done
 
-        echo -n '</small>"'
+        echo -n ']</small>"'
     else
         echo -n '"full_text":"󰂯"'
     fi
