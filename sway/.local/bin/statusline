@@ -138,6 +138,12 @@ volume() {
     fi
 }
 
+date_time() {
+    local datetime=$(date '+%d %b %H:%M')
+
+    echo -n "\"full_text\":\"<b>$datetime</b>\", \"color\":\"#78dce8\""
+}
+
 _bluetooth_type_to_icon() {
     case $1 in
         "input-keyboard") echo -n "󰌌" ;;
@@ -148,7 +154,7 @@ _bluetooth_type_to_icon() {
 }
 
 while :; do
-    datetime=$(date '+%d %b %H:%M')
+    datetime=$(date_time)
     battery=$(battery)
     wifi=$(wifi)
     bluetooth=$(bluetooth)
@@ -156,7 +162,7 @@ while :; do
     volume=$(volume)
 
     echo -n '['
-    echo -n "{\"full_text\":\"$datetime\", \"min_width\":30, \"separator\": true, \"separator_block_width\":20}"
+    echo -n "{"$datetime", \"min_width\":30, \"separator\": true, \"separator_block_width\":20, \"markup\":\"pango\"}"
     echo -n ",{"$notifications", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":23, \"markup\":\"pango\", \"name\":\"notifications\"}"
     echo -n ",{"$bluetooth", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":20, \"markup\":\"pango\"}"
     echo -n ",{"$wifi", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\"}"
