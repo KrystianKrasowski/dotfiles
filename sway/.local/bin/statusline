@@ -94,9 +94,24 @@ wifi() {
 
 bluetooth() {
     local connections=$(bluetoothctl devices Connected | wc -l)
+    local icons=$(bluetoothctl devices Connected | cut -c 8-24 | xargs -I{} bluetoothctl info {} | grep -i icon | awk -F': ' '{print $2}')
 
     if [ "$connections" -gt 0 ]; then
-        echo -n "\"full_text\":\"󰂱 <small>"$connections"</small>\""
+        echo -n "\"full_text\":\"󰂱 <small>"
+
+        for i in $icons; do
+
+            if [ "$i" = "input-keyboard" ]; then
+                echo -n " 󰌌 "
+            elif [ "$i" = "input-mouse" ]; then
+                echo -n " 󰍽 "
+            else
+                echo -n "  "
+            fi
+
+        done
+
+        echo -n '</small>"'
     else
         echo -n '"full_text":"󰂯"'
     fi
