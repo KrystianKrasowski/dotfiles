@@ -113,6 +113,16 @@ cd ~/dotfiles
 stow vifm
 ```
 
+### Audio
+---
+
+* Install packages:
+    * pipewire
+    * alsa-pipewire
+    * alsa-lib
+    * libspa-alsa
+* Follow the distribution's pipewire setup
+
 ### Useful packages
 ---
 
