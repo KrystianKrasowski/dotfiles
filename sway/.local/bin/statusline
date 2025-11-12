@@ -141,7 +141,7 @@ volume() {
 date_time() {
     local datetime=$(date '+%d %b %H:%M')
 
-    echo -n "\"full_text\":\"<b>$datetime</b>\", \"color\":\"#78dce8\""
+    echo -n "\"full_text\":\"<b>󰸘 <small>$datetime</small></b>\", \"color\":\"#78dce8\""
 }
 
 _bluetooth_type_to_icon() {
