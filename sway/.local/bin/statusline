@@ -144,6 +144,10 @@ date_time() {
     echo -n "\"full_text\":\"<b>󰸘 <small>$datetime</small></b>\", \"color\":\"#78dce8\""
 }
 
+pkg_updates() {
+    echo -n "$(cat /run/pkg-updates 2>/dev/null || echo -n 0)"
+}
+
 _bluetooth_type_to_icon() {
     case $1 in
         "input-keyboard") echo -n "󰌌" ;;
@@ -160,9 +164,15 @@ while :; do
     bluetooth=$(bluetooth)
     notifications=$(notifications)
     volume=$(volume)
+    pkg_count=$(pkg_updates)
 
     echo -n '['
     echo -n "{"$datetime", \"min_width\":30, \"separator\": true, \"separator_block_width\":20, \"markup\":\"pango\"}"
+
+    if [ "$pkg_count" -gt 0 ]; then
+        echo -n ",{\"full_text\":\"󰚰 <small>"$pkg_count"</small>\", \"color\":\"#a9dc76\", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":23, \"markup\":\"pango\"}"
+    fi
+
     echo -n ",{"$notifications", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":23, \"markup\":\"pango\", \"name\":\"notifications\"}"
     echo -n ",{"$bluetooth", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":20, \"markup\":\"pango\"}"
     echo -n ",{"$wifi", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\"}"
