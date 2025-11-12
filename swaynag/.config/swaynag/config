@@ -5,10 +5,10 @@ button-padding=5
 font=Cantarell 12
 
 [confirm]
-text=78dce8
-background=78dce833
-button-background=78dce833
+text=2d2a2e
+background=78dce8cc
+button-background=78dce8cc
 button-border-size=0
-button-text=78dce8
-border-bottom=78dce833
+button-text=2d2a2e
+border-bottom=78dce8cc
 border-bottom-size=1
