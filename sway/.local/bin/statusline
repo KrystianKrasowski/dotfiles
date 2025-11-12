@@ -139,7 +139,7 @@ volume() {
 }
 
 date_time() {
-    local datetime=$(date '+%d %b %H:%M')
+    local datetime=$(date '+%d %B, %H:%M')
 
     echo -n "\"full_text\":\"<b>󰸘 <small>$datetime</small></b>\", \"color\":\"#78dce8\""
 }
