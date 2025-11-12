@@ -74,8 +74,9 @@ battery() {
 }
 
 wifi() {
-    local SSID=$(nmcli -t -f in-use,ssid dev wifi | grep '*' | cut -d: -f2)
-    local STRENGTH=$(nmcli -t -f in-use,ssid,signal dev wifi | grep '*' | cut -d: -f3)
+    local wifi_info=$(nmcli -t -f in-use,ssid,signal dev wifi | grep '*')
+    local SSID=$(echo $wifi_info | cut -d: -f2)
+    local STRENGTH=$(echo $wifi_info | cut -d: -f3)
 
     if [[ -z "$SSID" ]]; then
         echo -n '"full_text":"󰤭", "color": "ff6188"'
