@@ -94,6 +94,25 @@ exec sh -c "/usr/libexec/xdg-desktop-portal"
 
 2. Install wlroots
 
+#### Packages to update count on Void linux
+
+The swaybar reads `/tmp/pkgs-updates-count` file in order to determine whether to display an indicator.
+For swaybar to work with this, some populating mechanism must be provided.
+In Void linux one can run a local user's service by `runsvdir` utility.
+Remember to run it with sway startup, for example `exec sh -c "runsvdir ~/service"`.
+
+Example service coul be something like that:
+
+```
+#!/bin/env bash
+
+while :; do
+    count=$(xbps-install --memory-sync --dry-run --update 2>/dev/null | grep -E 'update|install' | wc -l)
+    echo "$count" > /tmp/pkgs-updates-count
+    sleep 3600
+done
+```
+
 ### File management
 ---
 

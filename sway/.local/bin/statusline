@@ -146,7 +146,7 @@ date_time() {
 }
 
 pkg_updates() {
-    echo -n "$(cat /run/pkg-updates 2>/dev/null || echo -n 0)"
+    echo -n "$(cat /tmp/pkgs-updates-count 2>/dev/null || echo -n 0)"
 }
 
 _bluetooth_type_to_icon() {
