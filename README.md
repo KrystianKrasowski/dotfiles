@@ -101,7 +101,7 @@ For swaybar to work with this, some populating mechanism must be provided.
 In Void linux one can run a local user's service by `runsvdir` utility.
 Remember to run it with sway startup, for example `exec sh -c "runsvdir ~/service"`.
 
-Example service coul be something like that:
+Example service could be something like that:
 
 ```
 #!/bin/env bash
@@ -140,7 +140,17 @@ stow vifm
     * alsa-pipewire
     * alsa-lib
     * libspa-alsa
+    * libspa-bluetooth
 * Follow the distribution's pipewire setup
+
+### Adwaita Theme
+---
+
+* Install packages:
+    * adwaita-fonts
+    * adwaita-icon-theme
+    * adwaita-plus (optionally)
+* `sudo ln -s /usr/share/icons/Adwaita /usr/share/icons/defauls
 
 ### Useful packages
 ---
