@@ -154,6 +154,7 @@ _bluetooth_type_to_icon() {
         "input-keyboard") echo -n "󰌌" ;;
         "input-mouse") echo -n "󰍽" ;;
         "audio-card") echo -n "󰓃" ;;
+        "audio-headset") echo -n "󰋋" ;;
         *) echo -n "" ;;
     esac
 }
