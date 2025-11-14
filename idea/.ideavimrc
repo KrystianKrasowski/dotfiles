@@ -1,0 +1,42 @@
+set nerdtree
+
+set clipboard=unnamedplus
+
+" Set relative number
+set relativenumber
+
+" Toggle nerdtree 
+nnoremap <leader>tr :NERDTreeToggle<CR>
+
+" Toggle nerdtree in the parent directory of the file
+nnoremap <leader>tt :NERDTreeToggle %:p:h<CR>
+
+nnoremap <leader>wa :action SaveAll<CR>
+
+nnoremap <leader>fd :action ReformatCode<CR>
+
+nnoremap <leader>oi :action OptimizeImports<CR>
+
+nnoremap <leader>sc :action GotoClass<CR>
+
+nnoremap <leader>sf :action GotoFile<CR>
+
+nnoremap <leader>ss :action GotoSymbol<CR>
+
+nnoremap <leader>ra :action RefactoringMenu<CR>
+
+nnoremap <leader>gd :action GotoDeclaration<CR>
+
+nnoremap <leader>gi :action GotoImplementation<CR>
+
+nnoremap <leader>gr :action FindUsages<CR>
+
+nnoremap <leader>rn :action RenameElement<CR>
+
+nnoremap ]d :action GotoNextError<CR>
+
+nnoremap [d :action GotoPreviousError<CR>
+
+nnoremap K :action QuickJavaDoc<CR>
+
+nnoremap <leader>rt :action RunTargetAction<CR>
