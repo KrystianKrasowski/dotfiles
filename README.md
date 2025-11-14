@@ -84,12 +84,12 @@ Remember to add the user to audio, video and bluetooth groups.
 1. Add xdg-desktop-portal-* to sway's autostart (ex. ~/.config/sway/config.d/autostart.local):
 
 ```
-exec sh -c "pkill -f xdg-desktop-portal || true"
-exec sh -c "pkill -f xdg-desktop-portal-wlr || true"
+exec pkill -f xdg-desktop-portal
+exec pkill -f xdg-desktop-portal-wlr
 
-exec sh -c "dbus-update-activation-environment --all"
-exec sh -c "/usr/libexec/xdg-desktop-portal-wlr; sleep 1"
-exec sh -c "/usr/libexec/xdg-desktop-portal"
+exec dbus-update-activation-environment --all
+exec /usr/libexec/xdg-desktop-portal-wlr
+exec /usr/libexec/xdg-desktop-portal
 ```
 
 2. Install wlroots
