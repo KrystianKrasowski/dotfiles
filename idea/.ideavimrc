@@ -37,6 +37,8 @@ nnoremap ]d :action GotoNextError<CR>
 
 nnoremap [d :action GotoPreviousError<CR>
 
+nnoremap <leader>d :action ShowErrorDescription<CR>
+
 nnoremap K :action QuickJavaDoc<CR>
 
 nnoremap <leader>rt :action RunTargetAction<CR>
