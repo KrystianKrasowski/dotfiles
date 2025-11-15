@@ -44,7 +44,7 @@ inputbar {
     font:       "Cantarell 20";
     padding:    12px;
     spacing:    12px;
-    children:   [ entry ];
+    children:   [ prompt, entry ];
 }
 
 entry, element-icon, element-text {
@@ -53,7 +53,11 @@ entry, element-icon, element-text {
 
 entry {
     font:   inherit;
-    placeholder-color   : @comment;
+}
+
+prompt {
+    font: inherit;
+    text-color: @comment;
 }
 
 message {
