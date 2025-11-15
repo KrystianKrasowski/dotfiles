@@ -33,16 +33,17 @@
 
 window {
     background-color:   @bg;
-
+    padding: 20px;
+    spacing: 16px;
     location:       center;
     width:          640;
-    border:         1px;
-    border-color:   @cursorline;
+    border:         3px;
+    border-color:   @comment;
 }
 
 inputbar {
-    font:       "Cantarell 20";
-    padding:    12px;
+    font:       "Cantarell 12";
+    padding:    12px 0;
     spacing:    12px;
     children:   [ prompt, entry ];
 }
@@ -75,8 +76,8 @@ listview {
     columns:    1;
 
     fixed-height:   true;
-    border:         1px 0 0;
-    border-color:   @cursorline;
+    border:         2px 0 0;
+    border-color:   @comment;
 }
 
 element {
