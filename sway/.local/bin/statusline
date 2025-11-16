@@ -15,6 +15,10 @@ handle_clicks() {
             if [ -n "$notification_id" ]; then
                 dunstctl history-pop "$notification_id"
             fi
+        elif echo "$line" | grep -q '"name": "wifi"'; then
+            if command -v wifip >/dev/null; then
+                wifip >/dev/null
+            fi
         fi
     done
 }
@@ -82,13 +86,13 @@ wifi() {
         echo -n '"full_text":"󰤭", "color": "ff6188"'
     else
         if [ "$STRENGTH" -gt 75 ]; then
-            echo -n "\"full_text\":\"󰤨 <small>"$SSID"</small>\""
+            echo -n "\"full_text\":\"󰤨\""
         elif [ "$STRENGTH" -gt 50 ]; then
-            echo -n "\"full_text\":\"󰤥 <small>"$SSID"</small>\""
+            echo -n "\"full_text\":\"󰤥\""
         elif [ "$STRENGTH" -gt 25 ]; then
-            echo -n "\"full_text\":\"󰤢 <small>"$SSID"</small>\""
+            echo -n "\"full_text\":\"󰤢\""
         else
-            echo -n "\"full_text\":\"󰤟 <small>"$SSID"</small>\""
+            echo -n "\"full_text\":\"󰤟\""
         fi
     fi
 }
@@ -177,7 +181,7 @@ while :; do
 
     echo -n ",{"$notifications", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":23, \"markup\":\"pango\", \"name\":\"notifications\"}"
     echo -n ",{"$bluetooth", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":20, \"markup\":\"pango\"}"
-    echo -n ",{"$wifi", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\"}"
+    echo -n ",{"$wifi", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":30, \"markup\":\"pango\", \"name\":\"wifi\"}"
     echo -n ",{"$volume", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\"}"
     echo -n ",{"$battery", \"separator\": false}"
     echo '],'

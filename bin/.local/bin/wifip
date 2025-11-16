@@ -80,7 +80,7 @@ send_failure() {
 wifis=$(nmcli -t -f IN-USE,SSID,SIGNAL,SECURITY device wifi list)
 connected=$(echo "$wifis" | grep -i '*' | cut -d ':' -f 2)
 list=$(build_wifi_menu "$wifis" "$connected")
-picked=$(echo -e "$list" | rofi -dmenu -p 'Wi-Fi: ' -no-show-icons -mesg "Connected: $connected"| cut -f 2)
+picked=$(echo -e "$list" | rofi -dmenu -p 'Wi-Fi: ' -i -no-show-icons -mesg "Connected: $connected"| cut -f 2)
 
 if [ -z "$picked" ]; then
     echo "Aborted..."
