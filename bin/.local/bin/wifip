@@ -1,0 +1,122 @@
+#!/usr/bin/env bash
+
+STATUS_ABORTED=10
+STATUS_PASSWORD_REQUIRED=11
+STATUS_CONNECTION_REFUSED=12
+
+icon() {
+    local icon=""
+
+    if [ -z "$2" ]; then
+        if [ "$1" -gt 75 ]; then
+            icon='󰤨'
+        elif [ "$1" -gt 50 ]; then
+            icon="󰤥"
+        elif [ "$1" -gt 25 ]; then
+            icon="󰤢"
+        elif [ "$1" -gt 0 ]; then
+            icon="󰤟"
+        else
+            icon="󰤯"
+        fi
+    else
+        if [ "$1" -gt 75 ]; then
+            icon='󰤪'
+        elif [ "$1" -gt 50 ]; then
+            icon="󰤧"
+        elif [ "$1" -gt 25 ]; then
+            icon="󰤤"
+        elif [ "$1" -gt 0 ]; then
+            icon="󰤡"
+        else
+            icon="󱛏"
+        fi
+    fi
+
+    echo -ne "$icon"
+}
+
+build_wifi_menu() {
+    local list=""
+
+    while IFS=: read -r in_use ssid signal secured; do
+        if [ "$ssid" = "$2" ]; then
+            continue
+        fi
+
+        list="$list $(icon $signal $secured)\t$ssid\n"
+    done <<< "$1"
+
+    echo "$list"
+}
+
+connect_to_known_wifi() {
+    echo "Trying to connect to known networks..."
+
+    local known=$(nmcli -t -f NAME,TYPE connection show | grep -i wireless | cut -d ':' -f 1)
+
+    IFS=$'\n'
+    for ssid in $known; do
+        if [ "$ssid" = "$1" ]; then
+            echo "$1 is known, connecting..."
+            nmcli connection up "$1"
+            return 0
+        fi
+    done
+
+    return 1
+}
+
+send_success() {
+    notify-send -u low -a "Wi-Fi" "$1" "Connection successful"
+    echo "Connection successful"
+}
+
+send_failure() {
+    notify-send -u critical -a "Wi-Fi" "$1" "Connection refused"
+    echo "Connection refused"
+}
+
+wifis=$(nmcli -t -f IN-USE,SSID,SIGNAL,SECURITY device wifi list)
+connected=$(echo "$wifis" | grep -i '*' | cut -d ':' -f 2)
+list=$(build_wifi_menu "$wifis" "$connected")
+picked=$(echo -e "$list" | rofi -dmenu -p 'Wi-Fi: ' -no-show-icons -mesg "Connected: $connected"| cut -f 2)
+
+if [ -z "$picked" ]; then
+    echo "Aborted..."
+    exit $STATUS_ABORTED
+fi
+
+connect_to_known_wifi "$picked"
+
+if [ $? -eq 0 ]; then
+    send_success "$picked"
+    exit 0
+fi
+
+secured=$(echo "$wifis" | grep -i "$picked" | cut -d ':' -f 4)
+password=""
+
+if [ -n "$secured" ]; then
+    password=$(rofi -dmenu -p 'Password: ' -password -l 0 -mesg "$picked")
+fi
+
+if [ -n "$secured" ] && [ -z "$password" ]; then
+    echo "Password required, aborted..."
+    exit $STATUS_PASSWORD_REQUIRED
+fi
+
+if [ -n "$secured" ]; then
+    nmcli device wifi connect "$picked" password "$password"
+else
+    nmcli device wifi connect "$picked"
+fi
+
+if [ "$?" -eq 0 ]; then
+    send_success "$picked"
+else
+    send_failure "$picked"
+    exit $STATUS_CONNECTION_REFUSED
+fi
+
+exit 0
