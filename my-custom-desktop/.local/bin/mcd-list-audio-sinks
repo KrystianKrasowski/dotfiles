@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+STATUS_MISSING_DEPENDENCY=1
+
+if ! command -v pactl >/dev/null 2>&1; then
+    echo "pactl util is required"
+    exit $STATUS_MISSING_DEPENDENCY
+fi
+
+if ! command -v jq >/dev/null 2>&1; then
+    echo "jq util is required"
+    exit $STATUS_MISSING_DEPENDENCY
+fi
+
+sinks=$(pactl -f json list sinks | jq -r '.[] | "\(.index):\(.description):\(.base_volume.value_percent)"')
+menu_items=$(echo "$sinks" | cut -d : -f 2)
+selected=$(echo "$menu_items" | rofi -dmenu -set-no-icons)
+

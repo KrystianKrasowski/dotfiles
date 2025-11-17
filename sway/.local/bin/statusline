@@ -16,8 +16,8 @@ handle_clicks() {
                 dunstctl history-pop "$notification_id"
             fi
         elif echo "$line" | grep -q '"name": "wifi"'; then
-            if command -v wifip >/dev/null; then
-                wifip >/dev/null
+            if command -v mcd-select-wifi >/dev/null; then
+                mcd-select-wifi >/dev/null
             fi
         fi
     done
