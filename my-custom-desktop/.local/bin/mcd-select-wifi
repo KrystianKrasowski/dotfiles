@@ -4,52 +4,6 @@ STATUS_ABORTED=10
 STATUS_PASSWORD_REQUIRED=11
 STATUS_CONNECTION_REFUSED=12
 
-icon() {
-    local icon=""
-
-    if [ -z "$2" ]; then
-        if [ "$1" -gt 75 ]; then
-            icon='󰤨'
-        elif [ "$1" -gt 50 ]; then
-            icon="󰤥"
-        elif [ "$1" -gt 25 ]; then
-            icon="󰤢"
-        elif [ "$1" -gt 0 ]; then
-            icon="󰤟"
-        else
-            icon="󰤯"
-        fi
-    else
-        if [ "$1" -gt 75 ]; then
-            icon='󰤪'
-        elif [ "$1" -gt 50 ]; then
-            icon="󰤧"
-        elif [ "$1" -gt 25 ]; then
-            icon="󰤤"
-        elif [ "$1" -gt 0 ]; then
-            icon="󰤡"
-        else
-            icon="󱛏"
-        fi
-    fi
-
-    echo -ne "$icon"
-}
-
-build_wifi_menu() {
-    local list=""
-
-    while IFS=: read -r in_use ssid signal secured; do
-        if [ "$ssid" = "$2" ]; then
-            continue
-        fi
-
-        list="$list $(icon $signal $secured)\t$ssid\n"
-    done <<< "$1"
-
-    echo "$list"
-}
-
 connect_to_known_wifi() {
     echo "Trying to connect to known networks..."
 
@@ -58,9 +12,9 @@ connect_to_known_wifi() {
     IFS=$'\n'
     for ssid in $known; do
         if [ "$ssid" = "$1" ]; then
-            echo "$1 is known, connecting..."
+            send_in_progress $1
             nmcli connection up "$1"
-            return 0
+            return $?
         fi
     done
 
@@ -68,19 +22,25 @@ connect_to_known_wifi() {
 }
 
 send_success() {
-    notify-send -u low -a "Wi-Fi" "$1" "Connection successful"
-    echo "Connection successful"
+    local message="Connected to $1."
+    notify-send -u low -a "MCD" "Select Wi-Fi" "$message"
+    echo "$message"
+}
+
+send_in_progress() {
+    local message="Connecting to $1..."
+    notify-send -u low -a "MCD" "Select Wi-Fi" "$message"
+    echo "$message"
 }
 
 send_failure() {
-    notify-send -u critical -a "Wi-Fi" "$1" "Connection refused"
-    echo "Connection refused"
+    local message="Connection to $1 failed."
+    notify-send -u critical -a "MCD" "Select Wi-Fi" "$message"
+    echo "$message"
 }
 
-wifis=$(nmcli -t -f IN-USE,SSID,SIGNAL,SECURITY device wifi list)
-connected=$(echo "$wifis" | grep -i '*' | cut -d ':' -f 2)
-list=$(build_wifi_menu "$wifis" "$connected")
-picked=$(echo -e "$list" | rofi -dmenu -p 'Wi-Fi: ' -i -no-show-icons -mesg "Connected: $connected"| cut -f 2)
+connected=$(nmcli -t -f name,active,type connection show | grep -i -E 'yes.*wireless' | cut -d : -f 1)
+picked=$(mcd-list-wifi | rofi -dmenu -p 'Wi-Fi: ' -i -no-show-icons -mesg "Connected: $connected"| cut -f 2)
 
 if [ -z "$picked" ]; then
     echo "Aborted..."
@@ -105,6 +65,8 @@ if [ -n "$secured" ] && [ -z "$password" ]; then
     echo "Password required, aborted..."
     exit $STATUS_PASSWORD_REQUIRED
 fi
+
+send_in_progress "$picked"
 
 if [ -n "$secured" ]; then
     nmcli device wifi connect "$picked" password "$password"

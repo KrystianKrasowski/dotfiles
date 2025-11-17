@@ -1,0 +1,58 @@
+#!/usr/bin/env bash 
+
+icon() {
+    local icon=""
+
+    if [ -z "$2" ]; then
+        if [ "$1" -gt 75 ]; then
+            icon='󰤨'
+        elif [ "$1" -gt 50 ]; then
+            icon="󰤥"
+        elif [ "$1" -gt 25 ]; then
+            icon="󰤢"
+        elif [ "$1" -gt 0 ]; then
+            icon="󰤟"
+        else
+            icon="󰤯"
+        fi
+    else
+        if [ "$1" -gt 75 ]; then
+            icon='󰤪'
+        elif [ "$1" -gt 50 ]; then
+            icon="󰤧"
+        elif [ "$1" -gt 25 ]; then
+            icon="󰤤"
+        elif [ "$1" -gt 0 ]; then
+            icon="󰤡"
+        else
+            icon="󱛏"
+        fi
+    fi
+
+    echo -ne "$icon"
+}
+
+build_wifi_menu() {
+    local list=""
+
+    while IFS=: read -r in_use ssid signal secured; do
+        if [ "$ssid" = "$2" ]; then
+            continue
+        fi
+
+        list="$list $(icon $signal $secured)\t$ssid\n"
+    done <<< "$1"
+
+    echo -e "$list"
+}
+
+if ! command -v nmcli >/dev/null; then
+    echo "Network manager is not installed."
+    exit 1
+fi
+
+
+wifis=$(nmcli -t -f IN-USE,SSID,SIGNAL,SECURITY device wifi list)
+connected=$(echo "$wifis" | grep -i '*' | cut -d ':' -f 2)
+
+build_wifi_menu "$wifis" "$connected"
