@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+declare -A bluetooth_info=()
+
+add_device_icon() {
+    while read -r line; do
+        local device_address=$(echo "$line" | cut -d ',' -f 1)
+        local device_info=${bluetooth_info["$device_address"]}
+
+        local icon_name=$(echo "$device_info" \
+            | grep -i icon \
+            | awk -F ': ' '{print $2}')
+
+        echo "$line,$icon_name"
+    done
+}
+
+add_connected_icon() {
+    while read -r line; do
+        local device_address=$(echo "$line" | cut -d ',' -f 1)
+        local device_info=${bluetooth_info["$device_address"]}
+
+        local status="disconnected"
+        if echo "$device_info" | grep -i 'Connected: yes' >/dev/null 2>&1; then
+            status="connected"
+        fi
+
+        echo -e "$line,$status"
+    done
+}
+
+add_battery_level() {
+    while read -r line; do
+        local device_address=$(echo "$line" | cut -d ',' -f 1)
+        local device_info=${bluetooth_info["$device_address"]}
+
+        local battery_value=""
+        if echo "$device_info" | grep -i 'Battery Percentage:' >/dev/null 2>&1; then
+            battery_value=$(echo "$device_info" | grep -i 'battery percentage:' | awk -F'[()]' '{print $2}')
+        fi
+
+        echo -e "$line,$battery_value"
+    done
+}
+
+# Terminate if no bluetoothctl is found
+if ! command -v bluetoothctl >/dev/null 2>&1; then
+    echo "No bluetoothctl installed."
+    exit 1
+fi
+
+# Get tructed bluetooth devices and format them as <address>,<name> each line
+trusted_devices=$(bluetoothctl devices Trusted \
+    | cut -d ' ' -f 2- \
+    | sed 's/ /,/')
+
+# Cache details of each device
+for device in $(echo "$trusted_devices" | cut -d ',' -f 1); do
+    bluetooth_info["$device"]=$(bluetoothctl info "$device")
+done
+
+# Format output
+echo "$trusted_devices" \
+    | add_battery_level \
+    | add_connected_icon \
+    | add_device_icon 

@@ -19,6 +19,10 @@ handle_clicks() {
             if command -v mcd-select-wifi >/dev/null; then
                 mcd-select-wifi >/dev/null
             fi
+        elif echo "$line" | grep -q '"name": "bluetooth"'; then
+            if command -v mcd-select-bluetooth-device >/dev/null; then
+                mcd-select-bluetooth-device >/dev/null
+            fi
         fi
     done
 }
@@ -107,16 +111,9 @@ wifi() {
 
 bluetooth() {
     local connections=$(bluetoothctl devices Connected | wc -l)
-    local icons=$(bluetoothctl devices Connected | cut -c 8-24 | xargs -I{} bluetoothctl info {} | grep -i icon | awk -F': ' '{print $2}')
 
     if [ "$connections" -gt 0 ]; then
-        echo -n "\"full_text\":\"󰂱 <small> "
-
-        for i in $icons; do
-            echo -n "$(_bluetooth_type_to_icon $i) "
-        done
-
-        echo -n '</small>"'
+        echo -n "\"full_text\":\"󰂱\""
     else
         echo -n '"full_text":"󰂯"'
     fi
@@ -187,7 +184,7 @@ while :; do
     fi
 
     echo -n ",{"$notifications", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":23, \"markup\":\"pango\", \"name\":\"notifications\"}"
-    echo -n ",{"$bluetooth", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":20, \"markup\":\"pango\"}"
+    echo -n ",{"$bluetooth", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":20, \"markup\":\"pango\", \"name\":\"bluetooth\"}"
     echo -n ",{"$wifi", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":30, \"markup\":\"pango\", \"name\":\"wifi\"}"
     echo -n ",{"$volume", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\"}"
     echo -n ",{"$battery", \"separator\": false}"
