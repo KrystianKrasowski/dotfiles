@@ -78,6 +78,13 @@ battery() {
 }
 
 wifi() {
+    local connecting=$(nmcli -t -f name,type,state connection show | grep -i 'wireless:activating')
+
+    if [ -n "$connecting" ]; then
+        echo -n '"full_text":"󰤭", "color":"ffd866"'
+        return
+    fi
+
     local wifi_info=$(nmcli -t -f in-use,ssid,signal dev wifi | grep '*')
     local SSID=$(echo $wifi_info | cut -d: -f2)
     local STRENGTH=$(echo $wifi_info | cut -d: -f3)

@@ -29,7 +29,7 @@ send_success() {
 
 send_in_progress() {
     local message="Connecting to $1..."
-    notify-send -u low -a "MCD" "Select Wi-Fi" "$message"
+    #notify-send -u low -a "MCD" "Select Wi-Fi" "$message"
     echo "$message"
 }
 
