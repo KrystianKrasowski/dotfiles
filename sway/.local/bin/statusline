@@ -145,13 +145,13 @@ volume() {
     fi
 
     if echo "$volume" | grep -qi "muted"; then
-        echo -n "\"full_text\":\"󰖁\t<small>"$name"</small>\""
+        echo -n "\"full_text\":\"󰖁 <small>"$name"</small>\""
     elif [ $volume -gt 66 ]; then
-        echo -n "\"full_text\":\"󰕾\t<small>"$name" ("$volume"%)</small>\""
+        echo -n "\"full_text\":\"󰕾 <small>"$name" ("$volume"%)</small>\""
     elif [ $volume -gt 33 ]; then
-        echo -n "\"full_text\":\"󰖀\t<small>"$name" ("$volume"%)</small>\""
+        echo -n "\"full_text\":\"󰖀 <small>"$name" ("$volume"%)</small>\""
     else
-        echo -n "\"full_text\":\"󰕿\t<small>"$name" ("$volume"%)</small>\""
+        echo -n "\"full_text\":\"󰕿 <small>"$name" ("$volume"%)</small>\""
     fi
 }
 
@@ -191,7 +191,7 @@ while :; do
         echo -n ",{\"full_text\":\"󰚰 <small>"$pkg_count"</small>\", \"color\":\"#a9dc76\", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":23, \"markup\":\"pango\"}"
     fi
 
-    echo -n ",{"$notifications", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":23, \"markup\":\"pango\", \"name\":\"notifications\"}"
+    echo -n ",{"$notifications", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":20, \"markup\":\"pango\", \"name\":\"notifications\"}"
     echo -n ",{"$bluetooth", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":20, \"markup\":\"pango\", \"name\":\"bluetooth\"}"
     echo -n ",{"$wifi", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":30, \"markup\":\"pango\", \"name\":\"wifi\"}"
     echo -n ",{"$volume", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\", \"name\":\"audio-sink\"}"
