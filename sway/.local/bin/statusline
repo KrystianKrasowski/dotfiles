@@ -23,6 +23,10 @@ handle_clicks() {
             if command -v mcd-select-bluetooth-device >/dev/null; then
                 mcd-select-bluetooth-device >/dev/null
             fi
+        elif echo "$line" | grep -q '"name": "audio-sink"'; then
+            if command -v mcd-select-audio-sink >/dev/null; then
+                mcd-select-audio-sink >/dev/null
+            fi
         fi
     done
 }
@@ -133,17 +137,21 @@ notifications() {
 }
 
 volume() {
-    local volume=$(wpctl get-volume @DEFAULT_SINK@ | awk -F'.' '{print $2}')
-    local name=$(wpctl inspect @DEFAULT_SINK@ | grep -i node.description | awk -F\" '{ print $2}' | cut -d " " -f 1-3)
+    local volume=$(wpctl get-volume @DEFAULT_SINK@ | awk -F': ' '{print $2}' | sed 's/\.//' | sed 's/^0//')
+    local name=$(wpctl inspect @DEFAULT_SINK@ | grep -i node.nick | awk -F\" '{ print $2}')
+
+    if [ -z "$name" ]; then
+         name=$(wpctl inspect @DEFAULT_SINK@ | grep -i node.description | awk -F\" '{ print $2}' | cut -d " " -f 1-3)
+    fi
 
     if echo "$volume" | grep -qi "muted"; then
-        echo -n "\"full_text\":\"󰖁\""
-    elif [ "$volume" -gt 66 ]; then
-        echo -n "\"full_text\":\"󰕾 <small>"$name" ("$volume"%)</small>\""
-    elif [ "$volume" -gt 33 ]; then
-        echo -n "\"full_text\":\"󰖀 <small>"$name" ("$volume"%)</small>\""
+        echo -n "\"full_text\":\"󰖁\t<small>"$name"</small>\""
+    elif [ $volume -gt 66 ]; then
+        echo -n "\"full_text\":\"󰕾\t<small>"$name" ("$volume"%)</small>\""
+    elif [ $volume -gt 33 ]; then
+        echo -n "\"full_text\":\"󰖀\t<small>"$name" ("$volume"%)</small>\""
     else
-        echo -n "\"full_text\":\"󰕿 <small>"$name" ("$volume"%)</small>\""
+        echo -n "\"full_text\":\"󰕿\t<small>"$name" ("$volume"%)</small>\""
     fi
 }
 
@@ -186,7 +194,7 @@ while :; do
     echo -n ",{"$notifications", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":23, \"markup\":\"pango\", \"name\":\"notifications\"}"
     echo -n ",{"$bluetooth", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":20, \"markup\":\"pango\", \"name\":\"bluetooth\"}"
     echo -n ",{"$wifi", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":30, \"markup\":\"pango\", \"name\":\"wifi\"}"
-    echo -n ",{"$volume", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\"}"
+    echo -n ",{"$volume", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\", \"name\":\"audio-sink\"}"
     echo -n ",{"$battery", \"separator\": false}"
     echo '],'
     sleep 1

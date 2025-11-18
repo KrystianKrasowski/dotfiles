@@ -2,8 +2,8 @@
 
 STATUS_MISSING_DEPENDENCY=1
 
-if ! command -v pactl >/dev/null 2>&1; then
-    echo "pactl util is required"
+if ! command -v pw-dump >/dev/null 2>&1; then
+    echo "pipewire util is required"
     exit $STATUS_MISSING_DEPENDENCY
 fi
 
@@ -12,7 +12,6 @@ if ! command -v jq >/dev/null 2>&1; then
     exit $STATUS_MISSING_DEPENDENCY
 fi
 
-sinks=$(pactl -f json list sinks | jq -r '.[] | "\(.index):\(.description):\(.base_volume.value_percent)"')
-menu_items=$(echo "$sinks" | cut -d : -f 2)
-selected=$(echo "$menu_items" | rofi -dmenu -set-no-icons)
-
+pw-dump \
+    | jq '[ .[] | select(.info.props["media.class"] == "Audio/Sink") ]' \
+    | jq '[ .[] | {id, nick: .info.props["node.nick"], desc: .info.props["node.description"], icon: .info.props["device.icon-name"] } ]'

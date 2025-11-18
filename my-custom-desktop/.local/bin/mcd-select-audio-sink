@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+format_rofi_entries() {
+    while read -r line; do
+        local sink_id=$(echo "$line" | cut -d ',' -f 1)
+        local nick=$(echo "$line" | cut -d ',' -f 2)
+
+        if [ -z "$nick" ]; then
+            nick=$(echo "$line" | cut -d ',' -f 3)
+        fi
+
+        echo -en "$sink_id\0display\x1f$nick\x1fmeta\x1f$nick\n"
+    done
+}
+
+selected=$(mcd-list-audio-sinks \
+    | jq -r '.[] | [.id, .nick, .desc] | @csv' \
+    | sed 's/"//g' \
+    | format_rofi_entries 2>/dev/null \
+    | rofi -dmenu -no-show-icons -p "Audio sink: ")
+
+echo "$selected"
+
+wpctl set-default "$selected"
+
