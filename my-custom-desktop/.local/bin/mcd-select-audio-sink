@@ -9,7 +9,9 @@ format_rofi_entries() {
             nick=$(echo "$line" | cut -d ',' -f 3)
         fi
 
-        echo -en "$sink_id\0display\x1f$nick\x1fmeta\x1f$nick\n"
+        local display_value="\t\t$nick"
+
+        echo -en "$sink_id\0display\x1f$display_value\x1fmeta\x1f$nick\n"
     done
 }
 

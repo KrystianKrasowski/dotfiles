@@ -81,7 +81,7 @@ format_for_rofi() {
         local state=$(echo "$line" | cut -d ',' -f 4)
         local device_icon=$(echo "$line" | cut -d ',' -f 5)
 
-        local display_value="$device_icon\t$state\t$name"
+        local display_value="$device_icon\t$state\t\t$name"
 
         echo -en "$address\0display\x1f$display_value\x1fmeta\x1f$name\n"
     done

@@ -40,7 +40,7 @@ build_wifi_menu() {
             continue
         fi
 
-        list="$list $(icon $signal $secured)\t$ssid\n"
+        list="$list$(icon $signal $secured)\t\t$ssid\n"
     done <<< "$1"
 
     echo -e "$list"
