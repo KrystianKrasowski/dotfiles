@@ -48,6 +48,12 @@ inputbar {
     children:   [ prompt, entry ];
 }
 
+textbox {
+    text-color: @blue;
+    horizontal-align: 0.5;
+    font: "Cantarell Bold 11";
+}
+
 entry, element-icon, element-text {
     vertical-align: 0.5;
 }
