@@ -2,7 +2,7 @@
 /* Author: Newman Sanchez (https://github.com/newmanls) */
 
 * {
-    font:   "Cantarell 12";
+    font:   "NotoSans 12";
 
     bg         : #2D2A2E;
     fg         : #FCFCFA;

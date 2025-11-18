@@ -19,7 +19,7 @@ selected=$(mcd-list-audio-sinks \
     | jq -r '.[] | [.id, .nick, .desc] | @csv' \
     | sed 's/"//g' \
     | format_rofi_entries 2>/dev/null \
-    | rofi -dmenu -no-show-icons -p "Audio sink: ")
+    | rofi -dmenu -no-show-icons -p "Audio sink: " -i)
 
 echo "$selected"
 

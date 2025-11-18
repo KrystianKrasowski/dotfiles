@@ -21,7 +21,7 @@ set $term alacritty
 # Your preferred application launcher
 set $menu rofi -show drun
 
-font pango:Cantarell Medium 12
+font pango:NotoSans 12
 
 default_border pixel 3
 
