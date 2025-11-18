@@ -83,7 +83,7 @@ format_for_rofi() {
 
         local display_value="$device_icon\t$state\t$name"
 
-        echo -en "$address\0display\x1f$display_value\0meta\x1f$name\n"
+        echo -en "$address\0display\x1f$display_value\x1fmeta\x1f$name\n"
     done
 }
 
