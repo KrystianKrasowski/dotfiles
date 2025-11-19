@@ -36,7 +36,7 @@ build_wifi_menu() {
     local list=""
 
     while IFS=: read -r in_use ssid signal secured; do
-        if [ "$ssid" = "$2" ]; then
+        if [ "$ssid" = "$2" ] || [ -z "$ssid" ]; then
             continue
         fi
 

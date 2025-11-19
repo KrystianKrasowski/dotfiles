@@ -40,7 +40,7 @@ send_failure() {
 }
 
 connected=$(nmcli -t -f name,active,type connection show | grep -i -E 'yes.*wireless' | cut -d : -f 1)
-picked=$(mcd-list-wifi | rofi -dmenu -p 'Wi-Fi: ' -i -no-show-icons -mesg "Connected: $connected"| cut -f 2)
+picked=$(mcd-list-wifi | rofi -dmenu -p 'Wi-Fi: ' -i -no-show-icons -mesg "Connected: $connected"| cut -f 3)
 
 if [ -z "$picked" ]; then
     echo "Aborted..."
