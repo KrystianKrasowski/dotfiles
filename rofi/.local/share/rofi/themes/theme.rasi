@@ -2,7 +2,10 @@
 /* Author: Newman Sanchez (https://github.com/newmanls) */
 
 * {
-    font:   "NotoSans 12";
+    font-common: "NotoSans SemiBold 12";
+    font-inputbar: "NotoSans Regular 12";
+    font-textbox: "NotoSans SemiBold 11";
+
 
     bg         : #2D2A2E;
     fg         : #FCFCFA;
@@ -23,12 +26,14 @@
     fg1:    #FFFFFF;
     fg2:    #DEDEDE80;
 
+
     background-color:   transparent;
     text-color:         @fg;
 
     margin:     0;
     padding:    0;
     spacing:    0;
+    font: @font-common;
 }
 
 window {
@@ -42,7 +47,7 @@ window {
 }
 
 inputbar {
-    font:       "Cantarell 12";
+    font:       @font-inputbar;
     padding:    12px 0;
     spacing:    12px;
     children:   [ prompt, entry ];
@@ -51,7 +56,7 @@ inputbar {
 textbox {
     text-color: @blue;
     horizontal-align: 0.5;
-    font: "Cantarell Bold 11";
+    font: @font-textbox;
 }
 
 entry, element-icon, element-text {
