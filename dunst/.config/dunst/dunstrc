@@ -1,5 +1,5 @@
 [global]
-    font = Cantarell 12
+    font = NotoSans 12
     frame_width = 2
     separator_height = 0
     padding = 10
@@ -12,7 +12,6 @@
     icon_position = none
     shrink = false
     sort = ascending
-    show_age_threshold = 0
     follow = keyboard
     origin = top-center
     gap_size = 5
