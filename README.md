@@ -142,6 +142,7 @@ stow vifm
     * libspa-alsa
     * libspa-bluetooth
 * Follow the distribution's pipewire setup
+* Remember to add `exec pipewire` to your autostart in sway (in case you use it)
 
 ### Adwaita Theme
 ---
@@ -151,6 +152,106 @@ stow vifm
     * adwaita-icon-theme
     * adwaita-plus (optionally)
 * `sudo ln -s /usr/share/icons/Adwaita /usr/share/icons/defauls
+
+### Printing (HP Printer)
+---
+
+1. Install required packages
+    * cups
+    * cups-filters
+    * hplip
+    * ipptool
+    * dbus
+1. Add user to groups `lp` and `lpadmin`
+1. Perform printer setup, for example in CUPS at http://localhost:631
+
+#### Printer job notifications
+
+With the above setup there will be no notifications about printig jobs.
+There are at least two solutions to this:
+
+1. Install hplip-gui and run hp-systray
+    * QT dependent piece of software
+    * Ugly UI
+    * Tray icon out of style
+    * Very easy setup
+1. Configure custom scripts
+    * Harder way
+    * Very customizable
+
+##### Custom notifications setup
+
+> TODO: This is work in progress.
+It should be a part of some MCD (my custom desktop) installation
+
+1. Make sure the user is a member of group `lp`
+1. Add printer dbus subscriptions:
+
+    ```
+    ipptool -tv -d recipient=dbus:// ipp://localhost ./create-printer-subscription
+    ```
+
+    `create-printer-subscription` file is a plain text with IPP request content like:
+
+    ```
+    {
+        NAME "Create a push printer subscription"
+        OPERATION Create-Printer-Subscription
+
+        GROUP operation-attributes-tag
+        ATTR charset attributes-charset utf-8
+        ATTR language attributes-natural-language en
+        ATTR uri printer-uri $uri
+
+        GROUP subscription-attributes-tag
+        ATTR uri notify-recipient-uri $recipient
+        ATTR keyword notify-events job-state-changed
+        ATTR integer notify-lease-duration 0
+    }
+    ```
+
+    Place it somewhere in your system.
+    It will create a printer subscription with no expiration date.
+    The notifications will be pushed into dbus under 'com.cups.cupsd.Notifier' interface
+
+1. Cupsd notifier sends events onto system dbus, so there is a need to add an allowing policy.
+    Create a `/etc/dbus-1/system.d/cups-notifier.conf` file with content:
+
+    ```
+    <!-- This configuration file specifies the required security policies
+         for cupsd notification daemon to work. -->
+
+    <!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
+     "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
+    <busconfig>
+      <policy group="lp">
+        <allow receive_interface="org.cups.cupsd.Notifier"/>
+      </policy>
+    </busconfig>
+    ```
+
+1. Run custom runit service
+1. Cancel subscription
+    There is a way to cancel the printer subscription
+
+    ```
+    ipptool -tv ipp://localhost ./cancel-printer-subscription.test
+    ```
+
+    `cancel-printer-subscription.test` file is a plain text with IPP request content like:
+
+    ```
+    {
+        NAME "Cancel subscription by ID"
+        OPERATION Cancel-Subscription
+
+        GROUP operation-attributes-tag
+        ATTR charset attributes-charset utf-8
+        ATTR language attributes-natural-language en
+        ATTR uri printer-uri $uri
+        ATTR integer notify-subscription-id 5
+    }
+    ```
 
 ### Useful packages
 ---
