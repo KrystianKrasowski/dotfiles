@@ -1,5 +1,4 @@
 # Basic setup
----
 
 ## Required packages:
 
@@ -30,7 +29,6 @@ stow bash
 ```
 
 # Sway Base
----
 
 ## Required packages
 
@@ -69,7 +67,6 @@ echo "output * bg /path/to/your/wallpaper fill" >> ~/.config/sway/config.d/90-wa
 ```
 
 # Sway Notifications
----
 
 ## Required packages
 
@@ -82,7 +79,6 @@ stow sway-dunst
 ```
 
 # Sway Media
----
 
 ## Required packages:
 
@@ -106,7 +102,6 @@ stow sway-media-pipewire
 ```
 
 # Sway screen sharing
----
 
 ## Required packages
 
@@ -125,7 +120,6 @@ stow sway-xdg-portal
 ```
 
 # Packages to update count on Void linux
----
 
 The swaybar reads `/tmp/pkgs-updates-count` file in order to determine whether to display an indicator.
 For swaybar to work with this, some populating mechanism must be provided.
@@ -145,7 +139,6 @@ done
 ```
 
 # File management
----
 
 ## Required packages
 
@@ -161,7 +154,6 @@ stow vifm
 ```
 
 # Adwaita Theme
----
 
 ## Required packages:
 
@@ -174,7 +166,6 @@ stow vifm
 `sudo ln -s /usr/share/icons/Adwaita /usr/share/icons/default`
 
 # Printing (HP Printer)
----
 
 ## Required packages
 
@@ -278,7 +269,6 @@ It should be a part of some MCD (my custom desktop) installation
     ```
 
 ### Useful packages
----
 
 * guvcview - camera capture
 * wf-recorder - screen recorder
