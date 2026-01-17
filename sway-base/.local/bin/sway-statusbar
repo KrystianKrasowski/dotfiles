@@ -175,17 +175,19 @@ while :; do
     pkg_count=$(pkg_updates)
 
     echo -n '['
-    echo -n "{"$datetime", \"min_width\":30, \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\"}"
+
+
+    echo -n "{"$notifications", \"min_width\":25, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\", \"name\":\"notifications\"}"
+    echo -n ",{"$bluetooth", \"min_width\":25, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\", \"name\":\"bluetooth\"}"
+    echo -n ",{"$wifi", \"min_width\":20, \"align\":\"center\", \"separator\": true, \"separator_block_width\":35, \"markup\":\"pango\", \"name\":\"wifi\"}"
+    echo -n ",{"$battery", \"separator\": true, \"min_width\":20, \"align\":\"center\", \"separator_block_width\":35}"
+    echo -n ",{"$volume", \"min_width\":20, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\", \"name\":\"audio-sink\"}"
 
     if [ "$pkg_count" -gt 0 ]; then
         echo -n ",{\"full_text\":\"󰚰 <small>"$pkg_count"</small>\", \"color\":\"#a9dc76\", \"min_width\":30, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\"}"
     fi
 
-    echo -n ",{"$notifications", \"min_width\":25, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\", \"name\":\"notifications\"}"
-    echo -n ",{"$bluetooth", \"min_width\":25, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\", \"name\":\"bluetooth\"}"
-    echo -n ",{"$wifi", \"min_width\":20, \"align\":\"center\", \"separator\": true, \"separator_block_width\":35, \"markup\":\"pango\", \"name\":\"wifi\"}"
-    echo -n ",{"$volume", \"min_width\":20, \"align\":\"center\", \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\", \"name\":\"audio-sink\"}"
-    echo -n ",{"$battery", \"separator\": false}"
+    echo -n ",{"$datetime", \"min_width\":30, \"separator\": true, \"separator_block_width\":25, \"markup\":\"pango\"}"
     echo '],'
     sleep 1
 done
