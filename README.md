@@ -1,7 +1,7 @@
-### Basic setup
+# Basic setup
 ---
 
-Install following packages:
+## Required packages:
 
 * stow
 * fastfetch
@@ -9,7 +9,7 @@ Install following packages:
 * bash-completion
 * jq
 
-### Create required directories
+## Setup
 
 ```
 mkdir -p ~/.config/nvim
@@ -21,80 +21,111 @@ mkdir ~/wallpapers
 mkdir ~/downloads
 ```
 
-### Sway
+## Setup bash
+
+Bash setup the basic profile, prompt theme and adds `~/.local/bin` to `PATH` variable
+
+```
+stow bash
+```
+
+# Sway Base
 ---
 
-#### Prerequesites
-
-Install required packages:
+## Required packages
 
 * dbus
-* sway
+* alacritty
+* rofi
+* font-noto-sans
 * swaylock
+* swaynag
 * swayidle
-* brightnessctl
+* elogind (or seatd?, confirm that)
+* wl-clipboard
+
+## Setup
+
+Sway base contains very basic sway configuration with just general keybindigs.
+It composes configuration from ~/.config/sway/config.d/* files so feel free to add your local config.
+Autostart scripts would be probably the most popular use case
+
+> When adding your own config files into `~/.config/sway/config.d/` directory be aware this is
+a symlink unless you stow other sway modules.
+Adding your own config files will add them in this case to the dotfiles repository directory.
+If you want to prevent this behaviour,
+either add another sway module or create directory `~/.config/sway/config/d` first,
+before stow the sway-base.
+
+Sway base module provides also a `start-sway` bash script.
+It is dedicated for users who don't use any other DE, nor graphical login managers.
+If this is your case log in into TTY and run `start-sway`
+
+```
+# Required unless you plan to use other stow modules from this dotfiles
+mkdir -p ~/.config/sway/config.d
+stow sway-base
+echo "output * bg /path/to/your/wallpaper fill" >> ~/.config/sway/config.d/90-wallpaper
+```
+
+# Sway Notifications
+---
+
+## Required packages
+
+* dunst
+
+## Setup
+
+```
+stow sway-dunst
+```
+
+# Sway Media
+---
+
+## Required packages:
+
 * grim
 * slurp
-* nmcli
-* bluetoothctl
 * pipewire
 * pipewire-pulse
 * pipewire-alsa
+* alsa-lib
+* libspa-alsa
+* libspa-bluetooth
+* brightnessctl
+
+> Setup pipewire according to your distro manual.
+Package names could also be different.
+
+## Setup
+
+```
+stow sway-media-pipewire
+```
+
+# Sway screen sharing
+---
+
+## Required packages
+
 * xdg-desktop-portal
 * xdg-desktop-portal-wlr
-* dunst
-* rofi
-* alacritty
-* elogind (in case of a distro without systemd)
-* fonts: Mononoki, Cantarell
-* wl-clipboard
+* wlroots
 
-#### Setup d-bus
+## Setup
 
-On systemd or DE based distributions there is probably nothing to do here.
-Otherwise you need to make sure that dbus runs as a init system service.
-Sway should be started by `dbus-run-session sway` in order to work with pipewire.
-
-#### Setup dotfiles symlinks
+> Note that if you already use some other desktop environment,
+the xdg portal may be already installed with proper packages.
+This setup is dedicated for standalone sway installation.
 
 ```
-cd ~/dotfiles
-stow dunst
-stow rofi
-stow alacritty
-stow sway
-stow swaynag
+stow sway-xdg-portal
 ```
 
-#### Setup local configuration
-
-The default sway configuration can be overwritten or extended by \*.local files,
-placed under `~/.config/sway/config.d` directory.
-They can be used for set custom wallpaper, different output configuration, etc.
-
-#### Starting sway without login manager (from TTY)
-
-In order to run sway with audio/video capabilities it has to be run with dbus-run-session manually
-There is a script under `~/.local/bin/start-sway` that provides this requirement.
-Additionaly, the script exports some environemnt variables for xdg desktop portal.
-Remember to add the user to audio, video and bluetooth groups.
-
-#### Screen sharing on Sway
-
-1. Add xdg-desktop-portal-* to sway's autostart (ex. ~/.config/sway/config.d/autostart.local):
-
-```
-exec pkill -f xdg-desktop-portal
-exec pkill -f xdg-desktop-portal-wlr
-
-exec dbus-update-activation-environment --all
-exec /usr/libexec/xdg-desktop-portal-wlr
-exec /usr/libexec/xdg-desktop-portal
-```
-
-2. Install wlroots
-
-#### Packages to update count on Void linux
+# Packages to update count on Void linux
+---
 
 The swaybar reads `/tmp/pkgs-updates-count` file in order to determine whether to display an indicator.
 For swaybar to work with this, some populating mechanism must be provided.
@@ -113,59 +144,52 @@ while :; do
 done
 ```
 
-### File management
+# File management
 ---
 
-#### Prerequesites
-
-Install useful packages
+## Required packages
 
 * vifm - file manager with VIM motions
 * imv - image preview
 * mpv - video player
 * zathura - PDF viewer with VIM motions (zathura-pdf-poppler)
 
-#### Setup dotfiles symlinks
+## Setup dotfiles symlinks
 
 ```
-cd ~/dotfiles
 stow vifm
 ```
 
-### Audio
+# Adwaita Theme
 ---
 
-* Install packages:
-    * pipewire
-    * alsa-pipewire
-    * alsa-lib
-    * libspa-alsa
-    * libspa-bluetooth
-* Follow the distribution's pipewire setup
-* Remember to add `exec pipewire` to your autostart in sway (in case you use it)
+## Required packages:
 
-### Adwaita Theme
+* adwaita-fonts
+* adwaita-icon-theme
+* adwaita-plus (optionally)
+
+## Setup
+
+`sudo ln -s /usr/share/icons/Adwaita /usr/share/icons/default`
+
+# Printing (HP Printer)
 ---
 
-* Install packages:
-    * adwaita-fonts
-    * adwaita-icon-theme
-    * adwaita-plus (optionally)
-* `sudo ln -s /usr/share/icons/Adwaita /usr/share/icons/defauls
+## Required packages
 
-### Printing (HP Printer)
----
+* cups
+* cups-filters
+* hplip
+* ipptool
+* dbus
 
-1. Install required packages
-    * cups
-    * cups-filters
-    * hplip
-    * ipptool
-    * dbus
+## Setup
+
 1. Add user to groups `lp` and `lpadmin`
 1. Perform printer setup, for example in CUPS at http://localhost:631
 
-#### Printer job notifications
+## Printer job notifications
 
 With the above setup there will be no notifications about printig jobs.
 There are at least two solutions to this:
@@ -179,7 +203,7 @@ There are at least two solutions to this:
     * Harder way
     * Very customizable
 
-##### Custom notifications setup
+### Custom notifications setup
 
 > TODO: This is work in progress.
 It should be a part of some MCD (my custom desktop) installation
@@ -257,7 +281,6 @@ It should be a part of some MCD (my custom desktop) installation
 ---
 
 * guvcview - camera capture
-* vmfm - file manager
 * wf-recorder - screen recorder
 * pandoc - markdown converter
 * udisks2 - mounting flash drives as user
