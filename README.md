@@ -76,6 +76,7 @@ echo "output * bg /path/to/your/wallpaper fill" >> ~/.config/sway/config.d/90-wa
 
 ```
 stow sway-dunst
+stow dunst
 ```
 
 # Sway Media
