@@ -1,0 +1,2 @@
+exec pkill -f dunst
+exec dunst

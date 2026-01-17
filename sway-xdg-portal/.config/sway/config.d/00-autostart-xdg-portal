@@ -1,10 +1,6 @@
-exec pkill -f dunst
 exec pkill -f xdg-desktop-portal
 exec pkill -f xdg-desktop-portal-wlr
 
-exec pipewire
-exec dunst
 exec dbus-update-activation-environment --all
 exec /usr/libexec/xdg-desktop-portal-wlr
 exec /usr/libexec/xdg-desktop-portal
-exec runsvdir ~/service

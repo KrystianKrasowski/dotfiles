@@ -1,0 +1,9 @@
+font pango:NotoSans 12
+
+default_border pixel 3
+
+gaps inner 5
+gaps outer 10
+
+client.focused #78dce8 #78dce8 #2d2a2e #a9dc76 #78dce8
+
