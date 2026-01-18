@@ -89,7 +89,7 @@ while :; do
 
     if command -v sway-statusbar-swaybar-packages >/dev/null; then
          packages="$(sway-statusbar-swaybar-packages -n "$pkg_name" | format)"
-         if [ "$packages" -gt 0 ]; then
+         if [ -n "$packages" ]; then
              echo -n "$packages,"
          fi
     fi
