@@ -1,0 +1,17 @@
+bar {
+    position top
+    status_padding 7
+    status_edge_padding 18
+    workspace_min_width 30
+    separator_symbol |
+
+    status_command ~/.local/bin/sway-statusbar-swaybar
+
+    colors {
+        statusline #fcfcfa
+        background #2d2a2e
+        inactive_workspace #2d2a2e #2d2a2e #fcfcfa
+        active_workspace #2d2a2e #2d2a2e #fcfcfa
+        focused_workspace #2d2a2e #78dce8 #2d2a2e
+    }
+}

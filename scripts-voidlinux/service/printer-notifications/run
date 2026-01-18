@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+
+DBUS_INTERFACE=org.cups.cupsd.Notifier
+DBUS_MEMBER=JobCompleted
+
+# parse d-bus raw output to CSV
+#
+# EXAMPLE:
+#
+# dbus input
+# -----------
+#
+# signal time=1763839454.988995 sender=:1.21391 -> destination=(null destination) serial=2 path=/org/cups/cupsd/Notifier; interface=org.cups.cupsd.Notifier; member=JobCompleted
+#    string "Job completed."
+#    string "ipp://workbox/printers/HP_LaserJet_M14-M17"
+#    string "HP_LaserJet_M14-M17"
+#    uint32 4
+#    string "toner-empty-warning"
+#    boolean true
+#    uint32 30
+#    uint32 9
+#    string "job-completed-successfully"
+#    string "Bez Tytułu 1"
+#    uint32 1
+#
+# csv output
+# ----------
+# Job completed.                                   Message
+# ipp://workbox/printers/HP_LaserJet_M14-M17       Printer URI
+# HP_LaserJet_M14-M17                              Printer name
+# 4                                                Job state
+# toner-empty-warning                              Warning (what happens if empty?)
+# true                                             Is critical
+# 30                                               Job ID
+# 9                                                Attempts (?)
+# job-completed-successfully                       Job status
+# Bez Tytułu 1                                     File name
+# 1                                                Page count
+parse_signal() {
+    local line_ptr=0
+    local line_limit=0
+    local csv=""
+
+    # iterations occurs for each dbus output line
+    while read -r line; do
+        # dbus-monitor outputs some useless (for this script) info at start
+        if ! echo "$line" | grep -i $DBUS_MEMBER > /dev/null && [[ "$line_limit" -eq 0 ]]; then
+            continue
+
+        # detect a dbus member of interest and set up iterations limit
+        elif echo "$line" | grep -i $DBUS_MEMBER > /dev/null; then
+            # there is no termination indication, JobCompleted takes 11 lines of data (?)
+            line_limit=11
+            continue
+        fi
+
+        # parsing start - increment the line pointer for iteration guard
+        line_ptr=$((line_ptr + 1))
+
+        # build a CSV string by appending each line as segment
+        if [[ "$line_ptr" -le "$line_limit" ]]; then
+            local segment=$(echo -n "$line" \
+                | cut -f 2 \
+                | sed 's/[^ ]* //' \
+                | sed 's/"//g')
+
+            csv="$csv,$segment"
+        fi
+
+        # on last block iteration output the CSV string and reset guards
+        if [[ "$line_ptr" -eq "$line_limit" ]]; then
+            echo "$csv" | sed 's/^,//'
+            line_ptr=0
+            line_limit=0
+            csv=""
+        fi
+    done
+}
+
+send_notification() {
+    while read -r line; do
+        echo "$line"
+
+        local title=$(echo "$line" | cut -d ',' -f 1)
+        local printer_name=$(echo "$line" | cut -d ',' -f 3)
+        local alert=$(echo "$line" | cut -d ',' -f 5)
+        local job_status=$(echo "$line" | cut -d ',' -f 9)
+        local file_name=$(echo "$line" | cut -d ',' -f 10)
+        local urgency="NORMAL"
+        local message="File \"$file_name\" printed successfully."
+
+        if [ "$job_status" != "job-completed-successfully" ]; then
+            message="File \"$file_name\" print failed."
+            urgency="CRITICAL"
+        fi
+
+        if [ "$alert" = "toner-empty-warning" ]; then
+            message="$message\n<small>The toner is almost empty</small>"
+        fi
+
+        notify-send -a "$printer_name" -u "$urgency" "$title" "$message"
+    done
+}
+
+echo "Listening for printer complete jobs"
+
+bar=4
+foo=4
+
+dbus-monitor \
+    --system \
+    "interface='$DBUS_INTERFACE',member='$DBUS_MEMBER'" \
+    2>/dev/null \
+    | parse_signal \
+    | send_notification

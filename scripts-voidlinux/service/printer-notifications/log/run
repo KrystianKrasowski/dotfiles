@@ -1,0 +1,3 @@
+#!/usr/bin/bash env
+
+exec vlogger -t mcd-pend -p daemon

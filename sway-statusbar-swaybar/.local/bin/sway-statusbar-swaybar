@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+echo '{"version":1, "click_events":true}'
+echo '['
+echo '[],'
+
+exec 3<&0
+
+is_clicked() {
+    grep -q "\"name\":\"$1\""
+}
+
+# 1 full_text (string) 
+# 2 min_width (int) 
+# 3 align (string) 
+# 4 separator (bool) 
+# 5 separator_block_width (int) 
+# 5 markup (string) 
+# 6 name (string) 
+# 7 color (string) 
+# 8 urgent (bool)
+# separator |
+format() {
+    while read -r line; do
+        IFS='|' read -r full_text min_width align separator separator_block_width markup name color urgent <<<$line
+        echo -n '{'
+        printf ' "full_text": "%s"' "$full_text"
+        printf ', "min_width": %s' "$min_width"
+        printf ', "align": "%s"' "$align"
+        printf ', "separator": %s' "$separator"
+        printf ', "separator_block_width": %s' "$separator_block_width"
+        printf ', "markup": "%s"' "$markup"
+        printf ', "name": "%s"' "$name"
+        printf ', "color": "%s"' "$color"
+        printf ', "urgent": "%s"' "$urgent"
+        echo ' }'
+    done
+}
+
+dtime_name="datetime"
+pkg_name="pkgs"
+
+handle_clicks() {
+    while read -r line <&3; do
+        if echo "$line" | grep -q "\"name\": \"$dtime_name\""; then
+            sway-statusbar-swaybar-datetime -n "$dtime_name" -c
+        fi
+    done
+}
+
+handle_clicks &
+
+while :; do
+    datetime=$(sway-statusbar-swaybar-datetime -n "$dtime_name" | format)
+
+    packages_to_update=
+    if command -v sway-statusbar-swaybar-packages >/dev/null; then
+        packages_to_update=$(sway-statusbar-swaybar-packages -n "$pkg_name" | format)
+    fi
+
+    echo -n '['
+
+    if [ -n "$packages_to_update" ]; then
+        echo -n "$packages_to_update,"
+    fi
+
+    echo -n "$datetime"
+    echo '],'
+    sleep 1
+done
