@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 reboot="reboot\0display\x1f󰜉\t\tReboot\x1fmeta\x1freboot"
-shutdown="shutdown\0display\x1f󰤆\t\tShutdown\x1fmeta\x1fshutdown"
+shutdown="shutdown\0display\x1f󰤆\t\tShutdown\x1fmeta\x1fshutdown\x1fmeta\x1fpoweroff"
 
 selected=$(echo -ne "$reboot\n$shutdown" | rofi -dmenu -no-show-icons -p "Power: " -l 5)
 
