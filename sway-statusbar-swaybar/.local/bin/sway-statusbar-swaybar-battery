@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+
+optspec=":n:c"
+
+name=
+mode="print"
+
+while getopts ${optspec} opt; do
+    case ${opt} in
+        n) 
+            name=${OPTARG}
+            ;;
+        c)
+            mode="click"
+            ;;
+    esac
+done
+
+if [ -z "$name" ]; then
+    echo "No name provided" >&2
+    exit 1
+fi
+
+if [ "$mode" = "print" ]; then
+    battery="/sys/class/power_supply/BAT*"
+    battery_capacity=$(cat $battery/capacity)
+    battery_state=$(cat $battery/status)
+
+    full_text="󰁹"
+    color="fcfcfa"
+
+    if [ "$battery_state" = "Discharging" ]; then
+        if [ "$battery_capacity" -gt 90 ]; then
+            full_text="󰁹"
+        elif [ "$battery_capacity" -gt 80 ]; then
+            full_text="󰂂"
+        elif [ "$battery_capacity" -gt 70 ]; then
+            full_text="󰂁"
+        elif [ "$battery_capacity" -gt 60 ]; then
+            full_text="󰂀"
+        elif [ "$battery_capacity" -gt 50 ]; then
+            full_text="󰁿"
+        elif [ "$battery_capacity" -gt 40 ]; then
+            full_text="󰁽"
+            color="ffd866"
+        elif [ "$battery_capacity" -gt 30 ]; then
+            full_text="󰁽"
+            color="ffd866"
+        elif [ "$battery_capacity" -gt 20 ]; then
+            full_text="󰁼"
+            color="ff6188"
+        elif [ "$battery_capacity" -gt 10 ]; then
+            full_text="󰁻"
+            color="ff6188"
+        else
+            full_text="󰁺"
+            color="ff6188"
+        fi
+    else
+        if [ "$battery_capacity" -gt 90 ]; then
+            full_text="󰂅"
+        elif [ "$battery_capacity" -gt 80 ]; then
+            full_text="󰂋"
+        elif [ "$battery_capacity" -gt 70 ]; then
+            full_text="󰂊"
+        elif [ "$battery_capacity" -gt 60 ]; then
+            full_text="󰢞"
+        elif [ "$battery_capacity" -gt 50 ]; then
+            full_text="󰂉"
+        elif [ "$battery_capacity" -gt 40 ]; then
+            full_text="󰢝"
+        elif [ "$battery_capacity" -gt 30 ]; then
+            full_text="󰂈"
+        elif [ "$battery_capacity" -gt 20 ]; then
+            full_text="󰂇"
+        elif [ "$battery_capacity" -gt 10 ]; then
+            full_text="󰂆"
+        else
+            full_text="󰢜"
+        fi
+    fi
+
+    min_width=30
+    align="center"
+    separator="true"
+    separator_block_widht=25
+    markup="pango"
+    urgent="false"
+
+    echo "$full_text|$min_width|$align|$separator|$separator_block_widht|$markup|$name|$color|$urgent"
+fi

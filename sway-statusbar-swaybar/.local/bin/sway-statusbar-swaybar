@@ -5,10 +5,6 @@ echo '[],'
 
 exec 3<&0
 
-is_clicked() {
-    grep -q "\"name\":\"$1\""
-}
-
 # 1 full_text (string) 
 # 2 min_width (int) 
 # 3 align (string) 
@@ -38,11 +34,17 @@ format() {
 
 dtime_name="datetime"
 pkg_name="pkgs"
+volume_name="volume"
+battery_name="battery"
 
 handle_clicks() {
     while read -r line <&3; do
         if echo "$line" | grep -q "\"name\": \"$dtime_name\""; then
             sway-statusbar-swaybar-datetime -n "$dtime_name" -c
+        fi
+        
+        if echo "$line" | grep -q "\"name\": \"$volume_name\""; then
+            sway-statusbar-swaybar-volume -n "$volume_name" -c
         fi
     done
 }
@@ -50,20 +52,23 @@ handle_clicks() {
 handle_clicks &
 
 while :; do
-    datetime=$(sway-statusbar-swaybar-datetime -n "$dtime_name" | format)
-
-    packages_to_update=
-    if command -v sway-statusbar-swaybar-packages >/dev/null; then
-        packages_to_update=$(sway-statusbar-swaybar-packages -n "$pkg_name" | format)
-    fi
-
     echo -n '['
+    echo -n "$(sway-statusbar-swaybar-battery -n "$battery_name" | format),"
 
-    if [ -n "$packages_to_update" ]; then
-        echo -n "$packages_to_update,"
+    if command -v sway-statusbar-swaybar-volume >/dev/null; then
+        echo -n "$(sway-statusbar-swaybar-volume -n "$volume_name" | format),"
     fi
 
-    echo -n "$datetime"
+    if command -v sway-statusbar-swaybar-packages >/dev/null; then
+         packages="$(sway-statusbar-swaybar-packages -n "$pkg_name" | format)"
+         if [ "$packages" -gt 0 ]; then
+             echo -n "$packages,"
+         fi
+    fi
+    
+    echo -n "$(sway-statusbar-swaybar-datetime -n "$dtime_name" | format),"
+
     echo '],'
+
     sleep 1
 done

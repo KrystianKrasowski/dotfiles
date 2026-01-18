@@ -17,7 +17,7 @@ while getopts ${optspec} opt; do
 done
 
 if [ -z "$name" ]; then
-    echo "No name provided"
+    echo "No name provided" >&2
     exit 1
 fi
 
@@ -32,6 +32,4 @@ if [ "$mode" = "print" ]; then
     urgent="false"
 
     echo "$full_text|$min_width|$align|$separator|$separator_block_widht|$markup|$name|$color|$urgent"
-else
-    rofi
 fi

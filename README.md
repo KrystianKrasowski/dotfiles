@@ -88,6 +88,7 @@ stow dunst
 * pipewire
 * pipewire-pulse
 * pipewire-alsa
+* wireplumber
 * alsa-lib
 * libspa-alsa
 * libspa-bluetooth
