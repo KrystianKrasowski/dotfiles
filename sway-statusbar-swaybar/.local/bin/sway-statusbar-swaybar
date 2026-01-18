@@ -36,6 +36,7 @@ dtime_name="datetime"
 pkg_name="pkgs"
 volume_name="volume"
 battery_name="battery"
+wifi_name="wifi"
 
 handle_clicks() {
     while read -r line <&3; do
@@ -46,6 +47,10 @@ handle_clicks() {
         if echo "$line" | grep -q "\"name\": \"$volume_name\""; then
             sway-statusbar-swaybar-volume -n "$volume_name" -c
         fi
+
+        if echo "$line" | grep -q "\"name\": \"$wifi_name\""; then
+            sway-statusbar-swaybar-wifi -n "$wifi_name" -c
+        fi
     done
 }
 
@@ -53,6 +58,11 @@ handle_clicks &
 
 while :; do
     echo -n '['
+
+    if command -v sway-statusbar-swaybar-wifi >/dev/null; then
+        echo -n "$(sway-statusbar-swaybar-wifi -n "$wifi_name" | format),"
+    fi
+
     echo -n "$(sway-statusbar-swaybar-battery -n "$battery_name" | format),"
 
     if command -v sway-statusbar-swaybar-volume >/dev/null; then
