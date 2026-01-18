@@ -66,6 +66,12 @@ stow sway-base
 echo "output * bg /path/to/your/wallpaper fill" >> ~/.config/sway/config.d/90-wallpaper
 ```
 
+# Sway statusbar
+
+```
+stow sway-statusbar-swaybar
+```
+
 # Sway Notifications
 
 ## Required packages
@@ -119,6 +125,34 @@ This setup is dedicated for standalone sway installation.
 
 ```
 stow sway-xdg-portal
+```
+
+# Bluetooth
+
+This module provides swaybar indicator, and very simple rofi menu for trusted devices
+
+## Required packages
+
+* bluez
+* bluez-alsa
+* bluetoothctl
+
+```
+stow network-bluez
+```
+
+# Wifi
+
+This module provides wifi swaybar indicator and very simple rofi menu for wifi SSID selection
+
+## Required packages
+
+* network-manager
+
+## Setup
+
+```
+stow network-nm
 ```
 
 # Scripts: Void Linux

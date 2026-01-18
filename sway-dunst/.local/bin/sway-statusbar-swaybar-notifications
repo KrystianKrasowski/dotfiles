@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+optspec=":n:c"
+
+name=
+mode="print"
+
+while getopts ${optspec} opt; do
+    case ${opt} in
+        n) 
+            name=${OPTARG}
+            ;;
+        c)
+            mode="click"
+            ;;
+    esac
+done
+
+if [ -z "$name" ]; then
+    echo "No name provided" >&2
+    exit 1
+fi
+
+if [ "$mode" = "print" ]; then
+    unread_count=$(dunstctl history | jq '[.data[][] | select(.timeout.data > 0 and .urgency.data != "LOW")] | length')
+    is_paused=$(dunstctl is-paused)
+
+    color="fcfcfa"
+    full_text="󰂚"
+
+    if [ "$is_paused" = "true" ]; then
+        full_text="󰂛"
+        color="78dce8"
+    elif [ "$unread_count" -gt 0 ]; then
+        full_text="󱅫 <small>"$unread_count"</small>"
+        color="ff6188"
+    fi
+
+    min_width=30
+    align="center"
+    separator="true"
+    separator_block_widht=25
+    markup="pango"
+    urgent="false"
+
+    echo "$full_text|$min_width|$align|$separator|$separator_block_widht|$markup|$name|$color|$urgent"
+else
+    notification_id=$(dunstctl history | jq '[.data[][] | select(.timeout.data > 0 and .urgency.data != "LOW") | .id.data] | first')
+    
+    if [ -n "$notification_id" ]; then
+        dunstctl history-pop "$notification_id"
+    fi
+fi

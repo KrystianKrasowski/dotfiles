@@ -37,6 +37,8 @@ pkg_name="pkgs"
 volume_name="volume"
 battery_name="battery"
 wifi_name="wifi"
+bluetooth_name="bluetooth"
+notifications_name="notf"
 
 handle_clicks() {
     while read -r line <&3; do
@@ -51,6 +53,14 @@ handle_clicks() {
         if echo "$line" | grep -q "\"name\": \"$wifi_name\""; then
             sway-statusbar-swaybar-wifi -n "$wifi_name" -c
         fi
+
+        if echo "$line" | grep -q "\"name\": \"$bluetooth_name\""; then
+            sway-statusbar-swaybar-bluetooth -n "$bluetooth_name" -c
+        fi
+
+        if echo "$line" | grep -q "\"name\": \"$notifications_name\""; then
+            sway-statusbar-swaybar-notifications -n "$notifications_name" -c
+        fi
     done
 }
 
@@ -58,6 +68,14 @@ handle_clicks &
 
 while :; do
     echo -n '['
+
+    if command -v sway-statusbar-swaybar-notifications >/dev/null; then
+        echo -n "$(sway-statusbar-swaybar-notifications -n "$notifications_name" | format),"
+    fi
+
+    if command -v sway-statusbar-swaybar-bluetooth >/dev/null; then
+        echo -n "$(sway-statusbar-swaybar-bluetooth -n "$bluetooth_name" | format),"
+    fi
 
     if command -v sway-statusbar-swaybar-wifi >/dev/null; then
         echo -n "$(sway-statusbar-swaybar-wifi -n "$wifi_name" | format),"

@@ -1,0 +1,1 @@
+bindsym $mod+Shift+w exec mcd-select-wifi
