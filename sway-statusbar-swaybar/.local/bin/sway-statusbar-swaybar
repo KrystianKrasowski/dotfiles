@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+echo '{"version":1, "click_events":true}'
+echo '['
+echo '[],'
+
+exec 3<&0
+
+# 1 full_text (string) 
+# 2 min_width (int) 
+# 3 align (string) 
+# 4 separator (bool) 
+# 5 separator_block_width (int) 
+# 5 markup (string) 
+# 6 name (string) 
+# 7 color (string) 
+# 8 urgent (bool)
+# separator |
+format() {
+    while read -r line; do
+        IFS='|' read -r full_text min_width align separator separator_block_width markup name color urgent <<<$line
+        echo -n '{'
+        printf ' "full_text": "%s"' "$full_text"
+        printf ', "min_width": %s' "$min_width"
+        printf ', "align": "%s"' "$align"
+        printf ', "separator": %s' "$separator"
+        printf ', "separator_block_width": %s' "$separator_block_width"
+        printf ', "markup": "%s"' "$markup"
+        printf ', "name": "%s"' "$name"
+        printf ', "color": "%s"' "$color"
+        printf ', "urgent": "%s"' "$urgent"
+        echo ' }'
+    done
+}
+
+dtime_name="datetime"
+pkg_name="pkgs"
+volume_name="volume"
+battery_name="battery"
+wifi_name="wifi"
+bluetooth_name="bluetooth"
+notifications_name="notf"
+
+handle_clicks() {
+    while read -r line <&3; do
+        if echo "$line" | grep -q "\"name\": \"$dtime_name\""; then
+            sway-statusbar-swaybar-datetime -n "$dtime_name" -c
+        fi
+        
+        if echo "$line" | grep -q "\"name\": \"$volume_name\""; then
+            sway-statusbar-swaybar-volume -n "$volume_name" -c
+        fi
+
+        if echo "$line" | grep -q "\"name\": \"$wifi_name\""; then
+            sway-statusbar-swaybar-wifi -n "$wifi_name" -c
+        fi
+
+        if echo "$line" | grep -q "\"name\": \"$bluetooth_name\""; then
+            sway-statusbar-swaybar-bluetooth -n "$bluetooth_name" -c
+        fi
+
+        if echo "$line" | grep -q "\"name\": \"$notifications_name\""; then
+            sway-statusbar-swaybar-notifications -n "$notifications_name" -c
+        fi
+    done
+}
+
+handle_clicks &
+
+while :; do
+    echo -n '['
+
+    if command -v sway-statusbar-swaybar-notifications >/dev/null; then
+        echo -n "$(sway-statusbar-swaybar-notifications -n "$notifications_name" | format),"
+    fi
+
+    if command -v sway-statusbar-swaybar-bluetooth >/dev/null; then
+        echo -n "$(sway-statusbar-swaybar-bluetooth -n "$bluetooth_name" | format),"
+    fi
+
+    if command -v sway-statusbar-swaybar-wifi >/dev/null; then
+        echo -n "$(sway-statusbar-swaybar-wifi -n "$wifi_name" | format),"
+    fi
+
+    echo -n "$(sway-statusbar-swaybar-battery -n "$battery_name" | format),"
+
+    if command -v sway-statusbar-swaybar-volume >/dev/null; then
+        echo -n "$(sway-statusbar-swaybar-volume -n "$volume_name" | format),"
+    fi
+
+    if command -v sway-statusbar-swaybar-packages >/dev/null; then
+         packages="$(sway-statusbar-swaybar-packages -n "$pkg_name" | format)"
+         if [ "$packages" -gt 0 ]; then
+             echo -n "$packages,"
+         fi
+    fi
+    
+    echo -n "$(sway-statusbar-swaybar-datetime -n "$dtime_name" | format),"
+
+    echo '],'
+
+    sleep 1
+done

@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+optspec=":n:c"
+
+name=
+mode="print"
+
+while getopts ${optspec} opt; do
+    case ${opt} in
+        n) 
+            name=${OPTARG}
+            ;;
+        c)
+            mode="click"
+            ;;
+    esac
+done
+
+if [ -z "$name" ]; then
+    echo "No name provided" >&2
+    exit 1
+fi
+
+if [ "$mode" = "print" ]; then
+    full_text="<b>󰸘 <small>$(date '+%d %B, %H:%M')</small></b>"
+    min_width=30
+    align="center"
+    separator="true"
+    separator_block_widht=25
+    markup="pango"
+    color="#78dce8"
+    urgent="false"
+
+    echo "$full_text|$min_width|$align|$separator|$separator_block_widht|$markup|$name|$color|$urgent"
+fi

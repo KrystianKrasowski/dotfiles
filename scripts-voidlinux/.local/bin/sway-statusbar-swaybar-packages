@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+optspec=":n:c"
+
+name=
+mode="print"
+
+while getopts ${optspec} opt; do
+    case ${opt} in
+        n) 
+            name=${OPTARG}
+            ;;
+        c)
+            mode="click"
+            ;;
+    esac
+done
+
+if [ -z "$name" ]; then
+    echo "No name provided" >&2
+    exit 1
+fi
+
+pkg_count=$(cat /tmp/pkgs-updates-count 2>/dev/null || echo -n 0)
+
+if [ "$pkg_count" -eq 0 ]; then
+    exit 0
+fi
+
+if [ "$mode" = "print" ]; then
+    full_text="󰚰 <small>$pkg_count</small>"
+    min_width=30
+    align="center"
+    separator="true"
+    separator_block_widht=25
+    markup="pango"
+    color="#a9dc76"
+    urgent="false"
+
+    echo "$full_text|$min_width|$align|$separator|$separator_block_widht|$markup|$name|$color|$urgent"
+else
+    rofi
+fi

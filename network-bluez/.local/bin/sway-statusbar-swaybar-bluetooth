@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+optspec=":n:c"
+
+name=
+mode="print"
+
+while getopts ${optspec} opt; do
+    case ${opt} in
+        n) 
+            name=${OPTARG}
+            ;;
+        c)
+            mode="click"
+            ;;
+    esac
+done
+
+if [ -z "$name" ]; then
+    echo "No name provided" >&2
+    exit 1
+fi
+
+if [ "$mode" = "print" ]; then
+    connections=$(bluetoothctl devices Connected | wc -l)
+
+    full_text="󰂯"
+    if [ "$connections" -gt 0 ]; then
+        full_text="󰂱"
+    fi
+
+    color="fcfcfa"
+    min_width=30
+    align="center"
+    separator="true"
+    separator_block_widht=25
+    markup="pango"
+    urgent="false"
+
+    echo "$full_text|$min_width|$align|$separator|$separator_block_widht|$markup|$name|$color|$urgent"
+else
+    if command -v mcd-select-bluetooth-device >/dev/null; then
+        mcd-select-bluetooth-device >/dev/null
+    fi
+fi

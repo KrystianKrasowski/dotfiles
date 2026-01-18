@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+optspec=":n:c"
+
+name=
+mode="print"
+
+while getopts ${optspec} opt; do
+    case ${opt} in
+        n) 
+            name=${OPTARG}
+            ;;
+        c)
+            mode="click"
+            ;;
+    esac
+done
+
+if [ -z "$name" ]; then
+    echo "No name provided" >&2
+    exit 1
+fi
+
+if [ "$mode" = "print" ]; then
+    volume=$(wpctl get-volume @DEFAULT_SINK@ | awk -F': ' '{print $2}' | sed 's/\.//' | sed 's/^0//')
+    sink_name=$(wpctl inspect @DEFAULT_SINK@ | grep -i node.nick | awk -F\" '{ print $2}')
+
+    if [ -z "$sink_name" ]; then
+         name=$(wpctl inspect @DEFAULT_SINK@ | grep -i node.description | awk -F\" '{ print $2}' | cut -d " " -f 1-3)
+    fi
+
+    if echo "$volume" | grep -qi "muted"; then
+        full_text="󰖁 <small>$sink_name</small>"
+    elif [ $volume -gt 66 ]; then
+        full_text="󰕾 <small>$sink_name ($volume%)</small>"
+    elif [ $volume -gt 33 ]; then
+        full_text="󰖀 <small>$sink_name ($volume%)</small>"
+    else
+        full_text="󰖀 <small>$sink_name ($volume%)</small>"
+    fi
+
+    min_width=30
+    align="center"
+    separator="true"
+    separator_block_widht=25
+    markup="pango"
+    color="#fcfcfa"
+    urgent="false"
+
+    echo "$full_text|$min_width|$align|$separator|$separator_block_widht|$markup|$name|$color|$urgent"
+else
+    if command -v mcd-select-audio-sink >/dev/null; then
+        mcd-select-audio-sink >/dev/null
+    fi
+fi

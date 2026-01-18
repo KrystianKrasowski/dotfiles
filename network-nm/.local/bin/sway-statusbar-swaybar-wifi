@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+optspec=":n:c"
+
+name=
+mode="print"
+
+while getopts ${optspec} opt; do
+    case ${opt} in
+        n) 
+            name=${OPTARG}
+            ;;
+        c)
+            mode="click"
+            ;;
+    esac
+done
+
+if [ -z "$name" ]; then
+    echo "No name provided" >&2
+    exit 1
+fi
+
+if [ "$mode" = "print" ]; then
+    connecting=$(nmcli -t -f name,type,state connection show | grep -i 'wireless:activating')
+
+    if [ -n "$connecting" ]; then
+        full_text="󰤭"
+        color="ffd866"
+    else
+        wifi_info=$(nmcli -t -f in-use,ssid,signal dev wifi | grep '*')
+        ssid=$(echo $wifi_info | cut -d: -f2)
+        strength=$(echo $wifi_info | cut -d: -f3)
+
+        if [[ -z "$ssid" ]]; then
+            full_text="󰤭"
+            color="ff6188"
+        else
+            if [ "$strength" -gt 75 ]; then
+                full_text="󰤨"
+            elif [ "$strength" -gt 50 ]; then
+                full_text="󰤥"
+            elif [ "$strength" -gt 25 ]; then
+                full_text="󰤢"
+            else
+                full_text="󰤟"
+            fi
+        fi
+    fi
+
+    color="fcfcfa"
+    min_width=30
+    align="center"
+    separator="true"
+    separator_block_widht=25
+    markup="pango"
+    urgent="false"
+
+    echo "$full_text|$min_width|$align|$separator|$separator_block_widht|$markup|$name|$color|$urgent"
+else
+    if command -v mcd-select-wifi >/dev/null; then
+        mcd-select-wifi >/dev/null
+    fi
+fi
