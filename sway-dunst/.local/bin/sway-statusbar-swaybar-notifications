@@ -36,7 +36,7 @@ if [ "$mode" = "print" ]; then
         color="ff6188"
     fi
 
-    min_width=30
+    min_width=17
     align="center"
     separator="true"
     separator_block_widht=25
