@@ -1,4 +1,4 @@
-vim.lsp.config['clangd'] = {
+return {
     cmd = {
         'clangd',
         '--query-driver=/usr/bin/arm-none-eabi-g++',

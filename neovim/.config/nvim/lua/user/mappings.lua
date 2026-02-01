@@ -26,7 +26,7 @@ vim.keymap.set('n', '<leader>ee', ':e %:.:h')
 vim.keymap.set('n', '<leader>er', ':e')
 
 -- trigger omnicompletion
-vim.keymap.set('i', '<C-i><C-o>', '<C-x><C-o>')
+vim.keymap.set('i', '<C-Space>', '<C-x><C-o>')
 
 -- update all
 vim.keymap.set('n', '<leader>wa', ':wa<CR>')

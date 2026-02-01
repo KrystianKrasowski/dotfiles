@@ -20,7 +20,7 @@ end
 -- put workspace inside project as ".jdtls/"
 local workspace_dir = home .. "/.jdtls"
 
-vim.lsp.config['jdtls'] = {
+return {
     cmd = {
         "java",
         "-Declipse.application=org.eclipse.jdt.ls.core.id1",
