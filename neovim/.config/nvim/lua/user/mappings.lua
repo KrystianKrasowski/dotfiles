@@ -40,17 +40,34 @@ vim.keymap.set('n', '<leader>tr', ':20Lex<CR>')
 -- toggle Netrw in the parent directory of the file
 vim.keymap.set('n', '<leader>tt', ':20Lex %:p:h<CR>')
 
--- lsp mappings
-vim.keymap.set({ 'n', 'i' }, '<leader>fd', vim.lsp.buf.format)
-vim.keymap.set('n', 'gD', vim.lsp.buf.definition)
-vim.keymap.set('n', 'gd', vim.lsp.buf.declaration)
+-- === LSP MAPPINGS ===
+
+-- code format
+vim.keymap.set({ 'n', 'i' }, '<leader>cf', vim.lsp.buf.format)
+
+-- go to definition
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+
+-- go to implementation
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
+
+-- go to references
 vim.keymap.set('n', 'gr', vim.lsp.buf.references)
+
+-- go to document symbol
 vim.keymap.set('n', 'gs', vim.lsp.buf.document_symbol)
+
+-- quick doc popup
 vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+
+-- code action
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
-vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
-vim.keymap.set({ 'n', 'i' }, '<leader>sh', vim.lsp.buf.signature_help)
+
+-- refactor rename
+vim.keymap.set('n', '<leader>rr', vim.lsp.buf.rename)
+
+-- code signature
+vim.keymap.set({ 'n', 'i' }, '<leader>cs', vim.lsp.buf.signature_help)
 
 -- diagnostics mappings
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float)

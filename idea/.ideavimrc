@@ -1,8 +1,8 @@
+" Set space as a leader key
 let mapleader=" "
-
 nnoremap <Space> <Nop>
 
-
+" enable clipboard copy
 set clipboard=unnamedplus
 
 " Set relative number
@@ -10,6 +10,20 @@ set relativenumber
 
 " Sync IJ bookmarks with vim mark
 set ideamarks
+
+" === RRRRRRtion ===
+
+" move to left pane
+nnoremap <C-h> <C-w>h
+
+" move to down pane
+nnoremap <C-j> <C-w>j
+
+" move to upper pane
+nnoremap <C-k> <C-w>k
+
+" move to right pane
+nnoremap <C-l> <C-w>l
 
 " === PROJECT TREE ===
 
@@ -26,22 +40,12 @@ nnoremap <leader>tt :NERDTreeToggle<CR>
 
 " === BASIC motions ===
 
+" write all
 nnoremap <leader>wa :action SaveAll<CR>
+
+" yank all
 nnoremap <leader>ya ggvG$y
 
-" === Editor navigation ===
-
-" move to left pane
-nnoremap <C-h> <C-w>h
-
-" move to down pane
-nnoremap <C-j> <C-w>j
-
-" move to upper pane
-nnoremap <C-k> <C-w>k
-
-" move to right pane
-nnoremap <C-l> <C-w>l
 
 " === BUFFERS ===
 
