@@ -1,8 +1,8 @@
-" Set space as a leader key
 let mapleader=" "
+
 nnoremap <Space> <Nop>
 
-" enable clipboard copy
+
 set clipboard=unnamedplus
 
 " Set relative number
@@ -10,20 +10,6 @@ set relativenumber
 
 " Sync IJ bookmarks with vim mark
 set ideamarks
-
-" === RRRRRRtion ===
-
-" move to left pane
-nnoremap <C-h> <C-w>h
-
-" move to down pane
-nnoremap <C-j> <C-w>j
-
-" move to upper pane
-nnoremap <C-k> <C-w>k
-
-" move to right pane
-nnoremap <C-l> <C-w>l
 
 " === PROJECT TREE ===
 
@@ -38,14 +24,29 @@ nnoremap <leader>tq :NERDTreeClose<CR>
 " tree toggle
 nnoremap <leader>tt :NERDTreeToggle<CR>
 
+nnoremap <leader>tf :NERDTreeFocus<CR>
+
 " === BASIC motions ===
 
-" write all
+" save all (this is a habit more that useful mapping)
 nnoremap <leader>wa :action SaveAll<CR>
 
-" yank all
+" yank all document
 nnoremap <leader>ya ggvG$y
 
+" === Editor navigation ===
+
+" move to left pane
+nnoremap <C-h> <C-w>h
+
+" move to down pane
+nnoremap <C-j> <C-w>j
+
+" move to upper pane
+nnoremap <C-k> <C-w>k
+
+" move to right pane
+nnoremap <C-l> <C-w>l
 
 " === BUFFERS ===
 
@@ -66,7 +67,13 @@ nnoremap <leader>sc :action GotoClass<CR>
 nnoremap <leader>sf :action GotoFile<CR>
 
 " search symbol
-nnoremap <leader>ss :action GotoSymbol<CR>
+nnoremap <leader>ss :action GotoSymol<CR>
+
+" search action
+nnoremap <leader>sa :action GotoAction<CR> 
+
+" search recent files
+nnoremap <leader>srf :action RecentFiles<CR>
 
 " === GO TO ===
 
@@ -90,6 +97,9 @@ nnoremap <leader>rr :action RenameElement<CR>
 
 " refactor extract method
 vnoremap <leader>rem :action ExtractMethod<CR>
+
+" refactor inline
+nnoremap <leader>ri :action Inline<CR>
 
 " === CODE ===
 
@@ -151,3 +161,6 @@ nnoremap <leader>nqa :action MarkNotificationsAsRead<CR>
 
 " trigger code completion
 inoremap <C-Space> :action CodeCompletion<CR>
+
+" distraction-free mode toggle
+nnoremap <leader>dmt :action ToggleDistractionFreeMode<CR>
