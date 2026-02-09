@@ -28,13 +28,6 @@ start-at-login = true
 
 [mode.main.binding]
 
-    cmd-enter = '''exec-and-forget osascript -e '
-    tell application "Terminal"
-        do script
-        activate
-    end tell'
-    '''
-
     # i3 wraps focus by default
     cmd-h = 'focus --boundaries-action wrap-around-the-workspace left'
     cmd-j = 'focus --boundaries-action wrap-around-the-workspace down'
@@ -119,8 +112,8 @@ start-at-login = true
     2 = ['main', 'secondary']
     3 = ['main', 'secondary']
     4 = ['main', 'secondary']
-    5 = ['secondary', 'main']
-    6 = ['secondary', 'main']
+    5 = ['main', 'secondary']
+    6 = ['main', 'secondary']
     7 = ['secondary', 'main']
     8 = ['secondary', 'main']
     9 = ['secondary', 'main']
