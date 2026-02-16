@@ -152,6 +152,9 @@ nnoremap <leader>vu :action Vcs.UpdateProject<CR>
 " vcs changes
 nnoremap <leader>vc :action Vcs.ChangesView<CR>
 
+" vsc blame
+nnoremap <leader>vb :action Annotate<CR>
+
 " === NOTIFICATIONS ===
 
 " notifications quit all
