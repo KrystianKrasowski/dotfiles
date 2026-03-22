@@ -34,6 +34,9 @@ nnoremap <leader>wa :action SaveAll<CR>
 " yank all document
 nnoremap <leader>ya ggvG$y
 
+" surround with "
+nnoremap <leader>s" viwc""<Esc>P
+
 " === Editor navigation ===
 
 " move to left pane

@@ -300,6 +300,9 @@ stow vifm
 
 `sudo ln -s /usr/share/icons/Adwaita /usr/share/icons/default`
 
+> TIP:
+> Installing `nwg-look` can be really helpful for setting up the theme for standalone sway environment
+
 
 ### Useful packages
 
