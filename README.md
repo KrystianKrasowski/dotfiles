@@ -310,3 +310,4 @@ stow vifm
 * wf-recorder - screen recorder
 * pandoc - markdown converter
 * udisks2 - mounting flash drives as user
+* ncdu - disk usage analyzer
