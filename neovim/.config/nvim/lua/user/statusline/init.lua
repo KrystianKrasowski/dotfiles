@@ -5,7 +5,7 @@ local diagnostics = require('user.statusline.diagnostics')
 
 local file_path_relative = "%<%{expand('%:.')}"
 local file_marks = '%h%w%m%r%'
-local line_no_and_column = '󰍎 ' .. '%l,%c'
+local line_no_and_column = '󰍎 ' .. '%l,%c | %L '
 
 Statusline = {}
 
