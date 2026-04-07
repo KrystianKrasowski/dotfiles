@@ -61,6 +61,9 @@ nnoremap <leader>bqo :action CloseAllEditorsButActive<CR>
 " windows quit all
 nnoremap <leader>wqa :action HideAllWindows<CR>
 
+" windows toggle database
+nnoremap <leader>wtd :action ActivateDatabaseToolWindow<CR>
+
 " === SEARCH ===
 
 " search class
@@ -155,8 +158,11 @@ nnoremap <leader>vu :action Vcs.UpdateProject<CR>
 " vcs changes
 nnoremap <leader>vc :action Vcs.ChangesView<CR>
 
-" vsc blame
+" vcs blame
 nnoremap <leader>vb :action Annotate<CR>
+
+" vcs resolve conflicts
+nnoremap <leader>vrc :action Git.ResolveConflicts<CR>
 
 " === NOTIFICATIONS ===
 
