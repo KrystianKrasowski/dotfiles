@@ -40,6 +40,26 @@ vim.keymap.set('n', '<leader>tr', ':20Lex<CR>')
 -- toggle Netrw in the parent directory of the file
 vim.keymap.set('n', '<leader>tt', ':20Lex %:p:h<CR>')
 
+-- === SURROUND ===
+--
+-- surround with `
+vim.keymap.set('n', '<leader>sw`', 'ciw``<Esc>P')
+
+-- surround with '
+vim.keymap.set('n', "<leader>sw'", "ciw''<Esc>P")
+
+-- surround with "
+vim.keymap.set('n', '<leader>sw"', 'ciw""<Esc>P')
+
+-- surround with ()
+vim.keymap.set('n', '<leader>sw(', 'ciw()<Esc>P')
+
+-- surround with []
+vim.keymap.set('n', '<leader>sw[', 'ciw[]<Esc>P')
+
+-- surround with {}
+vim.keymap.set('n', '<leader>sw{', 'ciw{}<Esc>P')
+
 -- === LSP MAPPINGS ===
 
 -- code format
