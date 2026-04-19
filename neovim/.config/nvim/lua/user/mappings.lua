@@ -41,24 +41,57 @@ vim.keymap.set('n', '<leader>tr', ':20Lex<CR>')
 vim.keymap.set('n', '<leader>tt', ':20Lex %:p:h<CR>')
 
 -- === SURROUND ===
---
+
 -- surround with `
 vim.keymap.set('n', '<leader>sw`', 'ciw``<Esc>P')
+vim.keymap.set('v', '<leader>sw`', 'c``<Esc>P')
+
+-- surround WORD `
+vim.keymap.set('n', '<leader>sW`', 'ciW``<Esc>P')
 
 -- surround with '
 vim.keymap.set('n', "<leader>sw'", "ciw''<Esc>P")
+vim.keymap.set('v', "<leader>sw'", "c''<Esc>P")
+
+-- surround WORD '
+vim.keymap.set('n', "<leader>sW'", "ciW''<Esc>P")
 
 -- surround with "
 vim.keymap.set('n', '<leader>sw"', 'ciw""<Esc>P')
+vim.keymap.set('v', '<leader>sw"', 'c""<Esc>P')
+
+-- surround WORD "
+vim.keymap.set('n', '<leader>sW"', 'ciW""<Esc>P')
 
 -- surround with ()
 vim.keymap.set('n', '<leader>sw(', 'ciw()<Esc>P')
+vim.keymap.set('n', '<leader>sw)', 'ciw()<Esc>P')
+vim.keymap.set('v', '<leader>sw(', 'c()<Esc>P')
+vim.keymap.set('v', '<leader>sw)', 'c()<Esc>P')
+
+-- surround WORD ()
+vim.keymap.set('n', '<leader>sW(', 'ciW()<Esc>P')
+vim.keymap.set('n', '<leader>sW)', 'ciW()<Esc>P')
 
 -- surround with []
 vim.keymap.set('n', '<leader>sw[', 'ciw[]<Esc>P')
+vim.keymap.set('n', '<leader>sw]', 'ciw[]<Esc>P')
+vim.keymap.set('v', '<leader>sw[', 'c[]<Esc>P')
+vim.keymap.set('v', '<leader>sw]', 'c[]<Esc>P')
+
+-- surround WORD []
+vim.keymap.set('n', '<leader>sW[', 'ciW[]<Esc>P')
+vim.keymap.set('n', '<leader>sW]', 'ciW[]<Esc>P')
 
 -- surround with {}
 vim.keymap.set('n', '<leader>sw{', 'ciw{}<Esc>P')
+vim.keymap.set('n', '<leader>sw}', 'ciw{}<Esc>P')
+vim.keymap.set('v', '<leader>sw{', 'c{}<Esc>P')
+vim.keymap.set('v', '<leader>sw}', 'c{}<Esc>P')
+
+-- surround WORD {}
+vim.keymap.set('n', '<leader>sW{', 'ciW{}<Esc>P')
+vim.keymap.set('n', '<leader>sW}', 'ciW{}<Esc>P')
 
 -- === LSP MAPPINGS ===
 
