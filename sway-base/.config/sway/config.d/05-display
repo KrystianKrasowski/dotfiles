@@ -3,11 +3,9 @@ output eDP-1 {
 }
 
 output HDMI-A-1 {
-    resolution 3440x1440@60Hz 
     position -760,-1440
 }
 
 output DP-1 {
-    resolution 3440x1440@144Hz
     position -760,-1440
 }
