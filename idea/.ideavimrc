@@ -169,6 +169,26 @@ nnoremap <leader>vrc :action Git.ResolveConflicts<CR>
 " notifications quit all
 nnoremap <leader>nqa :action MarkNotificationsAsRead<CR>
 
+" === SURROUND ===
+"
+" surround with `
+nmap <leader>sw` ciw``<Esc>P
+
+" surround with '
+nmap <leader>sw' ciw''<Esc>P
+
+" surround with "
+nmap <leader>sw" ciw""<Esc>P
+
+" surround with ()
+nmap <leader>sw( ciw()<Esc>P
+
+" surround with []
+nmap <leader>sw[ ciw[]<Esc>P
+
+" surround with {}
+nmap <leader>sw{ ciw{}<Esc>P
+
 " === MISC ===
 
 " trigger code completion
