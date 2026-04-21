@@ -1,4 +1,10 @@
-input "type:pointer" {
-    accel_profile adaptive
-    pointer_accel 0.7
+input "1149:32934:Kensington_ORBIT_WIRELESS_TB_Mouse" {
+    accel_profile flat
+    pointer_accel 0.0
+
+    scroll_method on_button_down
+    scroll_button BTN_RIGHT
+
+    middle_emulation enabled
 }
+
