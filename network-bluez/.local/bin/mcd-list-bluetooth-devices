@@ -8,7 +8,7 @@ add_device_icon() {
         local device_info=${bluetooth_info["$device_address"]}
 
         local icon_name=$(echo "$device_info" \
-            | grep -i icon \
+            | grep -i icon: \
             | awk -F ': ' '{print $2}')
 
         echo "$line,$icon_name"
