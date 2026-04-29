@@ -170,7 +170,7 @@ nnoremap <leader>vrc :action Git.ResolveConflicts<CR>
 nnoremap <leader>nqa :action MarkNotificationsAsRead<CR>
 
 " === SURROUND ===
-"
+
 " surround with `
 nmap <leader>sw` ciw``<Esc>P
 
@@ -182,12 +182,36 @@ nmap <leader>sw" ciw""<Esc>P
 
 " surround with ()
 nmap <leader>sw( ciw()<Esc>P
+nmap <leader>sw) ciw()<Esc>P
 
 " surround with []
 nmap <leader>sw[ ciw[]<Esc>P
+nmap <leader>sw] ciw[]<Esc>P
 
 " surround with {}
 nmap <leader>sw{ ciw{}<Esc>P
+nmap <leader>sw} ciw{}<Esc>P
+
+" surround word `
+nmap <leader>sW` ciW``<Esc>P
+
+" surround word '
+nmap <leader>sW' ciW''<Esc>P
+
+" surround word "
+nmap <leader>sW" ciW""<Esc>P
+
+" surround word ()
+nmap <leader>sW( ciW()<Esc>P
+nmap <leader>sW) ciW()<Esc>P
+
+" surround word []
+nmap <leader>sW[ ciW[]<Esc>P
+nmap <leader>sW] ciW[]<Esc>P
+
+" surround word {}
+nmap <leader>sW{ ciW{}<Esc>P
+nmap <leader>sW} ciW{}<Esc>P
 
 " === MISC ===
 
