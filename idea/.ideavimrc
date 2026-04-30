@@ -220,3 +220,6 @@ inoremap <C-Space> :action CodeCompletion<CR>
 
 " distraction-free mode toggle
 nnoremap <leader>dmt :action ToggleDistractionFreeMode<CR>
+
+" open file structure
+nnoremap <leader>fs :action FileStructurePopup<CR> 
