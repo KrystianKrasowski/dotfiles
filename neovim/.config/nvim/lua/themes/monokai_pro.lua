@@ -52,7 +52,7 @@ hl("StatuslineErrorsNone", { fg = colors.green })
 hl("TabLineSel", { bg = colors.comment })
 
 -- Syntax
-hl("Keyword", { fg = colors.pink, bold = true })
+hl("Keyword", { fg = colors.pink })
 hl("Identifier", { fg = colors.blue })
 hl("Function", { fg = colors.green })
 hl("String", { fg = colors.yellow })
@@ -64,7 +64,13 @@ hl("Statement", { fg = colors.pink })
 hl("PreProc", { fg = colors.pink })
 hl("Special", { fg = colors.yellow })
 
+-- Syntax: kotlin
+-- Invoke `:Inspect` under the cursor to find out the type
+hl("ktModifier", { link = "Keyword" })
+hl("ktStructure", { link = "Keyword" })
+
 -- Lsp
+hl("@lsp.type.keyword", { fg = colors.pink })
 hl("@lsp.type.property", { fg = colors.fg, italic = true })
 hl("@lsp.type.parameter", { fg = colors.fg, bold = true })
 hl("@lsp.mod.usedAsMutableReference", { underline = true })
