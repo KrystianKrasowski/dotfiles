@@ -11,24 +11,3 @@ vim.diagnostic.config({
     },
 })
 
--- enable lsp completion
-vim.api.nvim_create_autocmd("LspAttach", {
-    group = vim.api.nvim_create_augroup("UserLspAttach", { clear = true }),
-    callback = function(ev)
-        vim.lsp.completion.enable(true, ev.data.client_id, ev.buf, {
-            autotrigger = false,
-            convert = function(item)
-                return { abbr = item.label:gsub('%b()', '') }
-            end,
-        })
-    end,
-})
-
--- enable symbol under the coursor highlight
--- vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
--- callback = vim.lsp.buf.document_highlight
--- })
-
--- vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
--- callback = vim.lsp.buf.clear_references
--- })
