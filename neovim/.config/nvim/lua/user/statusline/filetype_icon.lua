@@ -8,6 +8,7 @@ local icon_dictionary = {
     ["java"] = "",
     ["kotlin"] = "",
     ["markdown"] = "",
+    ["sh"] = ""
 }
 
 function M.print(type)
