@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+URL="https://danepubliczne.imgw.pl/api/data/synop/id/12495/format/csv"
+TMP_FILE=/tmp/weather
+
+while :; do
+    curl -s "$URL" | tail -n +2 > "$TMP_FILE"
+    # sleep for 60 minutes
+    sleep 3600
+done

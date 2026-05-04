@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+tmp_file=/tmp/weather
+
+temp="---"
+
+if [ -f "$tmp_file" ]; then
+    temp=$(cat "$tmp_file" | cut -d ',' -f 5)
+fi
+
+name="temperature"
+full_text=" <small>$temp °C</small>"
+color="fcfcfa"
+min_width=17
+align="center"
+separator="true"
+separator_block_width=25
+markup="pango"
+urgent="false"
+
+echo "$full_text|$min_width|$align|$separator|$separator_block_width|$markup|$name|$color|$urgent"
+

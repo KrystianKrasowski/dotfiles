@@ -39,6 +39,7 @@ battery_name="battery"
 wifi_name="wifi"
 bluetooth_name="bluetooth"
 notifications_name="notf"
+weather_name="weather"
 
 handle_clicks() {
     while read -r line <&3; do
@@ -92,6 +93,10 @@ while :; do
          if [ -n "$packages" ]; then
              echo -n "$packages,"
          fi
+    fi
+
+    if command -v sway-statusbar-swaybar-temperature >/dev/null; then
+        echo -n "$(sway-statusbar-swaybar-temperature | format),"
     fi
     
     echo -n "$(sway-statusbar-swaybar-datetime -n "$dtime_name" | format),"
