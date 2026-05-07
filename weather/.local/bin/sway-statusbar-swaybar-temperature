@@ -3,14 +3,31 @@
 tmp_file=/tmp/weather
 
 temp="---"
+int_temp="---"
+color="fcfcfa"
 
 if [ -f "$tmp_file" ]; then
     temp=$(cat "$tmp_file" | cut -d ',' -f 5)
 fi
 
+int_temp=$(echo "$temp" | cut -d '.' -f 1)
+
+if [ "$int_temp" -le -20 ]; then
+    color="ab9df2"
+elif [ "$int_temp" -le -0 ]; then
+    color="78dce8"
+elif [ "$int_temp" -le 10 ]; then
+    color="fcfcfa" # white
+elif [ "$int_temp" -le 20 ]; then
+    color="a9dc76" # green
+elif [ "$int_temp" -le 30 ]; then
+    color="ffd866" # yellow
+elif [ "$int_temp" -le 40 ]; then
+    color="fc9867" # orange
+fi
+
 name="temperature"
 full_text=" <small>$temp °C</small>"
-color="fcfcfa"
 min_width=17
 align="center"
 separator="true"
