@@ -4,7 +4,26 @@ tmp_file=/tmp/weather
 
 temp="---"
 int_temp="---"
-color="fcfcfa"
+
+# purple
+color_freezing="ab9df2"
+
+# cyan
+color_cold="78dce8"
+ 
+# white
+color_average="fcfcfa"
+ 
+#green
+color_warm="a9dc76"
+ 
+# yellow
+color_hot="ffd866"
+
+# orange
+color_burning="fc9867"
+ 
+color="$color_average"
 
 if [ -f "$tmp_file" ]; then
     temp=$(cat "$tmp_file" | cut -d ',' -f 5)
@@ -12,18 +31,18 @@ fi
 
 int_temp=$(echo "$temp" | cut -d '.' -f 1)
 
-if [ "$int_temp" -le -20 ]; then
-    color="ab9df2"
-elif [ "$int_temp" -le -0 ]; then
-    color="78dce8"
-elif [ "$int_temp" -le 10 ]; then
-    color="fcfcfa" # white
-elif [ "$int_temp" -le 20 ]; then
-    color="a9dc76" # green
-elif [ "$int_temp" -le 30 ]; then
-    color="ffd866" # yellow
+if [ "$int_temp" -le -15 ]; then
+    color="$color_freezing"
+elif [ "$int_temp" -le 8 ]; then
+    color="$color_cold"
+elif [ "$int_temp" -le 17 ]; then
+    color="$color_average"
+elif [ "$int_temp" -le 25 ]; then
+    color="$color_warm"
+elif [ "$int_temp" -le 32 ]; then
+    color="$color_hot"
 elif [ "$int_temp" -le 40 ]; then
-    color="fc9867" # orange
+    color="$color_burning"
 fi
 
 name="temperature"
