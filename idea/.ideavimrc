@@ -213,10 +213,15 @@ nmap <leader>sW] ciW[]<Esc>P
 nmap <leader>sW{ ciW{}<Esc>P
 nmap <leader>sW} ciW{}<Esc>P
 
-" === MISC ===
+" === COMPLETION ===
 
 " trigger code completion
 inoremap <C-Space> :action CodeCompletion<CR>
+
+" select completion option
+inoremap <C-y> :action EditorChooseLookupItemReplace<CR>
+
+" === MISC ===
 
 " distraction-free mode toggle
 nnoremap <leader>dmt :action ToggleDistractionFreeMode<CR>
