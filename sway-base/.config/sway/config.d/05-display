@@ -7,5 +7,6 @@ output HDMI-A-1 {
 }
 
 output DP-1 {
+    mode 3440x1440@144Hz
     position -760,-1440
 }
