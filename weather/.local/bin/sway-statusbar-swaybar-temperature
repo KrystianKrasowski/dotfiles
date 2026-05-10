@@ -35,7 +35,7 @@ if [ "$int_temp" -le -15 ]; then
     color="$color_freezing"
 elif [ "$int_temp" -le 8 ]; then
     color="$color_cold"
-elif [ "$int_temp" -le 17 ]; then
+elif [ "$int_temp" -le 16 ]; then
     color="$color_average"
 elif [ "$int_temp" -le 25 ]; then
     color="$color_warm"
