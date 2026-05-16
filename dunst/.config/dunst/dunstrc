@@ -16,6 +16,7 @@
     origin = top-center
     gap_size = 5
     format = "<b>%a: %s</b>\n\n%b"
+    mouse_left_click = remove_current
 
 [urgency_low]
     background = "#3e3d41"

@@ -17,3 +17,6 @@ DESKTOP_BASH_THEME=~/.bash_theme_monokai
 if [ -f "$HOME/.bash_environment.local" ]; then
     . "$HOME/.bash_environment.local"
 fi
+
+# set default editor
+export EDITOR=vi

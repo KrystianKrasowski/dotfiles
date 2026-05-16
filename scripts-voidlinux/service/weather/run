@@ -3,6 +3,8 @@
 URL="https://danepubliczne.imgw.pl/api/data/synop/id/12495/format/csv"
 TMP_FILE=/tmp/weather
 
+echo "Starting weather monitoring..."
+
 while :; do
     curl -s "$URL" | tail -n +2 > "$TMP_FILE"
     # sleep for 60 minutes
