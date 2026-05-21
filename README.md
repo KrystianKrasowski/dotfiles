@@ -311,3 +311,12 @@ stow vifm
 * pandoc - markdown converter
 * udisks2 - mounting flash drives as user
 * ncdu - disk usage analyzer
+
+### Monokai colors cheatsheet
+
+* pink: #ff6188
+* orange: #fc9867
+* yellow: #ffd866
+* green: #a9dc76
+* cyan: #78dce8
+* purple: #ab9df2
