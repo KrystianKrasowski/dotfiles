@@ -70,6 +70,7 @@ start-at-login = true
     cmd-8 = 'workspace 8'
     cmd-9 = 'workspace 9'
     cmd-0 = 'workspace 10'
+    cmd-alt-a = 'workspace 11'
 
     cmd-shift-1 = 'move-node-to-workspace 1'
     cmd-shift-2 = 'move-node-to-workspace 2'
