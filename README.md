@@ -320,3 +320,4 @@ stow vifm
 * green: #a9dc76
 * cyan: #78dce8
 * purple: #ab9df2
+* black: 221f22
