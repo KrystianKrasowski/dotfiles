@@ -24,6 +24,8 @@ fi
 if [ "$mode" = "print" ]; then
     connecting=$(nmcli -t -f name,type,state connection show | grep -i 'wireless:activating')
 
+    color="fcfcfa"
+
     if [ -n "$connecting" ]; then
         full_text="󰤭"
         color="ffd866"
@@ -48,7 +50,6 @@ if [ "$mode" = "print" ]; then
         fi
     fi
 
-    color="fcfcfa"
     min_width=17
     align="center"
     separator="true"
