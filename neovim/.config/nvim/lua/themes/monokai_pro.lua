@@ -81,3 +81,12 @@ hl("DiagnosticError", { fg = colors.pink })
 hl("DiagnosticWarn", { fg = colors.yellow })
 hl("DiagnosticInfo", { fg = colors.blue })
 hl("DiagnosticHint", { fg = colors.green })
+
+-- Syntax: treesitter html/jsx/tsx
+hl("@tag", { fg = colors.pink })
+hl("@tag.builtin", { fg = colors.pink })
+hl("@tag.delimiter", { fg = colors.comment })
+hl("@tag.attribute", { fg = colors.blue })
+hl("@string.special.url", { fg = colors.yellow })
+hl("@punctuation.bracket", { fg = colors.fg })
+hl("@punctuation.delimiter", { fg = colors.fg })
