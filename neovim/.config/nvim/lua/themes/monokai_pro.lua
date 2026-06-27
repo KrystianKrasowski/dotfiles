@@ -69,6 +69,16 @@ hl("Special", { fg = colors.yellow })
 hl("ktModifier", { link = "Keyword" })
 hl("ktStructure", { link = "Keyword" })
 
+-- html
+hl("htmlTag", { fg = colors.fg })
+hl("htmlTagName", { fg = colors.pink })
+
+-- typescript
+hl("typescriptDOMEventMethod", { link = "Function" })
+
+-- react
+hl("tsxTagName", { link = "htmlTagName" })
+
 -- Lsp
 hl("@lsp.type.keyword", { fg = colors.pink })
 hl("@lsp.type.property", { fg = colors.fg, italic = true })
