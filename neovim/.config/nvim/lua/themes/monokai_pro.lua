@@ -36,6 +36,7 @@ hl("VertSplit", { fg = "#403E41" })
 hl("StatusLine", { fg = colors.fg, bg = "#403E41" })
 hl("StatusLineNC", { bg = colors.bg })
 hl("Operator", { fg = colors.pink })
+hl("Type", { fg = colors.pink })
 
 -- Status line
 hl("StatuslineModeNormal", { fg = colors.fg })
@@ -75,6 +76,10 @@ hl("htmlTagName", { fg = colors.pink })
 
 -- typescript
 hl("typescriptDOMEventMethod", { link = "Function" })
+hl("typescriptObjectLabel", { fg = colors.fg, bold = true })
+hl("typescriptBraces", { link = "Normal" })
+hl("typescriptArrayMethod", { link = "Function" })
+hl("typescriptConsoleMethod", { link = "Function" })
 
 -- react
 hl("tsxTagName", { link = "htmlTagName" })
@@ -92,12 +97,3 @@ hl("DiagnosticWarn", { fg = colors.yellow })
 hl("DiagnosticInfo", { fg = colors.blue })
 hl("DiagnosticHint", { fg = colors.green })
 
--- Syntax: treesitter html/jsx/tsx
-hl("@tag", { fg = colors.pink })
-hl("@tag.builtin", { fg = colors.pink })
-hl("@tag.delimiter", { fg = colors.fg })
-hl("@tag.attribute", { fg = colors.blue })
-hl("@string.special.url", { fg = colors.yellow })
-hl("@punctuation.bracket", { fg = colors.fg })
-hl("@punctuation.delimiter", { fg = colors.fg })
-hl("@markup.link.label.tsx", { underline = false })
