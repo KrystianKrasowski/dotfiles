@@ -22,6 +22,9 @@ color_hot="ffd866"
 
 # orange
 color_burning="fc9867"
+
+# pink
+color_hell="ff6188"
  
 color="$color_average"
 
@@ -41,8 +44,11 @@ elif [ "$int_temp" -le 25 ]; then
     color="$color_warm"
 elif [ "$int_temp" -le 32 ]; then
     color="$color_hot"
-elif [ "$int_temp" -le 40 ]; then
+elif [ "$int_temp" -le 36 ]; then
     color="$color_burning"
+else
+    # hope I'll never see this
+    color="$color_hell"
 fi
 
 name="temperature"
