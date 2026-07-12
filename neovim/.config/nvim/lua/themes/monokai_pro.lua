@@ -80,6 +80,8 @@ hl("typescriptObjectLabel", { fg = colors.fg, bold = true })
 hl("typescriptBraces", { link = "Normal" })
 hl("typescriptArrayMethod", { link = "Function" })
 hl("typescriptConsoleMethod", { link = "Function" })
+hl("typescriptResponseProp", { link = "Normal" })
+hl("typescriptDOMFormMethod", { link = "Function" })
 
 -- react
 hl("tsxTagName", { link = "htmlTagName" })
@@ -96,4 +98,3 @@ hl("DiagnosticError", { fg = colors.pink })
 hl("DiagnosticWarn", { fg = colors.yellow })
 hl("DiagnosticInfo", { fg = colors.blue })
 hl("DiagnosticHint", { fg = colors.green })
-
