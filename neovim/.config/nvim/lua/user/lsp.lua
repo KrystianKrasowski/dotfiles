@@ -4,6 +4,7 @@ vim.lsp.enable('jdtls')
 vim.lsp.enable('tsls')
 vim.lsp.enable('kotlin-lsp')
 vim.lsp.enable('bashls')
+vim.lsp.enable('markdown')
 
 -- Diagnostics
 vim.diagnostic.config({

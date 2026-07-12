@@ -98,3 +98,22 @@ hl("DiagnosticError", { fg = colors.pink })
 hl("DiagnosticWarn", { fg = colors.yellow })
 hl("DiagnosticInfo", { fg = colors.blue })
 hl("DiagnosticHint", { fg = colors.green })
+
+-- Git signs
+hl("GitSignsAdd", { fg = colors.green })
+hl("GitSignsChange", { fg = colors.yellow })
+hl("GitSignsDelete", { fg = colors.pink })
+hl("GitSignsChangedelete", { link = "GitSignsChange" })
+hl("GitSignsTopdelete", { link = "GitSignsDelete" })
+hl("GitSignsUntracked", { fg = colors.comment })
+
+hl("GitSignsAddNr", { link = "GitSignsAdd" })
+hl("GitSignsChangeNr", { link = "GitSignsChange" })
+hl("GitSignsDeleteNr", { link = "GitSignsDelete" })
+
+hl("GitSignsAddLn", { bg = "#35362f" })
+hl("GitSignsChangeLn", { bg = "#3a3830" })
+hl("GitSignsAddPreview", { link = "GitSignsAddLn" })
+hl("GitSignsDeletePreview", { bg = "#3a2f33" })
+
+hl("GitSignsCurrentLineBlame", { fg = colors.comment, italic = true })
