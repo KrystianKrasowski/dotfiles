@@ -82,6 +82,9 @@ hl("typescriptArrayMethod", { link = "Function" })
 hl("typescriptConsoleMethod", { link = "Function" })
 hl("typescriptResponseProp", { link = "Normal" })
 hl("typescriptDOMFormMethod", { link = "Function" })
+hl("typescriptFuncCallArg", { link = "Function" })
+hl("typescriptDOMFormProp", { link = "Normal" })
+
 
 -- react
 hl("tsxTagName", { link = "htmlTagName" })
