@@ -1,0 +1,21 @@
+font-family = "Mononoki Nerd Font"
+font-size = 16
+
+background = #2d2a2e
+background-opacity = 0.95
+background-blur = true
+
+theme = Monokai Pro
+
+confirm-close-surface = false
+
+# shell integration will automatically set the cursor to a bar at a prompt without this setting
+shell-integration-features = no-cursor
+cursor-style = block
+cursor-style-blink = false
+cursor-opacity = 1
+cursor-text = #000000
+
+window-padding-y = 10
+window-padding-x = 10
+window-decoration = none
