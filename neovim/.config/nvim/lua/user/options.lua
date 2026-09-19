@@ -7,6 +7,7 @@ vim.o.expandtab = true
 vim.o.cursorline = true
 vim.o.clipboard = 'unnamedplus'
 vim.o.updatetime = 300
+vim.o.colorcolumn = "120"
 
 vim.opt.path:append("**")
 vim.opt.wildignore:append("**/build/**")
