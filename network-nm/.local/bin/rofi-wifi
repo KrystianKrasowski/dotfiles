@@ -1,0 +1,73 @@
+#!/usr/bin/env bash 
+
+format_option() {
+    while IFS=: read -r in_use ssid signal secured; do
+        icon=""
+        if [ -z "$secured" ]; then
+            if [ "$signal" -gt 75 ]; then
+                icon='󰤨'
+            elif [ "$signal" -gt 50 ]; then
+                icon="󰤥"
+            elif [ "$signal" -gt 25 ]; then
+                icon="󰤢"
+            elif [ "$signal" -gt 0 ]; then
+                icon="󰤟"
+            else
+                icon="󰤯"
+            fi
+        else
+            if [ "$signal" -gt 75 ]; then
+                icon='󰤪'
+            elif [ "$signal" -gt 50 ]; then
+                icon="󰤧"
+            elif [ "$signal" -gt 25 ]; then
+                icon="󰤤"
+            elif [ "$signal" -gt 0 ]; then
+                icon="󰤡"
+            else
+                icon="󱛏"
+            fi
+        fi
+
+        echo -en "$ssid:$secured\0display\x1f$icon\t$ssid\x1fdata\x1f$ssid:$secured\n"
+    done
+}
+
+IFS=: read -r ssid secured <<< $ROFI_DATA
+
+# Wi-Fi is selected
+if [ "$#" -eq 1 ] && [ -z "$ssid" ]; then
+    IFS=: read -r ssid secured <<< $1
+
+    if [ -n "$secured" ]; then
+        echo -en "\0prompt\x1fPassword:\n"
+        echo -en "\0message\x1f\n"
+        echo -en "\0password\x1ftrue\n"
+        echo -en "\0data\x1f$ssid:$secured\n"
+        echo -en "Type password for $ssid\0nonselectable\x1ftrue\n"
+    fi
+
+    exit 0
+fi
+
+# Selected Wi-Fi is secured and password is provided
+if [ "$#" -eq 1 ] && [ -n "$ssid" ] && [ -n "$secured" ]; then
+    echo -en "Password:$1, haha!\n"
+    exit 0
+fi
+
+# Selected Wi-Fi is public
+if [ "$#" -eq 1 ] && [ -n "$ssid" ] && [ -z "$secured" ]; then
+    echo -en "Password:$1, haha!\n"
+    exit 0
+fi
+
+# Render main options - all available wifi networks
+wifis=$(nmcli -c no -t -f IN-USE,SSID,SIGNAL,SECURITY device wifi list)
+connected=$(echo "$wifis" | grep -i '*' | cut -d ':' -f 2)
+available=$(echo "$wifis" | grep -v '*')
+
+echo -en "\0prompt\x1fWi-Fi:\n"
+echo -en "\0message\x1fConnected: $connected\n"
+echo "$available" | format_option
+

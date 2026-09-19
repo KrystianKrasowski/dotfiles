@@ -1,7 +1,7 @@
 configuration {
     display-drun: "Application";
     drun-display-format: "{icon} {name}";
-    modi: "run,drun";
+    modi: "run,drun,usbdisks";
     show-icons: true;
     icon-theme: "Adwaita";
     kb-row-up: "Up,Alt+k";
