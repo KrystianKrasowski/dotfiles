@@ -2,9 +2,9 @@
 /* Author: Newman Sanchez (https://github.com/newmanls) */
 
 * {
-    font-common: "NotoSans SemiBold 12";
-    font-inputbar: "NotoSans Regular 12";
-    font-textbox: "NotoSans SemiBold 11";
+    font-common: "Inter SemiBold 12";
+    font-inputbar: "Inter Regular 12";
+    font-textbox: "Inter SemiBold 11";
 
 
     bg         : #2D2A2E;
