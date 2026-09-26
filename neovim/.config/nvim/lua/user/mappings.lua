@@ -40,6 +40,15 @@ vim.keymap.set('n', '<leader>tr', ':20Lex<CR>')
 -- toggle Netrw in the parent directory of the file
 vim.keymap.set('n', '<leader>tt', ':20Lex %:p:h<CR>')
 
+-- toggle vertical margin
+vim.keymap.set('n', '<leader>vm', function()
+    if vim.wo.colorcolumn == '' then
+        vim.wo.colorcolumn = '120'
+    else
+        vim.wo.colorcolumn = ''
+    end
+end)
+
 -- === SURROUND ===
 
 -- surround with `
