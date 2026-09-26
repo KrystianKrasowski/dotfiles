@@ -78,11 +78,11 @@ hl("htmlTagName", { fg = colors.pink })
 hl("typescriptDOMEventMethod", { link = "Function" })
 hl("typescriptObjectLabel", { fg = colors.fg, bold = true })
 hl("typescriptBraces", { link = "Normal" })
-hl("typescriptArrayMethod", { link = "Function" })
+hl("typescriptArrayMethod", { fg = colors.fg })
 hl("typescriptConsoleMethod", { link = "Function" })
 hl("typescriptResponseProp", { link = "Normal" })
 hl("typescriptDOMFormMethod", { link = "Function" })
-hl("typescriptFuncCallArg", { link = "Function" })
+hl("typescriptFuncCallArg", { fg = colors.fg })
 hl("typescriptDOMFormProp", { link = "Normal" })
 
 
@@ -91,10 +91,13 @@ hl("tsxTagName", { link = "htmlTagName" })
 
 -- Lsp
 hl("@lsp.type.keyword", { fg = colors.pink })
-hl("@lsp.type.property", { fg = colors.fg, italic = true })
+hl("@lsp.type.property", { fg = colors.fg })
 hl("@lsp.type.parameter", { fg = colors.fg, bold = true })
+hl("@lsp.type.function", { fg = colors.fg })
+hl("@lsp.type.method", { fg = colors.fg })
 hl("@lsp.mod.usedAsMutableReference", { underline = true })
 hl("@lsp.mod.constructorOrDestructor", { fg = colors.green, bold = true })
+hl("@lsp.typemod.function.declaration", { link = "Function" })
 
 -- Diagnostics
 hl("DiagnosticError", { fg = colors.pink })
