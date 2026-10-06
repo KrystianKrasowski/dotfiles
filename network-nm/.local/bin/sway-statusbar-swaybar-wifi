@@ -57,7 +57,7 @@ if [ "$mode" = "print" ]; then
     markup="pango"
     urgent="false"
 
-    echo "$full_text|$min_width|$align|$separator|$separator_block_widht|$markup|$name|$color|$urgent"
+    echo "$full_text |$min_width|$align|$separator|$separator_block_widht|$markup|$name|$color|$urgent"
 else
     if command -v mcd-select-wifi >/dev/null; then
         mcd-select-wifi >/dev/null
