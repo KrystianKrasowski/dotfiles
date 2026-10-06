@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+print_usage() {
+    echo "Usage:"
+    echo "monokai-palette [options] <color name>"
+    echo "Options"
+    echo "-x - hex format (default)"
+    echo ""
+    echo "Color names:"
+    echo "- pink"
+    echo "- orange"
+    echo "- yellow"
+    echo "- green"
+    echo "- cyan"
+    echo "- purple"
+    echo "- black"
+}
+
+mode="hex"
+color=""
+
+declare -A colors_hex
+colors_hex["pink"]="#FF6188"
+colors_hex["orange"]="#FC9867"
+colors_hex["yellow"]="#FFD866"
+colors_hex["green"]="#A9DC76"
+colors_hex["cyan"]="#78DCE8"
+colors_hex["purple"]="#AB9DF2"
+colors_hex["black"]="#221F22"
+
+while getopts "xh" opt; do
+    case $opt in
+        x) mode="hex" ;;
+        h) print_usage; exit 0 ;;
+    esac
+done
+
+shift $((OPTIND - 1))
+
+if [ $# -eq 0 ]; then
+    echo "No color provided"
+    print_usage
+    exit 1
+fi
+
+color="${colors_hex["$@"]}"
+
+if [ -z "$color" ]; then
+    echo "Unknown color"
+    print_usage
+    exit 1
+fi
+
+echo "$color"
+

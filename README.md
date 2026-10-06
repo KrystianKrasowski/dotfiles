@@ -288,6 +288,35 @@ ipptool -tv ipp://localhost ./cancel-printer-subscription.test
 stow vifm
 ```
 
+# Scripts
+
+## Setup
+
+```
+stow scripts
+```
+
+## Description
+
+### monokai-palette
+
+`monokai-palette` is a simple script for fetching the scheme color hex codes.
+Example usage:
+
+```bash
+monokai-palette pink
+```
+
+Monokai colors cheatsheet
+
+* pink: #ff6188
+* orange: #fc9867
+* yellow: #ffd866
+* green: #a9dc76
+* cyan: #78dce8
+* purple: #ab9df2
+* black: 221f22
+
 # Adwaita Theme
 
 ## Required packages:
@@ -304,7 +333,7 @@ stow vifm
 > Installing `nwg-look` can be really helpful for setting up the theme for standalone sway environment
 
 
-### Useful packages
+# Useful packages
 
 * guvcview - camera capture
 * wf-recorder - screen recorder
@@ -312,12 +341,3 @@ stow vifm
 * udisks2 - mounting flash drives as user
 * ncdu - disk usage analyzer
 
-### Monokai colors cheatsheet
-
-* pink: #ff6188
-* orange: #fc9867
-* yellow: #ffd866
-* green: #a9dc76
-* cyan: #78dce8
-* purple: #ab9df2
-* black: 221f22
