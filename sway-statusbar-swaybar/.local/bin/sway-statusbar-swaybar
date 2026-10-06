@@ -82,10 +82,12 @@ while :; do
         echo -n "$(sway-statusbar-swaybar-wifi -n "$wifi_name" | format),"
     fi
 
-    echo -n "$(sway-statusbar-swaybar-battery -n "$battery_name" | format),"
-
     if command -v sway-statusbar-swaybar-volume >/dev/null; then
         echo -n "$(sway-statusbar-swaybar-volume -n "$volume_name" | format),"
+    fi
+
+    if command -v sway-statusbar-swaybar-temperature >/dev/null; then
+        echo -n "$(sway-statusbar-swaybar-temperature | format),"
     fi
 
     if command -v sway-statusbar-swaybar-packages >/dev/null; then
@@ -94,11 +96,8 @@ while :; do
              echo -n "$packages,"
          fi
     fi
-
-    if command -v sway-statusbar-swaybar-temperature >/dev/null; then
-        echo -n "$(sway-statusbar-swaybar-temperature | format),"
-    fi
     
+    echo -n "$(sway-statusbar-swaybar-battery -n "$battery_name" | format),"
     echo -n "$(sway-statusbar-swaybar-datetime -n "$dtime_name" | format),"
 
     echo '],'
