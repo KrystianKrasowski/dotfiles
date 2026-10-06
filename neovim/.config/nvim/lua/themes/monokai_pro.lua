@@ -84,6 +84,7 @@ hl("typescriptResponseProp", { link = "Normal" })
 hl("typescriptDOMFormMethod", { link = "Function" })
 hl("typescriptFuncCallArg", { fg = colors.fg })
 hl("typescriptDOMFormProp", { link = "Normal" })
+hl("typescriptBOMWindowMethod", { link = "Normal" })
 
 
 -- react
