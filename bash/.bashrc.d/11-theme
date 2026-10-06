@@ -1,19 +1,31 @@
 #!/usr/bin/env bash
 
+BOLD='\[\e[1m\]'
+
+BLACK='\[\e[30m\]'
+RED='\[\e[31m\]'
+GREEN='\[\e[32m\]'
+YELLOW='\[\e[33m\]'
+BLUE='\[\e[34m\]'
+MAGENTA='\[\e[35m\]'
+CYAN='\[\e[36m\]'
+WHITE='\[\e[37m\]'
+RESET='\[\e[0m\]'
+
 pink() {
-    echo "\[\e[38;2;255;97;136m\]$1\[\e[0m\]"
+    echo "${RED}$1${RESET}"
 }
 
 yellow() {
-    echo "\[\e[38;2;255;216;102m\]$1\[\e[0m\]"
+    echo "${YELLOW}$1${RESET}"
 }
 
 cyan() {
-    echo "\[\e[38;2;120;220;232m\]$1\[\e[0m\]"
+    echo "${CYAN}$1${RESET}"
 }
 
 green() {
-    echo "\[\e[38;2;169;220;118m\]$1\[\e[0m\]"
+    echo "${GREEN}$1${RESET}"
 }
 
 short_pwd() {
@@ -33,14 +45,29 @@ parse_git_branch() {
         status=""
     fi
 
-    echo " ${branch} ${status}"
+    echo "${branch} ${status}"
 }
 
 build_prompt() {
     local user="$(green "\u")"
     local path="$(green "  \w")"
-    local gitinfo="$(pink "$(parse_git_branch)")"
+
+    local git_branch=$(parse_git_branch)
+    local gitinfo=""
+    if [ -n "$git_branch" ]; then
+        local gitinfo="$(pink " $git_branch")"
+    fi
+
     local prompt="$(green "")"
+    
+    PS1="\n${path}  ${gitinfo}\n${prompt} "
+}
+
+build_tty_prompt() {
+    local user="${BOLD}$(green "\u")"
+    local path="$(green "\w")"
+    local gitinfo="$(pink "$(parse_git_branch)")"
+    local prompt="$(green "\$")"
     
     PS1="\n${path}  ${gitinfo}\n${prompt} "
 }
@@ -49,4 +76,6 @@ IS_TTY=$(tty | grep tty)
 
 if [ -z "$IS_TTY" ]; then
     PROMPT_COMMAND=build_prompt
+else
+    PROMPT_COMMAND=build_tty_prompt
 fi

@@ -13,7 +13,9 @@ print_usage() {
     echo "- green"
     echo "- cyan"
     echo "- purple"
+    echo "- gray"
     echo "- black"
+    echo "- white"
 }
 
 mode="hex"
@@ -26,7 +28,9 @@ colors_hex["yellow"]="#FFD866"
 colors_hex["green"]="#A9DC76"
 colors_hex["cyan"]="#78DCE8"
 colors_hex["purple"]="#AB9DF2"
-colors_hex["black"]="#221F22"
+colors_hex["gray"]="#221F22"
+colors_hex["black"]="#2D2A2E"
+colors_hex["white"]="#FFF1F3"
 
 while getopts "xh" opt; do
     case $opt in
