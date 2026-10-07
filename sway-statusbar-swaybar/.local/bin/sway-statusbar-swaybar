@@ -70,6 +70,13 @@ handle_clicks &
 while :; do
     echo -n '['
 
+    if command -v sway-statusbar-swaybar-packages >/dev/null; then
+         packages="$(sway-statusbar-swaybar-packages -n "$pkg_name" | format)"
+         if [ -n "$packages" ]; then
+             echo -n "$packages,"
+         fi
+    fi
+
     if command -v sway-statusbar-swaybar-notifications >/dev/null; then
         echo -n "$(sway-statusbar-swaybar-notifications -n "$notifications_name" | format),"
     fi
@@ -88,13 +95,6 @@ while :; do
 
     if command -v sway-statusbar-swaybar-temperature >/dev/null; then
         echo -n "$(sway-statusbar-swaybar-temperature | format),"
-    fi
-
-    if command -v sway-statusbar-swaybar-packages >/dev/null; then
-         packages="$(sway-statusbar-swaybar-packages -n "$pkg_name" | format)"
-         if [ -n "$packages" ]; then
-             echo -n "$packages,"
-         fi
     fi
     
     echo -n "$(sway-statusbar-swaybar-battery -n "$battery_name" | format),"
