@@ -51,6 +51,8 @@ else
     color="$color_hell"
 fi
 
+# I'm not sure yet I like colorless indicator, so I'll keep the above logic
+color="$color_average"
 name="temperature"
 full_text=" <small>$temp °C</small>"
 min_width=17
