@@ -1,0 +1,108 @@
+* {
+    bg: #2D2A2E;
+    fg: #FCFCFA;
+    pink: #FF6188;
+    orange: #FC9867;
+    yellow: #FFD866;
+    green: #A9DC76;
+    blue: #78DCE8;
+    purple: #AB9DF2;
+    comment: #727072;
+    cursorline: #3E3D41;
+
+    bg0: #242424E6;
+    bg1: #7E7E7E80;
+    bg2: #0860f2E6;
+
+    fg0: #DEDEDE;
+    fg1: #FFFFFF;
+    fg2: #DEDEDE80;
+
+    background-color: transparent;
+    text-color: @fg;
+
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+    font: @font-common;
+}
+
+window {
+    background-color: @bg;
+    padding: 20px;
+    spacing: 16px;
+    location: center;
+    width: 640;
+    border: 3px;
+    border-color: @comment;
+}
+
+inputbar {
+    padding: 12px 0;
+    spacing: 12px;
+    children: [ prompt, entry ];
+}
+
+textbox {
+    text-color: @blue;
+    horizontal-align: 0.5;
+}
+
+entry, element-icon, element-text {
+    vertical-align: 0.5;
+}
+
+entry {
+    font: inherit;
+}
+
+prompt {
+    font: inherit;
+    text-color: @comment;
+}
+
+message {
+    border: 2px 0 0;
+    border-color: @bg;
+    background-color: @bg;
+}
+
+textbox {
+    padding: 10px 24px;
+}
+
+listview {
+    lines: 10;
+    columns: 1;
+
+    fixed-height: false;
+    border: 2px 0 0;
+    border-color: @comment;
+}
+
+element {
+    padding: 10px 16px;
+    spacing: 16px;
+    background-color: transparent;
+}
+
+element normal active {
+    text-color: @bg;
+}
+
+element alternate active {
+    text-color: @bg;
+}
+
+element selected normal, element selected active {
+    background-color: @blue;
+    text-color: @bg;
+}
+
+element-icon {
+    size: 1em;
+}
+
+element-text {
+    text-color: inherit;
+}

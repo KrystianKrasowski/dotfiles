@@ -32,5 +32,6 @@ if [ x"$@" = x"capture" ]; then
     exit 0
 fi
 
+echo -ne '\0prompt\x1fCapture:\n'
 echo -ne 'screenshot\0display\x1f󰄀\tMake screenshot\n'
 echo -ne 'capture\0display\x1f\tCapture screen\n'
