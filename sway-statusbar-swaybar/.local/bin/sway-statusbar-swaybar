@@ -78,7 +78,10 @@ while :; do
     fi
 
     if command -v sway-statusbar-swaybar-notifications >/dev/null; then
-        echo -n "$(sway-statusbar-swaybar-notifications -n "$notifications_name" | format),"
+        notifications="$(sway-statusbar-swaybar-notifications -n "$notifications_name" | format)"
+        if [ -n "$notifications" ]; then
+            echo -n "$notifications,"
+        fi
     fi
 
     if command -v sway-statusbar-swaybar-bluetooth >/dev/null; then

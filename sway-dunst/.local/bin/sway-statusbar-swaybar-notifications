@@ -23,6 +23,11 @@ fi
 
 if [ "$mode" = "print" ]; then
     unread_count=$(dunstctl history | jq '[.data[][] | select(.timeout.data > 0 and .urgency.data != "LOW")] | length')
+
+    if [ "$unread_count" -eq 0 ]; then
+        exit 0
+    fi
+
     is_paused=$(dunstctl is-paused)
 
     color="fcfcfa"

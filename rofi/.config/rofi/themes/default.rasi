@@ -54,6 +54,7 @@ listview {
     columns: 1;
 
     fixed-height: false;
+    dynamic: false;
     border: 1px 0 0;
     border-color: @comment;
 }
@@ -64,6 +65,14 @@ element {
     background-color: transparent;
 }
 
-element selected normal, element selected active {
+element selected normal, element selected active, element selected urgent {
     background-color: @cursorline;
+}
+
+element-text urgent {
+    text-color: @pink;
+}
+
+element-text {
+    vertical-align: 0.5;
 }

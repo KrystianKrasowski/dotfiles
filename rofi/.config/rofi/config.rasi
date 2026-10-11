@@ -1,7 +1,7 @@
 configuration {
     display-drun: "Application";
     drun-display-format: "{icon} {name}";
-    modi: "run,drun,usbdisks,capture";
+    modi: "run,drun,usbdisks,capture,dunst";
     show-icons: true;
     icon-theme: "Colloid-Orange-Dark";
     kb-row-up: "Up,Alt+k,Ctrl+p";
