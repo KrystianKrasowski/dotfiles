@@ -10,36 +10,27 @@
     comment: #727072;
     cursorline: #3E3D41;
 
-    bg0: #242424E6;
-    bg1: #7E7E7E80;
-    bg2: #0860f2E6;
-
-    fg0: #DEDEDE;
-    fg1: #FFFFFF;
-    fg2: #DEDEDE80;
-
     background-color: transparent;
     text-color: @fg;
 
     margin: 0;
     padding: 0;
     spacing: 0;
-    font: @font-common;
 }
 
 window {
     background-color: @bg;
-    padding: 20px;
     spacing: 16px;
     location: center;
     width: 640;
-    border: 3px;
+    border: 2px;
     border-color: @comment;
 }
 
 inputbar {
-    padding: 12px 0;
-    spacing: 12px;
+    background-color: @comment;
+    padding: 10px 16px;
+    spacing: 10px;
     children: [ prompt, entry ];
 }
 
@@ -48,24 +39,11 @@ textbox {
     horizontal-align: 0.5;
 }
 
-entry, element-icon, element-text {
-    vertical-align: 0.5;
-}
-
-entry {
-    font: inherit;
-}
-
 prompt {
-    font: inherit;
-    text-color: @comment;
+    text-transform: Italic;
+    text-color: @cursorline;
 }
 
-message {
-    border: 2px 0 0;
-    border-color: @bg;
-    background-color: @bg;
-}
 
 textbox {
     padding: 10px 24px;
@@ -76,7 +54,7 @@ listview {
     columns: 1;
 
     fixed-height: false;
-    border: 2px 0 0;
+    border: 1px 0 0;
     border-color: @comment;
 }
 
@@ -86,23 +64,6 @@ element {
     background-color: transparent;
 }
 
-element normal active {
-    text-color: @bg;
-}
-
-element alternate active {
-    text-color: @bg;
-}
-
 element selected normal, element selected active {
-    background-color: @blue;
-    text-color: @bg;
-}
-
-element-icon {
-    size: 1em;
-}
-
-element-text {
-    text-color: inherit;
+    background-color: @cursorline;
 }
