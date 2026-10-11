@@ -33,6 +33,5 @@ fi
 
 echo -en "\0prompt\x1fNotification:$DELIM"
 echo -en "\0markup-rows\x1ftrue$DELIM"
-echo -en "\0theme\x1felement-text { padding: 0.5em; }$DELIM"
 echo -en "$notifications"
 

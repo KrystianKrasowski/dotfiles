@@ -73,6 +73,10 @@ element-text urgent {
     text-color: @pink;
 }
 
+element-icon {
+    size: 20;
+}
+
 element-text {
     vertical-align: 0.5;
 }
