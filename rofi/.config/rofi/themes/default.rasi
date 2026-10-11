@@ -24,11 +24,11 @@ window {
     location: center;
     width: 400;
     border: 2px;
-    border-color: @comment;
+    border-color: @blue;
 }
 
 inputbar {
-    background-color: @comment;
+    background-color: @blue;
     padding: 10px 16px;
     spacing: 10px;
     children: [ prompt, entry ];

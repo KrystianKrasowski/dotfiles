@@ -5,54 +5,13 @@ tmp_file=/tmp/weather
 temp="---"
 int_temp="---"
 
-# purple
-color_freezing="ab9df2"
-
-# cyan
-color_cold="78dce8"
- 
-# white
-color_average="fcfcfa"
- 
-#green
-color_warm="a9dc76"
- 
-# yellow
-color_hot="ffd866"
-
-# orange
-color_burning="fc9867"
-
-# pink
-color_hell="ff6188"
- 
-color="$color_average"
-
 if [ -f "$tmp_file" ]; then
     temp=$(cat "$tmp_file" | cut -d ',' -f 5)
 fi
 
 int_temp=$(echo "$temp" | cut -d '.' -f 1)
 
-if [ "$int_temp" -le -15 ]; then
-    color="$color_freezing"
-elif [ "$int_temp" -le 8 ]; then
-    color="$color_cold"
-elif [ "$int_temp" -le 16 ]; then
-    color="$color_average"
-elif [ "$int_temp" -le 25 ]; then
-    color="$color_warm"
-elif [ "$int_temp" -le 32 ]; then
-    color="$color_hot"
-elif [ "$int_temp" -le 36 ]; then
-    color="$color_burning"
-else
-    # hope I'll never see this
-    color="$color_hell"
-fi
-
-# I'm not sure yet I like colorless indicator, so I'll keep the above logic
-color="$color_average"
+color="fcfcfa"
 name="temperature"
 full_text=" <small>$temp °C</small>"
 min_width=17
