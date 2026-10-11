@@ -22,7 +22,7 @@ window {
     background-color: @bg;
     spacing: 16px;
     location: center;
-    width: 640;
+    width: 400;
     border: 2px;
     border-color: @comment;
 }
