@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+tmp_file=/tmp/weather
+
+temp="---"
+
+if [ -f "$tmp_file" ]; then
+    temp=$(cat "$tmp_file" | cut -d ',' -f 5)
+fi
+
+
+printf '{'
+printf '"name": "weather-temperature"'
+printf ', "full_text": "%s"' " <small>$temp °C</small>"
+printf ', "min_width": 17'
+printf ', "align": "center"'
+printf ', "separator": true'
+printf ', "separator_block_width": 25'
+printf ', "markup": "pango"'
+printf ', "color": "#fcfcfa"'
+printf ', "urgent": false'
+printf ' },\n'
+

@@ -1,4 +1,7 @@
+# 31-capture-keys
+
 set $capture_process wf-recorder
 
 bindsym Print exec rofi -show capture -no-show-icons
 bindsym Print+Shift exec pkill -INT -x $capture_process
+

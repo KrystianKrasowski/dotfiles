@@ -1,3 +1,6 @@
+# 02-swaybar
+
+# main swaybar daemon
 bar {
     position top
     status_padding 7
@@ -6,7 +9,7 @@ bar {
     separator_symbol |
     tray_padding 7
 
-    status_command ~/.local/bin/sway-statusbar-swaybar
+    status_command ~/.local/bin/swaybard
 
     colors {
         statusline #fcfcfa
@@ -16,3 +19,4 @@ bar {
         focused_workspace #2d2a2e #78dce8 #2d2a2e
     }
 }
+

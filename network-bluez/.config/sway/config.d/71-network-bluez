@@ -1,1 +1,7 @@
+# 71-network bluez
+
+# TODO: THIS FILE IS DEPRECATED. Use rofi extension instead
+
+# Define keybindings for bluetooth selection
 bindsym $mod+Shift+b exec mcd-select-bluetooth-device
+

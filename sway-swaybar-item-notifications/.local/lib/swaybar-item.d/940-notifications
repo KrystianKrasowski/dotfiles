@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+if ! command -v dunstctl >/dev/null; then
+    echo -n '{'
+    echo -n '"name": "notifications"'
+    echo -n ',"full_text": "󱏧"'
+    echo -n ',"min_width": 17'
+    echo -n ',"align": "center"'
+    echo -n ',"separator": true'
+    echo -n ',"separator_block_width": 25'
+    echo -n ',"urgent": true'
+    echo '},'
+    exit 0
+fi
+
+unread_count=$(dunstctl history | jq '[.data[][] | select(.urgency.data != "LOW")] | length')
+
+is_paused=$(dunstctl is-paused)
+
+full_text="󰂚"
+color="fcfcfa"
+
+if [ "$is_paused" = "true" ]; then
+    full_text="󰂛"
+    color="78dce8"
+elif [ "$unread_count" -eq 0 ]; then
+    exit 0
+elif [ "$unread_count" -gt 0 ]; then
+    full_text="󱅫 <small>"$unread_count"</small>"
+    color="ff6188"
+fi
+
+printf '{'
+printf '"name": "notifications"'
+printf ', "full_text": "%s"' "$full_text"
+printf ', "min_width": 17'
+printf ', "align": "center"'
+printf ', "separator": true'
+printf ', "separator_block_width": 25'
+printf ', "markup": "pango"'
+printf ', "color": "%s"' "$color"
+printf ', "urgent": false'
+printf ' },\n'

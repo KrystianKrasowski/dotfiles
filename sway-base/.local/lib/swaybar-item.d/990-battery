@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+# Given item data source.
+# Noramlly it should be taken from swaybar data snapshot (???)
+battery="/sys/class/power_supply/BAT*"
+battery_capacity=$(cat $battery[0]/capacity)
+battery_state=$(cat $battery[0]/status)
+
+# Given known render elements
+color_urgent="#FF6188"
+color_warging="#FFD866"
+color_default="#FFF1F3"
+icon_set_discharging="󰁺 󰁻 󰁼 󰁽 󰁽 󰁿 󰂀 󰂁 󰂂 󰁹"
+icon_set_charging="󰢜 󰂆 󰂇 󰂈 󰢝 󰂉 󰢞 󰂊 󰂋 󰂅"
+
+# Item logic
+icon_set=
+icon=
+color=
+
+if [ "$battery_state" = "Discharging" ]; then
+    read -r -a icon_set <<< "$icon_set_discharging"
+else
+    read -r -a icon_set <<< "$icon_set_charging"
+fi
+
+if [ "$battery_capacity" -le 20 ]; then
+    color="$color_urgent"
+elif [ "$battery_capacity" -le 40 ]; then
+    color="$color_warging"
+else
+    color="$color_default"
+fi
+
+for i in ${!icon_set[@]}; do
+    ind=$((($i + 1) * 10))
+    if [ "$battery_capacity" -le $ind ]; then
+        icon="${icon_set[$i]}"
+        break
+    fi
+done
+
+# Render according to swaybar protocol (man swaybar-protocol)
+printf '{'
+printf '"name": "battery"'
+printf ', "full_text": "%s"' "$icon"
+printf ', "min_width": 17'
+printf ', "align": "center"'
+printf ', "separator": true'
+printf ', "separator_block_width": 25'
+printf ', "markup": "pango"'
+printf ', "color": "%s"' "$color"
+printf ', "urgent": false'
+printf ' },\n'

@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+if ! command -v bluetoothctl >/dev/null; then
+    echo -n '{'
+    echo -n '"name": "bluetooth"'
+    echo -n ',"full_text": "󰂲"'
+    echo -n ',"min_width": 17'
+    echo -n ',"align": "center"'
+    echo -n ',"separator": true'
+    echo -n ',"separator_block_width": 25'
+    echo -n ',"urgent": true'
+    echo '},'
+    exit 0
+fi
+
+connections=$(bluetoothctl devices Connected | wc -l)
+
+full_text="󰂯"
+if [ "$connections" -gt 0 ]; then
+    full_text="󰂱"
+fi
+
+printf '{'
+printf '"name": "bluetooth"'
+printf ', "full_text": "%s"' "$full_text"
+printf ', "min_width": 17'
+printf ', "align": "center"'
+printf ', "separator": true'
+printf ', "separator_block_width": 25'
+printf ', "markup": "pango"'
+printf ', "color": "#FFF1F3"'
+printf ', "urgent": false'
+printf ' },\n'
+

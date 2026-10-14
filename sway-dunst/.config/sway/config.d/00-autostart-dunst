@@ -1,2 +1,5 @@
+# 00-autostart-dunst
+
 exec pkill -f dunst
 exec dunst
+

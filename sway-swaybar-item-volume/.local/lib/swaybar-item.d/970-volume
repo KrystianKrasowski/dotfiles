@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+if ! command -v wpctl >/dev/null; then
+    echo -n '{'
+    echo -n '"name": "volume"'
+    echo -n ',"full_text": "󰝟"'
+    echo -n ',"min_width": 17'
+    echo -n ',"align": "center"'
+    echo -n ',"separator": true'
+    echo -n ',"separator_block_width": 25'
+    echo -n ',"urgent": true'
+    echo '},'
+    exit 0
+fi
+
+# Given
+volume=$(wpctl get-volume @DEFAULT_SINK@ | awk -F': ' '{print $2}' | sed 's/\.//' | sed 's/^0//')
+nick=$(wpctl inspect @DEFAULT_SINK@ | grep -i 'node.nick' | cut -d '"' -f 2)
+description=$(wpctl inspect @DEFAULT_SINK@ | grep -i 'node.description' | cut -d '"' -f 2)
+icon_muted="󰖁"
+icon_set=("󰕿" "󰕿" "󰕿" "󰖀" "󰖀" "󰖀" "󰖀" "󰕾" "󰕾" "󰕾")
+
+# Default values
+sink_name="$nick"
+icon="?"
+color="#FFF1F3"
+
+# Resolve sink name
+if [ -z "$sink_name" ]; then
+    sink_name="$description"
+fi
+
+# I just want to have exceptional name ;)
+if echo "$description" | grep -qi "Komplete Audio 6"; then
+    sink_name="Komplete Audio 6"
+fi
+
+# Resolve icon
+for i in ${!icon_set[@]}; do
+    ind=$((($i + 1) * 10))
+    if [ "$volume" -le $ind ]; then
+        icon="${icon_set[$i]}"
+        break
+    fi
+done
+
+if echo "$volume" | grep -qi "muted"; then
+    icon="$icon_muted"
+    volume=$(echo $volume | cut -d ' ' -f 1)
+    color="#727072"
+fi
+
+# Render
+printf '{'
+printf '"name": "volume"'
+printf ', "full_text": "%s"' "$icon <small>$sink_name ($volume%)</small>"
+printf ', "min_width": 30'
+printf ', "align": "center"'
+printf ', "separator": true'
+printf ', "separator_block_width": 25'
+printf ', "markup": "pango"'
+printf ', "color": "%s"' "$color"
+printf ', "urgent": false'
+printf ' },\n'

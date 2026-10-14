@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+if ! command -v nmcli >/dev/null; then
+    echo -n '{'
+    echo -n '"name": "wifi"'
+    echo -n ',"full_text": "󰤫 "'
+    echo -n ',"min_width": 17'
+    echo -n ',"align": "center"'
+    echo -n ',"separator": true'
+    echo -n ',"separator_block_width": 25'
+    echo -n ',"urgent": true'
+    echo '},'
+    exit 0
+fi
+
+icon_set=("󰤯" "󰤯" "󰤟" "󰤟" "󰤢" "󰤢" "󰤥" "󰤥" "󰤨" "󰤨")
+icon="󰤭"
+color="ff6188"
+
+connecting=$(nmcli -t -f name,type,state connection show | grep -i 'wireless:activating')
+
+if [ -n "$connecting" ]; then
+    color="ffd866"
+else
+    wifi_info=$(nmcli -t -f in-use,ssid,signal dev wifi | grep '*')
+    ssid=$(echo $wifi_info | cut -d: -f2)
+    strength=$(echo $wifi_info | cut -d: -f3)
+
+    if [[ -z "$ssid" ]]; then
+        icon="󰤭"
+        color="ff6188"
+    else
+        color="fcfcfa"
+        for i in ${!icon_set[@]}; do
+            ind=$((($i + 1) * 10))
+            if [ "$strength" -le $ind ]; then
+                icon="${icon_set[$i]}"
+                break
+            fi
+        done
+    fi
+fi
+
+printf '{'
+printf '"name": "wifi-nm"'
+printf ', "full_text": "%s "' "$icon"
+printf ', "min_width": 17'
+printf ', "align": "center"'
+printf ', "separator": true'
+printf ', "separator_block_width": 25'
+printf ', "markup": "pango"'
+printf ', "color": "%s"' "$color"
+printf ', "urgent": false'
+printf ' },\n'
+

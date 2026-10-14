@@ -1,1 +1,4 @@
+# 70-network-nm
+
 bindsym $mod+Shift+w exec mcd-select-wifi
+

@@ -1,3 +1,5 @@
+# 01-base
+
 # Base variables
 # ===
 
@@ -127,3 +129,4 @@ mode "resize" {
 # Assign workspace 10 to the built-in display
 # In case of external display connect it will be assigned on 1
 workspace 10 output eDP-1
+

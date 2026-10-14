@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+printf '{'
+printf '"name": "datetime"'
+printf ', "full_text": "%s"' "<b>󰸘 <small>$(date '+%d %B, %H:%M')</small></b>"
+printf ', "min_width": 30'
+printf ', "align": "center"'
+printf ', "separator": true'
+printf ', "separator_block_width": 25'
+printf ', "markup": "pango"'
+printf ', "color": "#78dce8"'
+printf ', "urgent": false'
+printf ' },\n'

@@ -3,3 +3,5 @@ backups
 !*.local/
 vifminfo.json
 *.log
+
+supervise

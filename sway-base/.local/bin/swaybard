@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+ITEMS_DIR="$HOME/.local/lib/swaybar-item.d"
+
+echo '{"version":1, "click_events":false}'
+echo '['
+echo '[],'
+
+while :; do
+    echo '['
+
+    for item in "$ITEMS_DIR/"*; do
+        if [ -f "$item" ]; then
+            bash "$item"
+        fi
+    done
+
+    echo '],'
+
+    sleep 1
+done

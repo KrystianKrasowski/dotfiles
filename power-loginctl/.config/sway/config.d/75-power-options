@@ -1,1 +1,4 @@
+# 75-power-options
+
 bindsym $mod+Shift+p exec mcd-select-power-options
+

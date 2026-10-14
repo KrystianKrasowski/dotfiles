@@ -1,6 +1,9 @@
+# 00-autostart-xdg-portal
+
 exec pkill -f xdg-desktop-portal
 exec pkill -f xdg-desktop-portal-wlr
 
 exec dbus-update-activation-environment --all
 exec /usr/libexec/xdg-desktop-portal-wlr
 exec /usr/libexec/xdg-desktop-portal
+
