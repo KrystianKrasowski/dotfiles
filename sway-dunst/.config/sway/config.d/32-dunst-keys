@@ -1,4 +1,0 @@
-# 32-dunst-keys
-
-bindsym $mod+Shift+n exec rofi -show dunst -no-show-icons -theme-str 'element-text { padding: 0.5em; }'
-

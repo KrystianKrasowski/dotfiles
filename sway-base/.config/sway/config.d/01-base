@@ -16,7 +16,18 @@ set $right l
 set $term foot
 
 # Menu
-set $menu rofi -show drun
+
+## Desktop
+bindsym $mod+d exec rofi -show drun -modes 'drun' -show-icons
+
+## Media
+bindsym $mod+m exec rofi -show audio-sink -modes 'audio-sink,usbdisks'
+
+# Power
+bindsym $mod+p exec rofi -show power -modes 'power'
+
+# Notifications
+bindsym $mod+n exec rofi -show notifications-history -modes 'notifications-history,notifications-status' -no-show-icons -theme-str 'element-text { padding: 0.5em; }'
 
 # Base keybindings
 # ===
@@ -25,9 +36,6 @@ set $menu rofi -show drun
 # Note on readme that menu or term should be set, mostly by other stow dirs
 # Start a terminal
 bindsym $mod+Return exec $term
-
-# Start your launcher
-bindsym $mod+d exec $menu
 
 # Reload configuration file
 bindsym $mod+Shift+c reload

@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# check dependencies
+if ! command -v dunstctl >/dev/null 2>&1; then
+    echo "dunstctl util is required"
+    exit 1
+fi
+
 DELIM="%"
 
 format() {
@@ -31,7 +37,7 @@ if [[ $ROFI_RETV -eq 0 ]]; then
     echo -en "\0delim\x1f$DELIM\n"
 fi
 
-echo -en "\0prompt\x1fNotification:$DELIM"
+echo -en "\0prompt\x1fNotifications$DELIM"
 echo -en "\0markup-rows\x1ftrue$DELIM"
 echo -en "$notifications"
 
