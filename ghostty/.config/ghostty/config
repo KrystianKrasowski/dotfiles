@@ -1,6 +1,8 @@
 font-family = "Mononoki Nerd Font"
 font-size = 16
 
+adjust-cell-height = 7
+
 background = #2d2a2e
 background-opacity = 0.95
 background-blur = true
