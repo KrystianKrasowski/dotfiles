@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+
+STATUS_ABORTED=10
+STATUS_PASSWORD_REQUIRED=11
+STATUS_CONNECTION_REFUSED=12
+
+# check dependencies
+if ! command -v nmcli >/dev/null; then
+    echo "Network manager is not installed."
+    exit 1
+fi
+
+connect_to_known_wifi() {
+    echo "Trying to connect to known networks..."
+
+    local known=$(nmcli -t -f NAME,TYPE connection show | grep -i wireless | cut -d ':' -f 1)
+    local ssid=
+
+    IFS=$'\n'
+    for ssid in $known; do
+        if [ "$ssid" = "$1" ]; then
+            send_in_progress $1
+            nmcli connection up "$1"
+            return $?
+        fi
+    done
+
+    return 1
+}
+
+send_success() {
+    local message="Connected to $1."
+    notify-send -u low -a "Connect" "Select Wi-Fi" "$message"
+    echo "$message"
+}
+
+send_in_progress() {
+    local message="Connecting to $1..."
+    #notify-send -u low -a "MCD" "Select Wi-Fi" "$message"
+    echo "$message"
+}
+
+send_failure() {
+    local message="Connection to $1 failed."
+    notify-send -u critical -a "Connect" "Select Wi-Fi" "$message"
+    echo "$message"
+}
+
+connected=$(nmcli -t -f name,active,type connection show | grep -i -E 'yes.*wireless' | cut -d : -f 1)
+ssid="$1"
+secured="$2"
+
+if [ -z "$ssid" ]; then
+    echo "No SSID provided"
+    exit $STATUS_ABORTED
+fi
+
+connect_to_known_wifi "$ssid"
+
+if [ $? -eq 0 ]; then
+    send_success "$ssid"
+    exit 0
+fi
+
+password=""
+
+if [ -n "$secured" ]; then
+    password=$(rofi -dmenu -p 'Password: ' -password -l 0 -mesg "$ssid")
+fi
+
+if [ -n "$secured" ] && [ -z "$password" ]; then
+    echo "Password required, aborted..."
+    exit $STATUS_PASSWORD_REQUIRED
+fi
+
+send_in_progress "$ssid"
+
+if [ -n "$secured" ]; then
+    nmcli device wifi connect "$ssid" password "$password"
+else
+    nmcli device wifi connect "$ssid"
+fi
+
+if [ "$?" -eq 0 ]; then
+    send_success "$ssid"
+else
+    send_failure "$ssid"
+    exit $STATUS_CONNECTION_REFUSED
+fi
+
+exit 0

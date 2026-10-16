@@ -29,6 +29,9 @@ bindsym $mod+p exec rofi -show power -modes 'power'
 # Notifications
 bindsym $mod+n exec rofi -show notifications-history -modes 'notifications-history,notifications-status' -no-show-icons -theme-str 'element-text { padding: 0.5em; }'
 
+# Connect
+bindsym $mod+c exec rofi -show wifi-nm -modes 'wifi-nm' -no-show-icons
+
 # Base keybindings
 # ===
 
