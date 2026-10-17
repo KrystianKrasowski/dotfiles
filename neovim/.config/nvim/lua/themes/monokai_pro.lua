@@ -85,7 +85,9 @@ hl("typescriptDOMFormMethod", { link = "Function" })
 hl("typescriptFuncCallArg", { fg = colors.fg })
 hl("typescriptDOMFormProp", { link = "Normal" })
 hl("typescriptBOMWindowMethod", { link = "Normal" })
-
+hl("typescriptBOMLocationMethod", { link = "Normal" })
+hl("typescriptHeaderMethod", { link = "Normal" })
+hl("typescriptES6SetMethod", { link = "Normal" })
 
 -- react
 hl("tsxTagName", { link = "htmlTagName" })
