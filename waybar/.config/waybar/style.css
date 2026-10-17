@@ -1,10 +1,10 @@
 * {
-    font-family: "Cantarell Medium";
-    font-size: 16px;
+    font-family: "Inter SemiBold";
+    font-size: 10pt;
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 1);
+    background-color: #2D2A2E;
     border-bottom: 1px solid rgba(100, 114, 125, 0.5);
     color: #fcfcfc;
 }
@@ -18,8 +18,8 @@ button:hover {
 }
 
 #workspaces button {
-    padding: 3px 5px;
-    margin: 5px 5px 5px 0;
+    padding: 7px 0;
+    margin: 5px 10px 5px 10px;
     background-color: transparent;
     color: #fcfcfc;
     border-radius: 0;
@@ -33,17 +33,13 @@ button:hover {
     font-weight: normal;
 }
 
-.modules-left {
-    margin-left: 15px;
-}
-
-.modules-right {
-    margin-right: 15px;
-}
-
 #network,
 #battery {
-    margin: 5px 0 5px 5px;
+    padding: 0 10px 0 10px;
+}
+
+#clock {
+    padding: 10px 10px 15px 10px;
 }
 
 #battery.warning {
