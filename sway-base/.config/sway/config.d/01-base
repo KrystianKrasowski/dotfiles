@@ -15,23 +15,6 @@ set $right l
 # Terminal
 set $term foot
 
-# Menu
-
-## Desktop
-bindsym $mod+d exec rofi -show drun -modes 'drun' -show-icons
-
-## Media
-bindsym $mod+m exec rofi -show audio-sink -modes 'audio-sink,usbdisks'
-
-# Power
-bindsym $mod+p exec rofi -show power -modes 'power'
-
-# Notifications
-bindsym $mod+n exec rofi -show notifications-history -modes 'notifications-history,notifications-status' -no-show-icons -theme-str 'element-text { padding: 0.5em; }'
-
-# Connect
-bindsym $mod+c exec rofi -show wifi-nm -modes 'wifi-nm' -no-show-icons
-
 # Base keybindings
 # ===
 
@@ -51,6 +34,24 @@ bindsym $mod+Shift+x exec swaylock
 
 # Exit sway
 bindsym $mod+Shift+e exec swaynag -t confirm -m 'Do you really want to exit sway?' -B 'Yes, exit sway' 'swaymsg exit'
+
+## Desktop
+bindsym $mod+d exec rofi -show drun -modes 'drun' -show-icons
+
+## Media
+bindsym $mod+m exec rofi -show audio-sink -modes 'audio-sink,usbdisks'
+
+# Power
+bindsym $mod+p exec rofi -show power -modes 'power'
+
+# Notifications
+bindsym $mod+n exec rofi -show notifications-history -modes 'notifications-history,notifications-status' -no-show-icons -theme-str 'element-text { padding: 0.5em; }'
+
+# Connect
+bindsym $mod+c exec rofi -show wifi-nm -modes 'wifi-nm'
+
+# Work
+bindsym $mod+Shift+Return exec rofi -show dev-projects -modes 'dev-projects'
 
 # Move your focus around
 bindsym $mod+$left focus left
