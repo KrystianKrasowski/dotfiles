@@ -19,16 +19,23 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 start-at-login = true
 
 after-startup-command = [
-  'exec-and-forget borders active_color=0xfcfcfae4 inactive_color=0x2d2a2e64 width=10.0'
+  'exec-and-forget borders active_color=0xfcfcfae4 inactive_color=0xfc2a2e64 width=10.0 style=rounded'
 ]
 
+# Sketchybar
+# exec-on-workspace-change = ['/bin/bash', '-c', 'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE']
+
 [gaps]
-    inner.horizontal = 10
-    inner.vertical =   10
-    outer.left =       20
-    outer.bottom =     20
-    outer.top =        20
-    outer.right =      20
+    inner.horizontal = 15
+    inner.vertical = 15
+    outer.left = 15
+    outer.bottom = 15
+    outer.top = [
+        { monitor."built-in" = 15 },
+        { monitor."main" = 45 },
+        45
+    ]
+    outer.right = 15
 
 [mode.main.binding]
 
@@ -126,4 +133,3 @@ after-startup-command = [
     8 = ['secondary', 'main']
     9 = ['secondary', 'main']
     10 = ['secondary', 'main']
-
