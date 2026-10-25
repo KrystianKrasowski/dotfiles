@@ -101,6 +101,7 @@ hl("@lsp.type.method", { fg = colors.fg })
 hl("@lsp.mod.usedAsMutableReference", { underline = true })
 hl("@lsp.mod.constructorOrDestructor", { fg = colors.green, bold = true })
 hl("@lsp.typemod.function.declaration", { link = "Function" })
+hl("@lsp.typemod.method.declaration", { link = "Function" })
 
 -- Diagnostics
 hl("DiagnosticError", { fg = colors.pink })
